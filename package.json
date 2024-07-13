@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [],
   "author": "Ville Saloranta",
-  "license": "GPL-2.0-only"
+  "license": "GPL-3.0-only"
 }

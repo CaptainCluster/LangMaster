@@ -1,7 +1,3 @@
 {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "java.project.sourcePaths": [
-        "backend/src/main/java/com/example/demo"
-    ]
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
