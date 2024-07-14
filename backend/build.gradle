@@ -33,6 +33,10 @@ dependencies {
 
 	implementation 'io.github.cdimascio:dotenv-java:3.0.0'
 
+
+	// bCrypt hashing
+	//implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation 'org.springframework.security:spring-security-core:6.3.1'
 }
 
 tasks.named('test') {

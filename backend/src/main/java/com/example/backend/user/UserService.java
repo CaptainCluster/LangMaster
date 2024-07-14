@@ -1,7 +1,8 @@
-package com.example.user;
+package com.example.backend.user;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +19,12 @@ public class UserService {
     }
 
     public User createUser(User user) {
+
+        // Hashing the password with bCrypt
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
-
 
 }

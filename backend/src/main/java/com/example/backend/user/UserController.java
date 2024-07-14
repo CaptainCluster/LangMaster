@@ -1,4 +1,4 @@
-package com.example.user;
+package com.example.backend.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,6 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         userService.createUser(user);
         return ResponseEntity.ok().build();
-
     }
     
 }

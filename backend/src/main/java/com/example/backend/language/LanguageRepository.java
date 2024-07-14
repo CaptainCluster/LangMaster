@@ -1,4 +1,4 @@
-package com.example.language;
+package com.example.backend.language;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,13 +1,11 @@
 package com.example.backend;
 
-import com.example.user.User;
-import com.example.user.UserRepository;
+import com.example.backend.user.User;
+import com.example.backend.user.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Optional;
 
 @SpringBootTest
 class BackendApplicationTests {
