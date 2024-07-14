@@ -19,10 +19,10 @@ import java.time.LocalDate;
 @Table(name = "application_user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column(name = "user_id")
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -32,7 +32,9 @@ public class User {
 
     private LocalDate registerDate;
 
-    public User(){}
+    public User(){
+        this.registerDate = LocalDate.now();
+    }
 
     public User(String username, String password) {
         this.username = username;
@@ -40,7 +42,7 @@ public class User {
         this.registerDate = LocalDate.now();
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public void setUsername(String newUsername) {
