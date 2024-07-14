@@ -35,7 +35,6 @@ dependencies {
 
 
 	// bCrypt hashing
-	//implementation "org.springframework.boot:spring-boot-starter-security"
 	implementation 'org.springframework.security:spring-security-core:6.3.1'
 }
 

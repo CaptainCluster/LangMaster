@@ -27,5 +27,17 @@ public class UserController {
         userService.createUser(user);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user) {
+        boolean validCredentials = userService.checkCredentials(user);
+        if (!validCredentials) {
+            System.out.println("Invalid credentials");
+            return ResponseEntity.badRequest().build();
+        }
+        System.out.println("You are in!");
+
+        return ResponseEntity.ok().build();
+    }
     
 }
