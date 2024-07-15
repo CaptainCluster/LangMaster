@@ -1,9 +1,11 @@
 package com.example.backend.user;
 
+import com.example.backend.utilities.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -17,6 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -29,15 +34,22 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody User user) {
+    public HashMap<String, String> loginUser(@RequestBody User user) {
         boolean validCredentials = userService.checkCredentials(user);
-        if (!validCredentials) {
-            System.out.println("Invalid credentials");
-            return ResponseEntity.badRequest().build();
-        }
-        System.out.println("You are in!");
 
-        return ResponseEntity.ok().build();
+        HashMap<String, String> response = new HashMap<>();
+
+        // If credentials are not valid, user is notified.
+        if (!validCredentials) {
+            response.put("msg", "Invalid credentials.");
+            return response;
+        }
+
+        // Assigning the JWT for successful login
+        String jwtToken = jwtUtil.createJwt(user.getUsername());
+        response.put("msg", "success");
+        response.put("token", jwtToken);
+
+        return response;
     }
-    
 }
