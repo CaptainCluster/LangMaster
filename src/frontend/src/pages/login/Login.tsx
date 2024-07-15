@@ -1,7 +1,7 @@
-const Register = () => {
+const Login = () => {
 
 
-    const submitRegister = (event) => {
+    const submitLogin = (event) => {
         event.preventDefault();
 
         const inputUsername = document.getElementById("input-username") as HTMLInputElement;
@@ -13,7 +13,7 @@ const Register = () => {
         } 
 
         // Sending the POST request
-        fetch("/api/users/register", {
+        fetch("/api/users/login", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -22,14 +22,16 @@ const Register = () => {
                 username: inputUsername.value,
                 password: inputPassword.value
             })
-        });
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
 
         console.log("User created.");
     }
 
     return (
-        <div id="page-register">
-            <form onSubmit={submitRegister}>
+        <div id="page-login">
+            <form onSubmit={submitLogin}>
                 <input id="input-username" name="username" type="string"></input>
                 <input id="input-password" name="password" type="password"></input>
                 <input type="submit"></input>
@@ -38,4 +40,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default Login;
