@@ -1,7 +1,7 @@
 const Register = () => {
 
 
-    const submitRegister = (event) => {
+    const submitRegister = (event: any) => {
         event.preventDefault();
 
         const inputUsername = document.getElementById("input-username") as HTMLInputElement;

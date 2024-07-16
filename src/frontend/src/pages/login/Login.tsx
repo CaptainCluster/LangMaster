@@ -1,7 +1,7 @@
 const Login = () => {
 
 
-    const submitLogin = (event) => {
+    const submitLogin = (event: any) => {
         event.preventDefault();
 
         const inputUsername = document.getElementById("input-username") as HTMLInputElement;
