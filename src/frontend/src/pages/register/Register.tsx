@@ -1,3 +1,6 @@
+import User from "../../models/User";
+import { registerUser } from "../../api/authenticate";
+
 const Register = () => {
 
 
@@ -12,18 +15,14 @@ const Register = () => {
             return;
         } 
 
-        // Sending the POST request
-        fetch("/api/users/register", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                username: inputUsername.value,
-                password: inputPassword.value
-            })
-        });
+        const userCredentials: User = {
+            username: inputUsername.value,
+            password: inputPassword.value
+        }
 
+        // Sending the POST request
+        registerUser(userCredentials);
+        
         console.log("User created.");
     }
 

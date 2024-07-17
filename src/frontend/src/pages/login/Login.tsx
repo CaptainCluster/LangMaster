@@ -1,3 +1,6 @@
+import { loginUser } from "../../api/authenticate";
+import User from "../../models/User";
+
 const Login = () => {
 
 
@@ -12,21 +15,13 @@ const Login = () => {
             return;
         } 
 
-        // Sending the POST request
-        fetch("/api/users/login", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                username: inputUsername.value,
-                password: inputPassword.value
-            })
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        const userCredentials: User = {
+            username: inputUsername.value,
+            password: inputPassword.value
+        }
 
-        console.log("User created.");
+        // Sending the POST request
+        loginUser(userCredentials)
     }
 
     return (
