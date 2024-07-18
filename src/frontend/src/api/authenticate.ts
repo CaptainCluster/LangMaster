@@ -8,8 +8,8 @@ import axios from "axios";
  * 
  * @param userCredentials JSON object with the credentials
  */
-function registerUser(userCredentials: User) {
-    axios.post(
+function registerUser(userCredentials: { username: string, password: string }) {
+    return axios.post<User>(
         "/api/users/register", 
         userCredentials, 
         {
@@ -26,7 +26,7 @@ function registerUser(userCredentials: User) {
  * 
  * @param userCredentials JSON object with the credentials
  */
-function loginUser(userCredentials: User) {
+function loginUser(userCredentials: { username: string, password: string }) {
     return axios
         .post<LoginResponse>(
             "/api/users/login",
@@ -38,7 +38,9 @@ function loginUser(userCredentials: User) {
             }
         )
         .then(({data}) => {
-            localStorage.setItem("auth_token", data.token);
+            if (data.token !== undefined) {
+                localStorage.setItem("auth_token", data.token);
+            }
         });
 }
 

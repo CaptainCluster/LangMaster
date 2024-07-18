@@ -1,38 +1,41 @@
-import { loginUser } from "../../api/authenticate";
-import User from "../../models/User";
+import Header from '../../components/Header';
+import Credentials from '../../components/Credentials';
+import { useMutation } from '@tanstack/react-query';
+import { loginUser } from '../../api/authenticate';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
+  const navigate = useNavigate();
 
-
-    const submitLogin = (event: any) => {
-        event.preventDefault();
-
-        const inputUsername = document.getElementById("input-username") as HTMLInputElement;
-        const inputPassword = document.getElementById("input-password") as HTMLInputElement;
-
-        // Making sure the inputs are valid.
-        if (!inputUsername.value || !inputPassword.value) {
-            return;
-        } 
-
-        const userCredentials: User = {
-            username: inputUsername.value,
-            password: inputPassword.value
+  const { mutate } = useMutation({
+    mutationFn: loginUser,
+    onSuccess: () => {
+        if(localStorage.getItem("auth_token")) {
+            navigate('/'); 
         }
+    },
+  });
 
-        // Sending the POST request
-        loginUser(userCredentials)
-    }
+  const submitLogin = (username: string, password: string) => {
+    mutate({
+      username: username,
+      password: password,
+    });
+  };
 
-    return (
-        <div id="page-login">
-            <form onSubmit={submitLogin}>
-                <input id="input-username" name="username" type="string"></input>
-                <input id="input-password" name="password" type="password"></input>
-                <input type="submit"></input>
-            </form>
-        </div>
-    )
-}
+  if (localStorage.getItem('auth_token')) {
+    window.location.href = '/';
+  } else {
+      return (
+        <>
+          <Header />
+          <div id="page-register">
+            <Credentials onSubmit={submitLogin} />
+          </div>
+        </>
+      );
+  }
 
-export default Login;
+};
+
+export default Register;

@@ -11,12 +11,16 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "bootstrap": "^5.3.3",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.24.0",
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
+    "@tanstack/react-query": "^5.51.5",
+    "@tanstack/react-query-devtools": "^5.51.9",
     "@types/axios": "^0.14.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

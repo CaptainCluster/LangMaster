@@ -4,17 +4,24 @@ import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import './App.css'
 
+import Header from './components/Header'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function App() {
+
+  const queryClient = new QueryClient();
 
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />}/>
-        </Routes>
+        <QueryClientProvider client={queryClient}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />}/>
+            <Route path="/test" element={<Header />}/>
+          </Routes>
+        </QueryClientProvider>
       </Router>
     </>
   )
