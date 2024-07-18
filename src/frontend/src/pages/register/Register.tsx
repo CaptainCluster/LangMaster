@@ -3,37 +3,43 @@ import Credentials from '../../components/Credentials';
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '../../api/authenticate';
 import { useNavigate } from 'react-router-dom';
+import useStore from '../../stores/store';
+import { useEffect } from 'react';
 
-const Register = () => {
-  const navigate = useNavigate();
+function Register() {
 
-  const { mutate } = useMutation({
-    mutationFn: registerUser,
-    onSuccess: () => {
-      navigate('/login');
-    },
-  });
-
-  const submitRegister = (username: string, password: string) => {
-    mutate({
-      username: username,
-      password: password,
+    const navigate = useNavigate();
+    const {updateCurrentPageName} = useStore();
+    
+    const { mutate } = useMutation({
+        mutationFn: registerUser,
+        onSuccess: () => {
+            navigate('/login');
+        },
     });
-  };
+    
+    useEffect(() => {
+        if (localStorage.getItem('auth_token')) {
+            window.location.href = '/';
+        } 
+        updateCurrentPageName("Register");
+    }, []);
+  
+  const submitRegister = (username: string, password: string) => {
+      mutate({
+          username: username,
+          password: password,
+        });
+    };
 
-  if (localStorage.getItem('auth_token')) {
-    window.location.href = '/';
-  } else {
-      return (
+    return (
         <>
-          <Header />
-          <div id="page-register">
-            <Credentials onSubmit={submitRegister} />
-          </div>
+            <Header/>
+            <div id="page-register">
+                <Credentials onSubmit={submitRegister} />
+            </div>
         </>
-      );
-  }
-
+    );
 };
 
 export default Register;

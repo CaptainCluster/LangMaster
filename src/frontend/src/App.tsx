@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Index from './pages/Index'
+import Home from './pages/Home'
 import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import './App.css'
@@ -16,7 +16,7 @@ function App() {
       <Router>
         <QueryClientProvider client={queryClient}>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />}/>
             <Route path="/test" element={<Header />}/>

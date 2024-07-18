@@ -3,9 +3,14 @@ import Credentials from '../../components/Credentials';
 import { useMutation } from '@tanstack/react-query';
 import { loginUser } from '../../api/authenticate';
 import { useNavigate } from 'react-router-dom';
+import useStore from '../../stores/store';
+import { useEffect } from 'react';
+
 
 const Register = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const {updateCurrentPageName} = useStore();
+    
 
   const { mutate } = useMutation({
     mutationFn: loginUser,
@@ -16,6 +21,13 @@ const Register = () => {
     },
   });
 
+  useEffect(() => {
+        if (localStorage.getItem('auth_token')) {
+            window.location.href = '/';
+        } 
+        updateCurrentPageName("Login");
+    }, []);
+
   const submitLogin = (username: string, password: string) => {
     mutate({
       username: username,
@@ -23,19 +35,14 @@ const Register = () => {
     });
   };
 
-  if (localStorage.getItem('auth_token')) {
-    window.location.href = '/';
-  } else {
-      return (
+    return (
         <>
-          <Header />
-          <div id="page-register">
-            <Credentials onSubmit={submitLogin} />
-          </div>
+            <Header />
+                <div id="page-register">
+                <Credentials onSubmit={submitLogin} />
+            </div>
         </>
-      );
-  }
-
+    );
 };
 
 export default Register;
