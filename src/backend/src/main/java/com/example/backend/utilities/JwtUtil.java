@@ -2,13 +2,13 @@ package com.example.backend.utilities;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Service;
-
 import javax.crypto.SecretKey;
-import java.util.Calendar;
 import java.util.Date;
 
 @Service
 public class JwtUtil {
+
+    public static final long EXPIRATION_TIME = 3600_000;
 
     /**
      * Creates a JWT token for the authenticated user.
@@ -28,15 +28,8 @@ public class JwtUtil {
             .subject(username)
             .signWith(jwtKey)
             .issuedAt(new Date())
-            .expiration(getJwtExpiration())
+            .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
             .compact();
-    }
-
-    public Date getJwtExpiration() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.HOUR_OF_DAY, 1);
-        return calendar.getTime();
     }
 
     /**

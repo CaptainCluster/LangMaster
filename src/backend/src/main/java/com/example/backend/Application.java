@@ -13,11 +13,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	/**
-	 * Setting the env variables. 
-	 * 
-	 * Currently handles the credentials for PostgresSQL
-	 */
+	// Setting the .env variables
 	public static void setEnvVariables() {
 		Dotenv dotenv = Dotenv.load();
 		System.setProperty("DB_HOST", dotenv.get("DB_HOST"));

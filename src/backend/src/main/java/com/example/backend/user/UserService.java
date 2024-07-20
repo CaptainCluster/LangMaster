@@ -37,6 +37,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Making sure the credentials are valid for successful authentication.
+     * @param loggingUser The user object with the credentials
+     */
     public boolean checkCredentials(User loggingUser) {
 
         // Figuring out whether the user exists

@@ -1,20 +1,17 @@
 package com.example.backend.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.backend.language.Language;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
+
 /**
  * Table: application_user
  * 
  * Used to store core user information, such as the 
  * username and password
  */
-
 @Entity
 @Table(name = "application_user")
 public class User {
@@ -30,7 +27,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column
     private LocalDate registerDate;
+
+    @ManyToMany
+    @JoinTable (
+            name = "user_language",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private Set<Language> studiedLanguages;
+
 
     public User(){
         this.registerDate = LocalDate.now();
