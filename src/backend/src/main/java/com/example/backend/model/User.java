@@ -1,6 +1,5 @@
-package com.example.backend.user;
+package com.example.backend.model;
 
-import com.example.backend.language.Language;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -17,8 +16,6 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "user_id")
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -33,10 +30,14 @@ public class User {
     @ManyToMany
     @JoinTable (
             name = "user_language",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user")),
             inverseJoinColumns = @JoinColumn(name = "language_id")
     )
     private Set<Language> studiedLanguages;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "progress_id", referencedColumnName = "id")
+    private Progress progress;
 
 
     public User(){

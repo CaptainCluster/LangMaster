@@ -1,7 +1,7 @@
 package com.example.backend;
 
-import com.example.backend.user.User;
-import com.example.backend.user.UserRepository;
+import com.example.backend.model.User;
+import com.example.backend.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
