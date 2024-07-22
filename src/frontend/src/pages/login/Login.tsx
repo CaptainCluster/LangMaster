@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useStore from "../../stores/store";
 import { useEffect } from "react";
 
-const Register = () => {
+const Login = () => {
   const navigate = useNavigate();
   const { updateCurrentPageName } = useStore();
 
@@ -47,4 +47,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
