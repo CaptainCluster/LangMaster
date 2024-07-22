@@ -5,8 +5,7 @@ import Home from "./pages/Home";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Error404 from "./pages/Error404";
-
-import Header from "./components/Header";
+import Profile from "./pages/profile/Profile";
 
 import "./App.css";
 
@@ -22,7 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/test" element={<Header />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </QueryClientProvider>
       </Router>

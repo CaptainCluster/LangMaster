@@ -1,20 +1,28 @@
 import { create } from "zustand";
 
 interface Application {
-    currentPageName: string;
-
-    updateCurrentPageName: (newPage: string) => void;
+  currentPageName: string;
+  currentUser: string;
+  updateCurrentPageName: (newPage: string) => void;
+  updateCurrentUser: (newUser: string) => void;
 }
 
 const useStore = create<Application>((set) => ({
-    currentPageName: "",
+  currentPageName: "",
+  currentUser: "",
 
-    updateCurrentPageName: (newPage: string) => 
-        set((state) => ({
-            ...state,
-            currentPageName: newPage,
-        })),
-    
+  updateCurrentPageName: (newPage: string) =>
+    set((state) => ({
+      ...state,
+      currentPageName: newPage,
+    })),
+
+  updateCurrentUser: (newUser: string) => {
+    set((state) => ({
+      ...state,
+      currentUser: newUser,
+    }));
+  },
 }));
 
 export default useStore;
