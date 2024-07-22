@@ -14,4 +14,38 @@ public class Answer {
 
     @Column
     private boolean isCorrect;
+
+    // Constructors
+    public Answer() {}
+
+    public Answer(String content, boolean isCorrect) {
+        this.content = content;
+        this.isCorrect = isCorrect;
+    }
+
+    // Setters
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setCorrect(boolean isCorrect) {
+        this.isCorrect = isCorrect;
+    }
+
+    // Getters
+    public long getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public boolean getIsCorrect() {
+        return isCorrect;
+    }
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -36,7 +35,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    
     @PostMapping("/login")
     public HashMap<String, String> loginUser(@RequestBody User user) {
         boolean validCredentials = userService.checkCredentials(user);

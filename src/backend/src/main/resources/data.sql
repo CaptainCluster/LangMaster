@@ -1,5 +1,10 @@
-INSERT INTO language (name) VALUES ('Chinese');
-INSERT INTO language (name) VALUES ('Finnish');
-INSERT INTO language (name) VALUES ('French');
+INSERT INTO
+    language (name)
+VALUES
+    ('Chinese'),
+    ('Finnish'),
+    ('French'),
+    ('Japanese')
+    ON CONFLICT (name)
+    	DO NOTHING;
 
-  

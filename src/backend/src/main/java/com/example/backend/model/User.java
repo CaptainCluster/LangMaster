@@ -3,6 +3,7 @@ package com.example.backend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -33,46 +34,72 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_user")),
             inverseJoinColumns = @JoinColumn(name = "language_id")
     )
-    private Set<Language> studiedLanguages;
+    private Set<Language> languages;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "progress_id", referencedColumnName = "id")
     private Progress progress;
 
-
+    // Constructors
     public User(){
-        this.registerDate = LocalDate.now();
+        fillCommon();
     }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.registerDate = LocalDate.now();
+        fillCommon();
     }
 
+    public void fillCommon() {
+        this.registerDate = LocalDate.now();
+        this.languages = Collections.emptySet();
+        this.progress = new Progress();
+    }
+
+    // Setters
     public void setId(Long id) {
         this.id = id;
     }
+
     public void setUsername(String newUsername) {
         this.username = newUsername;
     }
+
     public void setPassword(String newPassword) {
         this.password = newPassword;
-    } 
+    }
+
     public void setRegisterDate(LocalDate newRegisterDate) {
         this.registerDate = newRegisterDate;
     }
 
+    public void setProgress(Progress progress) {
+        this.progress = progress;
+    }
+
+    public void setLanguages(Set<Language> languages) {
+        this.languages = languages;
+    }
+
+    // Getters
     public long getId() {
         return this.id;
     }
+
     public String getUsername() {
         return this.username;
     }
+
     public String getPassword() {
         return this.password;
     }
+
     public LocalDate getRegisterDate() {
         return this.registerDate;
+    }
+
+    public Set<Language> getLanguages() {
+        return this.languages;
     }
 }

@@ -14,7 +14,6 @@ import java.util.Optional;
 public class UserService {
     private UserRepository userRepository;
 
-
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -32,11 +31,14 @@ public class UserService {
      */
     public void createUser(User user) {
 
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+
         // Hashing the password with bCrypt
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        userRepository.save(user);
+        userRepository.save(newUser);
     }
 
     /**
