@@ -1,12 +1,13 @@
 package com.example.backend.service;
 
+import com.example.backend.model.Question;
 import com.example.backend.model.Quiz;
 import com.example.backend.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class QuizService {
@@ -32,5 +33,14 @@ public class QuizService {
 
     public Optional<Quiz> findQuiz(String name) {
         return quizRepository.findByName(name);
+    }
+
+    public Set<Question> findQuizzes(String quizName) {
+        Optional<Quiz> optionalQuiz = quizRepository.findByName(quizName);
+        if (optionalQuiz.isEmpty()) {
+            return null;
+        }
+        Quiz quiz = optionalQuiz.get();
+        return quiz.getContent();
     }
 }
