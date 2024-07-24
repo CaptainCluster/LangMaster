@@ -8,7 +8,7 @@ import java.util.Date;
 @Service
 public class JwtUtil {
 
-    public static final long EXPIRATION_TIME = 3600_000;
+    public static final int EXPIRATION_TIME = 3600;
 
     /**
      * Creates a JWT token for the authenticated user.
@@ -28,7 +28,7 @@ public class JwtUtil {
             .subject(username)
             .signWith(jwtKey)
             .issuedAt(new Date())
-            .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+            .expiration(new Date(new Date().getTime() + EXPIRATION_TIME))
             .compact();
     }
 
