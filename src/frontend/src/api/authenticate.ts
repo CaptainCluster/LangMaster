@@ -1,7 +1,6 @@
 import axios from "axios";
 import User from "../models/User";
 import LoginResponse from "../models/response/LoginResponse";
-
 /**
  * Sends a POST request to /api/users/register
  * Attempts to register a user.
@@ -33,6 +32,7 @@ function loginUser(userCredentials: { username: string; password: string }) {
       // Setting the token.
       if (data.token !== undefined) {
         localStorage.setItem("auth_token", data.token);
+        localStorage.setItem("auth_username", userCredentials.username);
       }
     });
 }
