@@ -1,6 +1,7 @@
 import axios from "axios";
 import User from "../models/User";
 import LoginResponse from "../models/response/LoginResponse";
+
 /**
  * Sends a POST request to /api/users/register
  * Attempts to register a user.
@@ -29,7 +30,7 @@ function loginUser(userCredentials: { username: string; password: string }) {
       },
     })
     .then(({ data }) => {
-      // Setting the token.
+      // Token and client username are stored in localstorage
       if (data.token !== undefined) {
         localStorage.setItem("auth_token", data.token);
         localStorage.setItem("auth_username", userCredentials.username);
