@@ -41,9 +41,11 @@ function Header() {
       <Nav className="me-auto">
         <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href="/profile">Profile</Nav.Link>
+        <Nav.Link href="/learn">Learn</Nav.Link>
+        <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
         <NavDropdown title="" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.1">Log Out</NavDropdown.Item>
+          <NavDropdown.Item href="/logout">Log Out</NavDropdown.Item>
         </NavDropdown>
       </Nav>
     );

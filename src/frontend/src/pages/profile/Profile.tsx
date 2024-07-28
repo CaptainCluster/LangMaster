@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function Profile() {
-  const { currentUser, updateCurrentPageName } = useStore();
+  const { updateCurrentPageName } = useStore();
 
   // Unauthenticated users are redirected
   useEffect(() => {
@@ -22,7 +22,7 @@ function Profile() {
       <Container>
         <Row>
           <Col>
-            <h2>{currentUser}</h2>
+            <h2>{}</h2>
           </Col>
         </Row>
       </Container>

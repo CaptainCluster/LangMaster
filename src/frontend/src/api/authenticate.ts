@@ -30,9 +30,10 @@ function loginUser(userCredentials: { username: string; password: string }) {
       },
     })
     .then(({ data }) => {
-      // Setting the token.
+      // Token and client username are stored in localstorage
       if (data.token !== undefined) {
         localStorage.setItem("auth_token", data.token);
+        localStorage.setItem("auth_username", userCredentials.username);
       }
     });
 }
