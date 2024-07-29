@@ -15,6 +15,8 @@ import java.util.Set;
 @Entity
 @Table(name = "application_user")
 public class User {
+    private static final String defaultBio = "The user has not written their bio yet.";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,6 +26,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Column
+    private String bio;
 
     @Column
     private LocalDate registerDate;
@@ -55,6 +60,7 @@ public class User {
         this.registerDate = LocalDate.now();
         this.languages = Collections.emptySet();
         this.progress = new Progress();
+        this.bio = defaultBio;
     }
 
     // Setters
@@ -82,6 +88,10 @@ public class User {
         this.languages = languages;
     }
 
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
     // Getters
     public long getId() {
         return this.id;
@@ -102,4 +112,9 @@ public class User {
     public Set<Language> getLanguages() {
         return this.languages;
     }
+
+    public String getBio() {
+        return this.bio;
+    }
 }
+

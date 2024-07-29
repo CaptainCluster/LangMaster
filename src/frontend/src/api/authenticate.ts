@@ -1,6 +1,7 @@
 import axios from "axios";
 import User from "../models/User";
 import LoginResponse from "../models/response/LoginResponse";
+import ProfileResponse from "../models/response/ProfileResponse";
 
 /**
  * Sends a POST request to /api/users/register
@@ -26,7 +27,7 @@ function loginUser(userCredentials: { username: string; password: string }) {
   return axios
     .post<LoginResponse>("/api/users/login", userCredentials, {
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
     })
     .then(({ data }) => {
@@ -38,4 +39,25 @@ function loginUser(userCredentials: { username: string; password: string }) {
     });
 }
 
-export { registerUser, loginUser };
+/**
+ * Fetches profile data based on the current user. The data is based
+ * on what is to be displayed publicly.
+ *
+ * @param username The username of the user
+ */
+function getProfileData(username: String) {
+  return axios
+    .get<ProfileResponse>(`/api/users/profile/${username}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(({ data }) => {
+      if (!data.success) {
+        return;
+      }
+      return data;
+    });
+}
+
+export { registerUser, loginUser, getProfileData };
