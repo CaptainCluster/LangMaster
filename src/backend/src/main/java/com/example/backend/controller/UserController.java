@@ -58,8 +58,8 @@ public class UserController {
     }
 
     //TODO: Implement requirement for JWT token
-    @PostMapping("/profile")
-    public ResponseEntity<JSONObject> getProfile(@RequestParam String username) {
+    @GetMapping("/profile/{username}")
+    public ResponseEntity<JSONObject> getProfile(@PathVariable String username) {
         JSONObject response = new JSONObject();
         User user = userService.findMatchingUser(username);
 
@@ -72,6 +72,7 @@ public class UserController {
             response.put("bio", user.getBio());
             response.put("languages", user.getLanguages());
         }
+        System.out.println(response);
         return ResponseEntity.ok(response);
     }
 }

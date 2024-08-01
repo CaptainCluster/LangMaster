@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import useStore from "../../stores/store";
 import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
-import { loginUser } from "../../api/authenticate";
+import { ApiAuthenticate } from "../../api/ApiAuthenticate";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Login = () => {
   // Sending a POST request request in order to log the client in.
   // Redirects if JWT was obtained.
   const { mutate } = useMutation({
-    mutationFn: loginUser,
+    mutationFn: ApiAuthenticate.loginUser,
     onSuccess: () => {
       if (localStorage.getItem("auth_token")) {
         navigate("/");
