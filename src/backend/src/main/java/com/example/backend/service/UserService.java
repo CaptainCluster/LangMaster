@@ -59,4 +59,8 @@ public class UserService {
         return BCrypt.checkpw(loggingUser.getPassword(), foundUser.getPassword());
     }
 
+    public User findMatchingUser(String username) {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        return optionalUser.orElse(null);
+    }
 }
