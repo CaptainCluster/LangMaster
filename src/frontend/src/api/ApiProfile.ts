@@ -1,5 +1,6 @@
 import axios, { Axios, AxiosHeaders } from "axios";
 import ProfileResponse from "../models/response/ProfileResponse";
+import ProfileFailResponse from "../models/response/ProfileFailResponse";
 
 namespace ApiProfile {
   /**
@@ -15,11 +16,14 @@ namespace ApiProfile {
         .get<ProfileResponse>(`/api/users/profile/${username}`, {
           headers,
         })
-        .then((data) => {
-          console.log(data);
-          if (!data) {
-            console.log("weee");
-            return;
+        .then(({ data }) => {
+          // Making sure that the request was successful
+          if (!data.success) {
+            const errorObj: ProfileFailResponse = {
+              success: false,
+              msg: "Failed to fetch profile data.",
+            };
+            return errorObj;
           }
           return data;
         });

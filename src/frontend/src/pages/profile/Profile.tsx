@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,6 +11,7 @@ import { ApiProfile } from "../../api/ApiProfile";
 function Profile() {
   const { updateCurrentPageName } = useStore(); // State management
   const username: string | undefined = useParams().username; // URL parameter recognition
+  const [langElements, setLangElements] = useState<JSX.Element[]>();
 
   // Unauthenticated users are redirected
   useEffect(() => {
@@ -29,13 +30,24 @@ function Profile() {
     queryKey: ["profile"],
     queryFn: () => ApiProfile.getProfileData(username),
   });
-
+  console.log(data);
   if (isLoading) {
     return <span>Loading...</span>;
   }
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+
+  const displayLanguages = (): JSX.Element => {
+    if (!data.languages || data.languages.length === 0) {
+      return <span>No languages found.</span>;
+    }
+    const languagesList: JSX.Element[] = [];
+    data.languages.map((language: String) => {
+      languagesList.push(<li>{language}</li>);
+    });
+    return <ul>{languagesList}</ul>;
+  };
 
   // Returning the intended content upon successful query fetch
   return (
@@ -44,7 +56,9 @@ function Profile() {
       <Container>
         <Row>
           <Col>
-            <h2>{}</h2>
+            <h2>{username}</h2>
+            <h6>{data.bio}</h6>
+            {displayLanguages()}
           </Col>
         </Row>
       </Container>
