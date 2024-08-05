@@ -30,7 +30,7 @@ public class User {
     @Column
     private String bio;
 
-    @Column
+    @Column(nullable = false)
     private LocalDate registerDate;
 
     @ManyToMany

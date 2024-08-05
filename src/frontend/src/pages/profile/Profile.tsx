@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Params, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useStore from "../../stores/store";
 import Header from "../../components/Header";
-import { ApiProfile } from "../../api/ApiProfile";
+import { ApiProfile } from "../../api/profile";
 
 function Profile() {
   const { updateCurrentPageName } = useStore(); // State management

@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import useStore from "../../stores/store";
 import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
-import { ApiAuthenticate } from "../../api/ApiAuthenticate";
+import { ApiAuthenticate } from "../../api/authenticate";
 
 const Login = () => {
   const navigate = useNavigate();
