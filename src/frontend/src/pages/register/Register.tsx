@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
 import { useMutation } from "@tanstack/react-query";
-import { ApiAuthenticate } from "../../api/ApiAuthenticate";
+import { ApiAuthenticate } from "../../api/authenticate";
 import { useNavigate } from "react-router-dom";
 import useStore from "../../stores/store";
 import { useEffect } from "react";

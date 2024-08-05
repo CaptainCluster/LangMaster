@@ -26,24 +26,25 @@ public class LanguageService {
 
     public void addLanguageForUser(String username, String languageName) {
 
-        // Making sure the user doesn't already study the language
-        boolean foundLanguage = false;
-
+        // Fetching the User object
         Optional<User> optionalUser = userRepository.findByUsername(username);
+        if (optionalUser.isEmpty()) {
+            return;
+        }
         User user = optionalUser.get();
 
+        // Making sure the user does not already study the language
         for (Language languageObj : user.getLanguages()) {
             if (Objects.equals(languageObj.getName(), languageName)) {
-                foundLanguage = true;
-                break;
+                return;
             }
-        }
-        if (foundLanguage) {
-            return;
         }
 
         // Assigning the new language to user.
         Optional<Language> optionalLanguage = languageRepository.findByName(languageName);
+        if (optionalLanguage.isEmpty()) {
+            return;
+        }
         Language language = optionalLanguage.get();
 
         user.getLanguages().add(language);
@@ -52,6 +53,5 @@ public class LanguageService {
         // Assigning the user to the language (in case issues occur)
         // language.getUsers().add(user);
         // languageRepository.save(language);
-
     }
 }

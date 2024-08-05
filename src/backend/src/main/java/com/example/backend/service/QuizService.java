@@ -43,4 +43,18 @@ public class QuizService {
         Quiz quiz = optionalQuiz.get();
         return quiz.getContent();
     }
+
+    public void addQuestions(Quiz quiz, Set<Question> questions) {
+        for (Question question : questions) {
+            quiz.getContent().add(question);
+        }
+        quizRepository.save(quiz);
+    }
+
+    public void removeQuestions(Quiz quiz, Set<Question> questions) {
+        for (Question question : questions) {
+            quiz.getContent().remove(question);
+        }
+        quizRepository.save(quiz);
+    }
 }
