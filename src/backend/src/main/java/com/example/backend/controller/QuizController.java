@@ -56,4 +56,16 @@ public class QuizController {
 
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/")
+    public ResponseEntity<Quiz> deleteQuiz(@RequestBody String name) {
+        Optional<Quiz> optionalQuiz = quizService.findQuiz(name);
+        if (optionalQuiz.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        Quiz quiz = optionalQuiz.get();
+        quizService.deleteQuiz(quiz);
+
+        return ResponseEntity.ok().build();
+    }
 }

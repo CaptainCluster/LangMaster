@@ -44,6 +44,10 @@ public class QuizService {
         return quiz.getContent();
     }
 
+    public void deleteQuiz(Quiz quiz) {
+        quizRepository.delete(quiz);
+    }
+
     public void addQuestions(Quiz quiz, Set<Question> questions) {
         for (Question question : questions) {
             quiz.getContent().add(question);

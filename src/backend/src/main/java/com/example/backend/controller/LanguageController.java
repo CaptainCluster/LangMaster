@@ -1,15 +1,14 @@
 package com.example.backend.controller;
 
+import com.example.backend.input.LanguageInput;
 import com.example.backend.model.Language;
 import com.example.backend.repository.LanguageRepository;
 import com.example.backend.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,14 +16,19 @@ import java.util.Map;
 public class LanguageController {
 
     @Autowired
-    LanguageRepository languageRepository;
+    private LanguageRepository languageRepository;
 
     @Autowired
-    LanguageService languageService;
+    private LanguageService languageService;
+
+    @GetMapping
+    public ResponseEntity<List<Language>> getLanguage() {
+        return ResponseEntity.ok().body(languageService.getAllLanguages());
+    }
 
     @PostMapping("/commence")
-    public ResponseEntity<Language> startNewLanguage(@RequestBody Map<String, String> reqData) {
-        languageService.addLanguageForUser(reqData.get("username"), reqData.get("language"));
+    public ResponseEntity<Language> startNewLanguage(@RequestBody LanguageInput languageInput) {
+        languageService.addLanguageForUser(languageInput.getUsername(), languageInput.getLanguage());
         return ResponseEntity.ok().build();
     }
 }

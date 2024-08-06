@@ -7,6 +7,7 @@ import com.example.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -23,6 +24,11 @@ public class LanguageService {
     public LanguageService(LanguageRepository languageRepository) {
         this.languageRepository = languageRepository;
     }
+
+    public List<Language> getAllLanguages() {
+        return languageRepository.findAll();
+    }
+
 
     public void addLanguageForUser(String username, String languageName) {
 
