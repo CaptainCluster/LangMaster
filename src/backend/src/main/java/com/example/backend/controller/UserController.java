@@ -2,6 +2,8 @@ package com.example.backend.controller;
 
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
+import com.example.backend.result.LoginResult;
+import com.example.backend.result.ProfileResult;
 import com.example.backend.service.UserService;
 import com.example.backend.utilities.JwtUtil;
 import org.json.JSONObject;
@@ -38,41 +40,33 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public HashMap<String, String> loginUser(@RequestBody User user) {
+    public ResponseEntity<LoginResult> loginUser(@RequestBody User user) {
+        LoginResult loginResult = new LoginResult(false);
         boolean validCredentials = userService.checkCredentials(user);
 
-        HashMap<String, String> response = new HashMap<>();
-
         // If credentials are not valid, user is notified.
-        if (!validCredentials) {
-            response.put("msg", "Invalid credentials.");
-            return response;
+        if (validCredentials) {
+            String jwtToken = jwtUtil.createJwt(user.getUsername());
+
+            loginResult.setSuccess(true);
+            loginResult.setToken(jwtToken);
         }
-
-        // Assigning the JWT for successful login
-        String jwtToken = jwtUtil.createJwt(user.getUsername());
-        response.put("msg", "success");
-        response.put("token", jwtToken);
-
-        return response;
+        return ResponseEntity.ok().body(loginResult);
     }
 
     //TODO: Implement requirement for JWT token
     @GetMapping("/profile/{username}")
-    public ResponseEntity<String> getProfile(@PathVariable String username) {
-        JSONObject response = new JSONObject();
+    public ResponseEntity<ProfileResult> getProfile(@PathVariable String username) {
+        ProfileResult profileResult = new ProfileResult(false);
         User user = userService.findMatchingUser(username);
 
-        // Trying to find the user
-        if (user == null) {
-            response.put("success", false);
-        } else {
-            response.put("success", true);
-            response.put("username", user.getUsername());
-            response.put("bio", user.getBio());
-            response.put("languages", user.getLanguages());
+        if (user != null) {
+           profileResult.setSuccess(true);
+           profileResult.setUsername(user.getUsername());
+           profileResult.setBio(user.getBio());
+           profileResult.setLanguages(user.getLanguages());
         }
-        System.out.println(response);
-        return ResponseEntity.ok().body(response.toString());
+
+        return ResponseEntity.ok().body(profileResult);
     }
 }

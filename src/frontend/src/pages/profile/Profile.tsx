@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useStore from "../../stores/store";
 import Header from "../../components/Header";
-import { ApiProfile } from "../../api/profile";
+import { api } from "../../api";
 
 function Profile() {
   const { updateCurrentPageName } = useStore(); // State management
@@ -28,9 +28,8 @@ function Profile() {
   // Query for fetching the profile data
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["profile"],
-    queryFn: () => ApiProfile.getProfileData(username),
+    queryFn: () => api.user.getProfileData(username),
   });
-  console.log(data);
   if (isLoading) {
     return <span>Loading...</span>;
   }
@@ -39,11 +38,11 @@ function Profile() {
   }
 
   const displayLanguages = (): JSX.Element => {
-    if (!data.languages || data.languages.length === 0) {
+    if (!data.data.languages || data.data.languages.length === 0) {
       return <span>No languages found.</span>;
     }
     const languagesList: JSX.Element[] = [];
-    data.languages.map((language: String) => {
+    data.data.languages.map((language: String) => {
       languagesList.push(<li>{language}</li>);
     });
     return <ul>{languagesList}</ul>;
@@ -57,7 +56,7 @@ function Profile() {
         <Row>
           <Col>
             <h2>{username}</h2>
-            <h6>{data.bio}</h6>
+            <h6>{data.data.bio}</h6>
             {displayLanguages()}
           </Col>
         </Row>
