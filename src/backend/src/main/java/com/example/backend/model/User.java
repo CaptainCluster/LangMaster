@@ -116,5 +116,9 @@ public class User {
     public String getBio() {
         return this.bio;
     }
+
+    public Progress getProgress() {
+        return progress;
+    }
 }
 
