@@ -19,10 +19,12 @@ public class QuizService {
      * Creating a Quiz object and saving it
      * @param name The name of the quiz
      */
-    public boolean createQuiz(String name) {
-
-        for (Quiz existingQuiz : quizRepository.findAll()) {
-            if (existingQuiz.getName().equals(name)) {
+    public boolean createQuiz(String name)
+    {
+        for (Quiz existingQuiz : quizRepository.findAll())
+        {
+            if (existingQuiz.getName().equals(name))
+            {
                 return false;
             }
         }
@@ -31,32 +33,39 @@ public class QuizService {
         return true;
     }
 
-    public Optional<Quiz> findQuiz(String name) {
-        return quizRepository.findByName(name);
+    public Quiz findQuiz(String name) {
+        return quizRepository.findByName(name).orElse(null);
     }
 
     public Set<Question> findQuizzes(String quizName) {
+
         Optional<Quiz> optionalQuiz = quizRepository.findByName(quizName);
-        if (optionalQuiz.isEmpty()) {
+        if (optionalQuiz.isEmpty())
+        {
             return null;
         }
         Quiz quiz = optionalQuiz.get();
         return quiz.getContent();
     }
 
-    public void deleteQuiz(Quiz quiz) {
+    public void deleteQuiz(Quiz quiz)
+    {
         quizRepository.delete(quiz);
     }
 
-    public void addQuestions(Quiz quiz, Set<Question> questions) {
-        for (Question question : questions) {
+    public void addQuestions(Quiz quiz, Set<Question> questions)
+    {
+        for (Question question : questions)
+        {
             quiz.getContent().add(question);
         }
         quizRepository.save(quiz);
     }
 
-    public void removeQuestions(Quiz quiz, Set<Question> questions) {
-        for (Question question : questions) {
+    public void removeQuestions(Quiz quiz, Set<Question> questions)
+    {
+        for (Question question : questions)
+        {
             quiz.getContent().remove(question);
         }
         quizRepository.save(quiz);

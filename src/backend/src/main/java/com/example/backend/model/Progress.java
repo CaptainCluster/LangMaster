@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Progress {
+public class Progress
+{
     private static final int DEFAULT_SUCCESSES = 0;
     private static final int DEFAULT_FAILS = 0;
 
@@ -19,12 +20,14 @@ public class Progress {
     private int fails;
 
     // Constructors
-    public Progress() {
+    public Progress()
+    {
         this.successes = DEFAULT_SUCCESSES;
         this.fails = DEFAULT_FAILS;
     }
 
-    public Progress(int successes, int fails) {
+    public Progress(int successes, int fails)
+    {
         this.successes = successes;
         this.fails = fails;
     }

@@ -1,37 +1,47 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Progress;
-import com.example.backend.model.User;
 import com.example.backend.service.ProgressService;
-import com.example.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/api/progress")
-public class ProgressController {
-
-    @Autowired
-    private UserService userService;
-
+public class ProgressController
+{
     @Autowired
     private ProgressService progressService;
 
-
     @GetMapping("/")
-    public ResponseEntity<Progress> getProgress(@RequestBody String username) {
-        // Fetching the User object
-        User user = userService.findMatchingUser(username);
-        if (user == null) {
+    public ResponseEntity<Progress> getProgress(@RequestBody String username)
+    {
+        Progress progress = progressService.getProgressWithUsername(username);
+        return ResponseEntity.ok(progress);
+    }
+
+    @PostMapping("/success")
+    public ResponseEntity<Progress> postSuccess(@RequestBody String username)
+    {
+        Progress progress = progressService.getProgressWithUsername(username);
+        if (progress == null)
+        {
             return ResponseEntity.badRequest().build();
         }
+        progressService.incrementSuccess(progress);
+        return ResponseEntity.ok().build();
+    }
 
-        Progress progress = user.getProgress();
-        return ResponseEntity.ok(progress);
+    @PostMapping("/fail")
+    public ResponseEntity<Progress> postFail(@RequestBody String username)
+    {
+        Progress progress = progressService.getProgressWithUsername(username);
+        if (progress == null)
+        {
+            return ResponseEntity.badRequest().build();
+        }
+        progressService.incrementFails(progress);
+        return ResponseEntity.ok().build();
     }
 }

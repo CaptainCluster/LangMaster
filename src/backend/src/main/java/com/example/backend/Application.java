@@ -6,15 +6,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
-public class Application {
-
-	public static void main(String[] args) {
+public class Application
+{
+	public static void main(String[] args)
+	{
 		setEnvVariables();
 		SpringApplication.run(Application.class, args);
 	}
 
 	// Setting the .env variables
-	public static void setEnvVariables() {
+	public static void setEnvVariables()
+	{
 		Dotenv dotenv = Dotenv.load();
 		System.setProperty("DB_HOST", dotenv.get("DB_HOST"));
         System.setProperty("DB_PORT", dotenv.get("DB_PORT"));

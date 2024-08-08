@@ -4,20 +4,24 @@ import com.example.backend.model.Question;
 
 import java.util.Set;
 
-public class QuizInput {
+public class QuizInput
+{
     private String name;
     private Set<Question> addQuestions;
     private Set<Question> removeQuestions;
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public Set<Question> getAddQuestions() {
+    public Set<Question> getAddQuestions()
+    {
         return addQuestions;
     }
 
-    public Set<Question> getRemoveQuestions() {
+    public Set<Question> getRemoveQuestions()
+    {
         return removeQuestions;
     }
 }
