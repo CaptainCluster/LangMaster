@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService
+{
     private UserRepository userRepository;
 
     @Autowired
@@ -18,7 +19,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findUserById(Long id) {
+    public User findUserById(Long id)
+    {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entity not found."));
     }
 
@@ -28,8 +30,8 @@ public class UserService {
      *
      * @param user The User object (most likely from request body)
      */
-    public void createUser(User user) {
-
+    public void createUser(User user)
+    {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
 
@@ -44,13 +46,15 @@ public class UserService {
      * Making sure the credentials are valid for successful authentication.
      * @param loggingUser The user object with the credentials
      */
-    public boolean checkCredentials(User loggingUser) {
+    public boolean checkCredentials(User loggingUser)
+    {
 
         // Figuring out whether the user exists
         Optional<User> potentialUser = userRepository.findByUsername(loggingUser.getUsername());
         User foundUser = potentialUser.orElse(null);
 
-        if (foundUser == null) {
+        if (foundUser == null)
+        {
             return false;
         }
 
@@ -58,7 +62,8 @@ public class UserService {
         return BCrypt.checkpw(loggingUser.getPassword(), foundUser.getPassword());
     }
 
-    public User findMatchingUser(String username) {
+    public User findMatchingUser(String username)
+    {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         return optionalUser.orElse(null);
     }

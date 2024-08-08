@@ -6,19 +6,16 @@ import com.example.backend.result.LoginResult;
 import com.example.backend.result.ProfileResult;
 import com.example.backend.service.UserService;
 import com.example.backend.utilities.JwtUtil;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
-
+public class UserController
+{
     @Autowired
     private UserRepository userRepository;
 
@@ -34,18 +31,21 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
+    public ResponseEntity<User> registerUser(@RequestBody User user)
+    {
         userService.createUser(user);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResult> loginUser(@RequestBody User user) {
+    public ResponseEntity<LoginResult> loginUser(@RequestBody User user)
+    {
         LoginResult loginResult = new LoginResult(false);
         boolean validCredentials = userService.checkCredentials(user);
 
         // If credentials are not valid, user is notified.
-        if (validCredentials) {
+        if (validCredentials)
+        {
             String jwtToken = jwtUtil.createJwt(user.getUsername());
 
             loginResult.setSuccess(true);
@@ -56,11 +56,13 @@ public class UserController {
 
     //TODO: Implement requirement for JWT token
     @GetMapping("/profile/{username}")
-    public ResponseEntity<ProfileResult> getProfile(@PathVariable String username) {
+    public ResponseEntity<ProfileResult> getProfile(@PathVariable String username)
+    {
         ProfileResult profileResult = new ProfileResult(false);
         User user = userService.findMatchingUser(username);
 
-        if (user != null) {
+        if (user != null)
+        {
            profileResult.setSuccess(true);
            profileResult.setUsername(user.getUsername());
            profileResult.setBio(user.getBio());

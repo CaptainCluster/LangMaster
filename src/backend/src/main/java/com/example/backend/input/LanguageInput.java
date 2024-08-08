@@ -1,14 +1,17 @@
 package com.example.backend.input;
 
-public class LanguageInput {
+public class LanguageInput
+{
     private String username;
     private String language;
 
-    public String getUsername() {
+    public String getUsername()
+    {
         return username;
     }
 
-    public String getLanguage() {
+    public String getLanguage()
+    {
         return language;
     }
 }

@@ -12,7 +12,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class LanguageService {
+public class LanguageService
+{
 
     @Autowired
     private LanguageRepository languageRepository;
@@ -25,30 +26,35 @@ public class LanguageService {
         this.languageRepository = languageRepository;
     }
 
-    public List<Language> getAllLanguages() {
+    public List<Language> getAllLanguages()
+    {
         return languageRepository.findAll();
     }
 
-
-    public void addLanguageForUser(String username, String languageName) {
+    public void addLanguageForUser(String username, String languageName)
+    {
 
         // Fetching the User object
         Optional<User> optionalUser = userRepository.findByUsername(username);
-        if (optionalUser.isEmpty()) {
+        if (optionalUser.isEmpty())
+        {
             return;
         }
         User user = optionalUser.get();
 
         // Making sure the user does not already study the language
-        for (Language languageObj : user.getLanguages()) {
-            if (Objects.equals(languageObj.getName(), languageName)) {
+        for (Language languageObj : user.getLanguages())
+        {
+            if (Objects.equals(languageObj.getName(), languageName))
+            {
                 return;
             }
         }
 
         // Assigning the new language to user.
         Optional<Language> optionalLanguage = languageRepository.findByName(languageName);
-        if (optionalLanguage.isEmpty()) {
+        if (optionalLanguage.isEmpty())
+        {
             return;
         }
         Language language = optionalLanguage.get();

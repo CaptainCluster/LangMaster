@@ -14,7 +14,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "application_user")
-public class User {
+public class User
+{
     private static final String defaultBio = "The user has not written their bio yet.";
 
     @Id
@@ -50,13 +51,15 @@ public class User {
         fillCommon();
     }
 
-    public User(String username, String password) {
+    public User(String username, String password)
+    {
         this.username = username;
         this.password = password;
         fillCommon();
     }
 
-    public void fillCommon() {
+    public void fillCommon()
+    {
         this.registerDate = LocalDate.now();
         this.languages = Collections.emptySet();
         this.progress = new Progress();
@@ -115,6 +118,10 @@ public class User {
 
     public String getBio() {
         return this.bio;
+    }
+
+    public Progress getProgress() {
+        return progress;
     }
 }
 

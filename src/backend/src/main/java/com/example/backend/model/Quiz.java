@@ -6,7 +6,8 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Quiz {
+public class Quiz
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,12 +26,14 @@ public class Quiz {
     private Reward reward;
 
     // Constructors
-    public Quiz() {
+    public Quiz()
+    {
         this.name = "Unnamed Quiz";
         fillCommon();
     }
 
-    public Quiz(String name) {
+    public Quiz(String name)
+    {
         this.name = name;
         fillCommon();
     }

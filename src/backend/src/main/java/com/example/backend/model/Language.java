@@ -6,7 +6,8 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Language {
+public class Language
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,12 +23,14 @@ public class Language {
     private Set<Quiz> quizzes;
 
     // Constructors
-    public Language() {
+    public Language()
+    {
         this.users = Collections.emptySet();
         this.quizzes = Collections.emptySet();
     }
 
-    public Language(String name) {
+    public Language(String name)
+    {
         this.name = name;
         this.users = Collections.emptySet();
         this.quizzes = Collections.emptySet();

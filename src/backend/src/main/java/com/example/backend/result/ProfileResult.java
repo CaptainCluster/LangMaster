@@ -4,7 +4,8 @@ import com.example.backend.model.Language;
 
 import java.util.Set;
 
-public class ProfileResult {
+public class ProfileResult
+{
     private boolean success;
     private String username;
     private String bio;
@@ -12,23 +13,28 @@ public class ProfileResult {
 
     public ProfileResult() {}
 
-    public ProfileResult(boolean success) {
+    public ProfileResult(boolean success)
+    {
         this.success = success;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(boolean success)
+    {
         this.success = success;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username)
+    {
         this.username = username;
     }
 
-    public void setBio(String bio) {
+    public void setBio(String bio)
+    {
         this.bio = bio;
     }
 
-    public void setLanguages(Set<Language> languages) {
+    public void setLanguages(Set<Language> languages)
+    {
         this.languages = languages;
     }
 }

@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Reward {
+public class Reward
+{
     private static final int DEFAULT_XP = 0;
 
     @Id
