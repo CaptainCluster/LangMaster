@@ -11,7 +11,6 @@ import { api } from "../../api";
 function Profile() {
   const { updateCurrentPageName } = useStore(); // State management
   const username: string | undefined = useParams().username; // URL parameter recognition
-  const [langElements, setLangElements] = useState<JSX.Element[]>();
 
   // Unauthenticated users are redirected
   useEffect(() => {
@@ -37,8 +36,6 @@ function Profile() {
     return <span>Error: {error.message}</span>;
   }
 
-  console.log(data);
-  console.log(data.data);
   const displayLanguages = (): JSX.Element => {
     if (!data.data.languages || data.data.languages.length === 0) {
       return <span>No languages found.</span>;

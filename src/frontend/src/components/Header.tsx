@@ -54,6 +54,7 @@ function Header() {
         <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href={`/profile/${username}`}>Profile</Nav.Link>
         <Nav.Link href="/learn">Learn</Nav.Link>
+        <Nav.Link href="/workshop">Workshop</Nav.Link>
         <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
         <NavDropdown title="" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
