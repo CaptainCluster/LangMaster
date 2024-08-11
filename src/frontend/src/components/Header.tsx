@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import useStore from "../stores/store";
+import { Logout } from "./Logout";
 
 function Header() {
   const { currentPageName } = useStore();
@@ -56,7 +57,7 @@ function Header() {
         <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
         <NavDropdown title="" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
-          <NavDropdown.Item href="/logout">Log Out</NavDropdown.Item>
+          <Logout />
         </NavDropdown>
       </Nav>
     );
