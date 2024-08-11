@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import Error404 from "./pages/Error404";
 import Profile from "./pages/profile/Profile";
 import Logout from "./pages/logout/Logout";
+import { Workshop } from "./pages/workshop/Workshop";
 
 import "./App.css";
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/workshop" element={<Workshop />} />
           </Routes>
         </QueryClientProvider>
       </Router>

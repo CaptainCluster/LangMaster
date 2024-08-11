@@ -6,10 +6,18 @@ import useStore from "../stores/store";
 
 function Header() {
   const { currentPageName } = useStore();
+
+  // Fetching user from JWT, allowing redirection to profile page
   const username = localStorage.getItem("auth_username")
     ? localStorage.getItem("auth_username")
     : "";
 
+  /**
+   * Checks whether user is authenticated and selects what
+   * content will be in the header for navigation.
+   *
+   * @returns {JSX.Element} The header navigation content
+   */
   const displayNav = () => {
     /**
      * For unauthenticated users
@@ -54,6 +62,7 @@ function Header() {
     );
   };
 
+  // The final return for the Header
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>

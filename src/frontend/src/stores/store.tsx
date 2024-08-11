@@ -12,7 +12,7 @@ const useStore = create<Application>((set) => ({
     set((state) => ({
       ...state,
       currentPageName: newPage,
-    }))
+    })),
 }));
 
 export default useStore;
