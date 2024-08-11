@@ -37,6 +37,8 @@ function Profile() {
     return <span>Error: {error.message}</span>;
   }
 
+  console.log(data);
+  console.log(data.data);
   const displayLanguages = (): JSX.Element => {
     if (!data.data.languages || data.data.languages.length === 0) {
       return <span>No languages found.</span>;

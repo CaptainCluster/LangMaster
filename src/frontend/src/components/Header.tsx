@@ -6,6 +6,9 @@ import useStore from "../stores/store";
 
 function Header() {
   const { currentPageName } = useStore();
+  const username = localStorage.getItem("auth_username")
+    ? localStorage.getItem("auth_username")
+    : "";
 
   const displayNav = () => {
     /**
@@ -40,7 +43,7 @@ function Header() {
     return (
       <Nav className="me-auto">
         <Nav.Link href="/">Home</Nav.Link>
-        <Nav.Link href="/profile">Profile</Nav.Link>
+        <Nav.Link href={`/profile/${username}`}>Profile</Nav.Link>
         <Nav.Link href="/learn">Learn</Nav.Link>
         <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
         <NavDropdown title="" id="basic-nav-dropdown">

@@ -9,7 +9,7 @@ public class ProfileResult
     private boolean success;
     private String username;
     private String bio;
-    private Set<Language> languages;
+    private Set<String> languages;
 
     public ProfileResult() {}
 
@@ -33,7 +33,7 @@ public class ProfileResult
         this.bio = bio;
     }
 
-    public void setLanguages(Set<Language> languages)
+    public void setLanguages(Set<String> languages)
     {
         this.languages = languages;
     }
