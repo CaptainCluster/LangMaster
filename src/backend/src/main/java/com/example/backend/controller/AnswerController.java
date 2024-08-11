@@ -25,7 +25,6 @@ public class AnswerController
         {
             return ResponseEntity.badRequest().build();
         }
-
         Set<AnswerResult> answerResults = answerService.formatToResult(answers);
         return ResponseEntity.ok(answerResults);
     }

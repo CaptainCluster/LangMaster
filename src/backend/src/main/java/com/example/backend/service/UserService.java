@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.model.Language;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -7,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService
@@ -66,5 +70,15 @@ public class UserService
     {
         Optional<User> optionalUser = userRepository.findByUsername(username);
         return optionalUser.orElse(null);
+    }
+
+    public Set<String> getUserLanguageNames(User user)
+    {
+        Set<String> languages = Collections.emptySet();
+        for (Language language : user.getLanguages())
+        {
+            languages.add(language.getName());
+        }
+        return languages;
     }
 }

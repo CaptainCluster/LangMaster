@@ -1,16 +1,20 @@
 package com.example.backend.controller;
 
+import com.example.backend.model.Language;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.result.LoginResult;
 import com.example.backend.result.ProfileResult;
 import com.example.backend.service.UserService;
 import com.example.backend.utilities.JwtUtil;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
@@ -38,37 +42,44 @@ public class UserController
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResult> loginUser(@RequestBody User user)
+    public ResponseEntity<String> loginUser(@RequestBody User user)
     {
-        LoginResult loginResult = new LoginResult(false);
+        JSONObject response = new JSONObject();
+
         boolean validCredentials = userService.checkCredentials(user);
 
         // If credentials are not valid, user is notified.
         if (validCredentials)
         {
             String jwtToken = jwtUtil.createJwt(user.getUsername());
-
-            loginResult.setSuccess(true);
-            loginResult.setToken(jwtToken);
+            response.put("success", true);
+            response.put("token", jwtToken);
         }
-        return ResponseEntity.ok().body(loginResult);
+        else
+        {
+            response.put("success", false);
+        }
+        return ResponseEntity.ok(response.toString());
     }
 
     //TODO: Implement requirement for JWT token
     @GetMapping("/profile/{username}")
-    public ResponseEntity<ProfileResult> getProfile(@PathVariable String username)
+    public ResponseEntity<String> getProfile(@PathVariable String username)
     {
-        ProfileResult profileResult = new ProfileResult(false);
         User user = userService.findMatchingUser(username);
-
-        if (user != null)
+        if (user == null)
         {
-           profileResult.setSuccess(true);
-           profileResult.setUsername(user.getUsername());
-           profileResult.setBio(user.getBio());
-           profileResult.setLanguages(user.getLanguages());
+            return ResponseEntity.badRequest().build();
         }
+        
+        JSONObject response = new JSONObject();
+        response.put("success", true);
+        response.put("username", user.getUsername());
+        response.put("bio", user.getBio());
 
-        return ResponseEntity.ok().body(profileResult);
+        // Fetching the languages user has studied
+        Set<String> languages = userService.getUserLanguageNames(user);
+        response.put("languages", languages);
+        return ResponseEntity.ok(response.toString());
     }
 }
