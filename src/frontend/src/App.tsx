@@ -6,7 +6,7 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Error404 from "./pages/Error404";
 import Profile from "./pages/profile/Profile";
-import { Workshop } from "./pages/workshop/Workshop";
+import Workshop from "./pages/workshop/Workshop";
 
 import "./App.css";
 

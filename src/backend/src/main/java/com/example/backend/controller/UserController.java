@@ -1,10 +1,7 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.Language;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
-import com.example.backend.result.LoginResult;
-import com.example.backend.result.ProfileResult;
 import com.example.backend.service.UserService;
 import com.example.backend.utilities.JwtUtil;
 import org.json.JSONObject;
@@ -12,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 

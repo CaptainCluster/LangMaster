@@ -3,9 +3,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import useStore from "../stores/store";
-import { Logout } from "./Logout";
+import Logout from "./Logout";
 
-function Header() {
+const Header = () => {
   const { currentPageName } = useStore();
 
   // Fetching user from JWT, allowing redirection to profile page
@@ -55,9 +55,9 @@ function Header() {
         <Nav.Link href={`/profile/${username}`}>Profile</Nav.Link>
         <Nav.Link href="/learn">Learn</Nav.Link>
         <Nav.Link href="/workshop">Workshop</Nav.Link>
-        <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
         <NavDropdown title="" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
+          <NavDropdown.Item href="/leaderboards">Leaderboards</NavDropdown.Item>
           <Logout />
         </NavDropdown>
       </Nav>
@@ -74,6 +74,6 @@ function Header() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default Header;

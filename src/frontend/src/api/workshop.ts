@@ -1,13 +1,17 @@
 import axios, { AxiosResponse } from "axios";
 import OkResponse from "../models/response/OkResponse";
 import FailResponse from "../models/response/FailResponse";
-import PostWorkshopInput from "../models/request/PostWorkshopInput";
 
 export async function postQuiz(
-  quizName: PostWorkshopInput
+  quizName: string
 ): Promise<AxiosResponse<OkResponse> | FailResponse> {
   try {
-    const response = await axios.post<OkResponse>("/api/quiz", quizName);
+    const response = await axios.post<OkResponse>("/api/quiz/", quizName, {
+      headers: {
+        "Content-Type": "text/plain",
+      },
+    });
+    console.log(response);
     return response;
   } catch (error) {
     console.error(error);

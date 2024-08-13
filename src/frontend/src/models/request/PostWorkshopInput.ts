@@ -1,3 +1,3 @@
 export default interface PostWorkshopInput {
-  name: String;
+  name: string;
 }

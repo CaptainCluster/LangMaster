@@ -1,6 +1,6 @@
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-export const Logout = () => {
+const Logout = () => {
   const logUserOut = () => {
     localStorage.clear();
     window.location.href = "/login";
@@ -10,3 +10,5 @@ export const Logout = () => {
     <NavDropdown.Item onClick={() => logUserOut()}>Log Out</NavDropdown.Item>
   );
 };
+
+export default Logout;

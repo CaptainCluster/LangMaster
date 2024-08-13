@@ -1,21 +1,27 @@
 import Header from "../../components/Header";
-import { QuizCreate } from "../../components/QuizCreate";
-import { useEffect } from "react";
+import QuizCreate from "../../components/quiz/QuizCreate";
+import { useEffect, useState } from "react";
 import useStore from "../../stores/store";
 
-export const Workshop = () => {
+const Workshop = () => {
   const { updateCurrentPageName } = useStore();
+  const [createComponent, setCreateComponent] = useState<JSX.Element>(<></>);
 
   useEffect(() => {
     if (!localStorage.getItem("auth_token")) {
       window.location.href = "/login";
     }
     updateCurrentPageName("Workshop");
+
+    setCreateComponent(<QuizCreate setCreateComponent={setCreateComponent} />);
   }, []);
+
   return (
     <>
       <Header></Header>
-      <QuizCreate />
+      {createComponent}
     </>
   );
 };
+
+export default Workshop;
