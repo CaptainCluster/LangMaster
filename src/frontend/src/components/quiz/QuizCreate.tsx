@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
 import QuizUpdate from "./QuizUpdate";
@@ -12,7 +12,6 @@ const QuizCreate = ({ setCreateComponent }: any) => {
     mutationFn: api.workshop.postQuiz,
     onSuccess: () => {
       setCreateComponent(<QuizUpdate />);
-      console.log("www");
     },
     onError: (error) => {
       console.log(error);
@@ -21,7 +20,6 @@ const QuizCreate = ({ setCreateComponent }: any) => {
 
   const submitCreation = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    console.log(quizName);
     mutate(quizName);
   };
 

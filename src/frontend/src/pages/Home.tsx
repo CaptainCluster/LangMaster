@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import useStore from "../stores/store";
 import { useEffect, useState } from "react";
 
-function Home() {
+const Home = () => {
   const { updateCurrentPageName } = useStore();
   const [welcomeMessage, setWelcomeMessage] = useState<String | null>("");
 
@@ -28,6 +28,6 @@ function Home() {
       </div>
     </>
   );
-}
+};
 
 export default Home;
