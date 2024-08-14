@@ -9,7 +9,7 @@ import FailResponse from "../models/response/FailResponse";
  * @param username The username of the user
  */
 export async function getProfileData(
-  username: String
+  username: string
 ): Promise<AxiosResponse<ProfileResponse> | FailResponse> {
   try {
     const response = await axios.get<ProfileResponse>(

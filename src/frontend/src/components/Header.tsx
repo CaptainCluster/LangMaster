@@ -3,13 +3,22 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import useStore from "../stores/store";
+import Logout from "./Logout";
 
-function Header() {
+const Header = () => {
   const { currentPageName } = useStore();
+
+  // Fetching user from JWT, allowing redirection to profile page
   const username = localStorage.getItem("auth_username")
     ? localStorage.getItem("auth_username")
     : "";
 
+  /**
+   * Checks whether user is authenticated and selects what
+   * content will be in the header for navigation.
+   *
+   * @returns {JSX.Element} The header navigation content
+   */
   const displayNav = () => {
     /**
      * For unauthenticated users
@@ -45,15 +54,17 @@ function Header() {
         <Nav.Link href="/">Home</Nav.Link>
         <Nav.Link href={`/profile/${username}`}>Profile</Nav.Link>
         <Nav.Link href="/learn">Learn</Nav.Link>
-        <Nav.Link href="/leaderboards">Leaderboards</Nav.Link>
+        <Nav.Link href="/workshop">Workshop</Nav.Link>
         <NavDropdown title="" id="basic-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
-          <NavDropdown.Item href="/logout">Log Out</NavDropdown.Item>
+          <NavDropdown.Item href="/leaderboards">Leaderboards</NavDropdown.Item>
+          <Logout />
         </NavDropdown>
       </Nav>
     );
   };
 
+  // The final return for the Header
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -63,6 +74,6 @@ function Header() {
       </Container>
     </Navbar>
   );
-}
+};
 
 export default Header;

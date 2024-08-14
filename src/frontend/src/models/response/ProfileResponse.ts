@@ -1,6 +1,6 @@
 export default interface ProfileResponse {
   success: boolean;
-  username: String;
-  bio: String;
-  languages: String[];
+  username: string;
+  bio: string;
+  languages: string[];
 }

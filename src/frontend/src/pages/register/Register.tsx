@@ -6,7 +6,7 @@ import useStore from "../../stores/store";
 import { useEffect } from "react";
 import { api } from "../../api";
 
-function Register() {
+const Register = () => {
   const navigate = useNavigate();
   const { updateCurrentPageName } = useStore();
 
@@ -42,6 +42,6 @@ function Register() {
       </div>
     </>
   );
-}
+};
 
 export default Register;

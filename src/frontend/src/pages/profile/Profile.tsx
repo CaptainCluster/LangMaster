@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,10 +8,9 @@ import useStore from "../../stores/store";
 import Header from "../../components/Header";
 import { api } from "../../api";
 
-function Profile() {
+const Profile = () => {
   const { updateCurrentPageName } = useStore(); // State management
   const username: string | undefined = useParams().username; // URL parameter recognition
-  const [langElements, setLangElements] = useState<JSX.Element[]>();
 
   // Unauthenticated users are redirected
   useEffect(() => {
@@ -22,7 +21,7 @@ function Profile() {
   }, []);
 
   if (username == undefined) {
-    return <span>Undefined user error.</span>;
+    return <span>No user found.</span>;
   }
 
   // Query for fetching the profile data
@@ -30,15 +29,19 @@ function Profile() {
     queryKey: ["profile"],
     queryFn: () => api.user.getProfileData(username),
   });
+
+  // Handling errors and loading
   if (isLoading) {
     return <span>Loading...</span>;
   }
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+  if (data == undefined) {
+    return <span>No data</span>;
+  }
 
-  console.log(data);
-  console.log(data.data);
+  //Displaying the languages the user has studied
   const displayLanguages = (): JSX.Element => {
     if (!data.data.languages || data.data.languages.length === 0) {
       return <span>No languages found.</span>;
@@ -65,6 +68,6 @@ function Profile() {
       </Container>
     </>
   );
-}
+};
 
 export default Profile;
