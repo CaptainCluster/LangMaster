@@ -13,12 +13,15 @@ const QuizUpdate = () => {
   const createQuestion = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setActiveQuestionForms(
-      <React.Fragment key={formCount}>
+      <React.Fragment key={formCount++}>
         {activeQuestionForms}
         <QuestionForm />
       </React.Fragment>
     );
-    formCount++;
+  };
+
+  const submitUpdates = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
   };
 
   return (
@@ -27,7 +30,7 @@ const QuizUpdate = () => {
       <button onClick={createQuestion}>Create a Question</button>
       <div>{activeQuestionForms}</div>
       <div>
-        <button>Submit Updates</button>
+        <button onClick={submitUpdates}>Submit Updates</button>
       </div>
     </>
   );
