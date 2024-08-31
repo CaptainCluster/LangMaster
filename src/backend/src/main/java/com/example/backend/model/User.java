@@ -20,6 +20,7 @@ public class User
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
     private long id;
 
     @Column(nullable = false, unique = true)
@@ -43,7 +44,7 @@ public class User
     private Set<Language> languages;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "progress_id", referencedColumnName = "id")
+    @JoinColumn(name = "progress_id", referencedColumnName = "progress_id")
     private Progress progress;
 
     // Constructors

@@ -8,6 +8,7 @@ public class Answer
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="answer_id")
     private long id;
 
     @Column
@@ -16,10 +17,15 @@ public class Answer
     @Column
     private boolean isCorrect;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="question_id")
+    private Question question;
+
     // Constructors
     public Answer() {}
 
-    public Answer(String content, boolean isCorrect) {
+    public Answer(String content, boolean isCorrect)
+    {
         this.content = content;
         this.isCorrect = isCorrect;
     }

@@ -45,7 +45,7 @@ public class QuizService {
             return null;
         }
         Quiz quiz = optionalQuiz.get();
-        return quiz.getContent();
+        return quiz.getQuestions();
     }
 
     public void deleteQuiz(Quiz quiz)
@@ -57,7 +57,7 @@ public class QuizService {
     {
         for (Question question : questions)
         {
-            quiz.getContent().add(question);
+            quiz.getQuestions().add(question);
         }
         quizRepository.save(quiz);
     }
@@ -66,7 +66,7 @@ public class QuizService {
     {
         for (Question question : questions)
         {
-            quiz.getContent().remove(question);
+            quiz.getQuestions().remove(question);
         }
         quizRepository.save(quiz);
     }

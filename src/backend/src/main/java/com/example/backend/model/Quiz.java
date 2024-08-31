@@ -8,37 +8,43 @@ import java.util.Set;
 @Table
 public class Quiz
 {
+    // quiz_id as the primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="quiz_id")
     private long id;
 
+    // The name of the quiz
     @Column(nullable = false)
     private String name;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="language_id")
+    private Language language;
+
+    // A written description to describe the quiz
     @Column
     private String description;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "quiz_id", referencedColumnName = "id")
-    private Set<Question> content;
+    // One Quiz, many Questions
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quiz")
+    private Set<Question> questions;
 
+    // A Reward entity for each Quiz
     @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="reward_id")
     private Reward reward;
 
     // Constructors
     public Quiz()
     {
         this.name = "Unnamed Quiz";
-        fillCommon();
+        this.reward = new Reward();
     }
 
     public Quiz(String name)
     {
         this.name = name;
-        fillCommon();
-    }
-
-    public void fillCommon() {
         this.reward = new Reward();
     }
 
@@ -55,8 +61,8 @@ public class Quiz
         this.description = description;
     }
 
-    public void setContent(Set<Question> content) {
-        this.content = content;
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
     }
 
     public void setReward(Reward reward) {
@@ -76,8 +82,8 @@ public class Quiz
         return description;
     }
 
-    public Set<Question> getContent() {
-        return content;
+    public Set<Question> getQuestions() {
+        return questions;
     }
 
     public Reward getReward() {

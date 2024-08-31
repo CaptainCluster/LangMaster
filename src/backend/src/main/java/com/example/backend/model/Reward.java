@@ -10,6 +10,7 @@ public class Reward
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="reward_id")
     private long id;
 
     @Column
@@ -18,9 +19,6 @@ public class Reward
     // Constructors
     public Reward() {
         this.xp = DEFAULT_XP;
-    }
-    public Reward(int xp) {
-        this.xp = xp;
     }
 
     // Setters
