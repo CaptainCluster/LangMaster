@@ -6,7 +6,7 @@ import Answer from "../models/quiz/Answer";
 interface Application {
   currentPageName: string;
   currentQuiz: Quiz;
-  updateCurrentPageName: (newPage: string) => void;
+  updateCurrentPageName: (pageName: string) => void;
   updateQuiz: (quiz: Quiz) => void;
 }
 

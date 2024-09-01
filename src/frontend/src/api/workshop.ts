@@ -11,6 +11,22 @@ export async function postQuiz(
         "Content-Type": "text/plain",
       },
     });
+    return response;
+  } catch (error) {
+    console.error(error);
+    return {
+      msg: "Failed to create the quiz.",
+    };
+  }
+}
+
+export async function getQuizById(
+  quizName: string
+): Promise<AxiosResponse<{ id: number }> | FailResponse> {
+  try {
+    const response = await axios.get<{ id: number }>(
+      `/api/quiz/id/${quizName}`
+    );
     console.log(response);
     return response;
   } catch (error) {
