@@ -10,6 +10,7 @@ public class Language
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="language_id")
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -18,8 +19,7 @@ public class Language
     @ManyToMany(mappedBy = "languages")
     private Set<User> users;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "quiz_id", referencedColumnName = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "language")
     private Set<Quiz> quizzes;
 
     // Constructors
@@ -40,9 +40,11 @@ public class Language
     public void setName(String name) {
         this.name = name;
     }
+
     public void setStudyingUsers(Set<User> users) {
         this.users = users;
     }
+
     public void setQuizzes(Set<Quiz> quizzes) {
         this.quizzes = quizzes;
     }
@@ -51,12 +53,15 @@ public class Language
     public Long getId() {
         return this.id;
     }
+
     public String getName() {
         return this.name;
     }
+
     public Set<User> getUsers() {
         return this.users;
     }
+
     public Set<Quiz> getQuizzes() {
         return this.quizzes;
     }

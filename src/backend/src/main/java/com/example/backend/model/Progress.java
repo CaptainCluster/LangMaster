@@ -11,6 +11,7 @@ public class Progress
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="progress_id")
     private long id;
 
     @Column(nullable = false)

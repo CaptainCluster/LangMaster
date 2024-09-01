@@ -27,6 +27,17 @@ public class QuizController
         return ResponseEntity.ok(quiz);
     }
 
+    @GetMapping("/id/{name}")
+    public ResponseEntity<Long> getQuizId(@PathVariable String name)
+    {
+        Quiz quiz = quizService.findQuiz(name);
+        if (quiz == null)
+        {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(quiz.getId());
+    }
+
     @PostMapping("/")
     public ResponseEntity<Quiz> postQuiz(@RequestBody String name)
     {

@@ -1,14 +1,12 @@
 package com.example.backend.controller;
 
+import com.example.backend.input.QuestionInput;
 import com.example.backend.model.Question;
 import com.example.backend.service.QuestionService;
 import com.example.backend.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Random;
@@ -54,5 +52,11 @@ public class QuestionController
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(question);
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Question> postQuestion(@RequestBody QuestionInput questionInput)
+    {
+        return ResponseEntity.ok().build();
     }
 }

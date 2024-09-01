@@ -21,14 +21,21 @@ const QuestionForm = () => {
     formCount++;
   };
 
+  const sendQuestion = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+  };
+
   return (
     <>
       <form>
         <input type="text" placeholder="Question Title" />
         <input type="submit" value="Create question" />
-        {activeAnswerForms}
       </form>
       <button onClick={createAnswerForm}>Create Answer</button>
+      {activeAnswerForms}
+      <form onSubmit={sendQuestion}>
+        <input type="submit" value="Apply changes" />
+      </form>
     </>
   );
 };
