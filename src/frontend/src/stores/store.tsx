@@ -1,63 +1,35 @@
 import { create } from "zustand";
-import Quiz from "../models/quiz/Quiz";
-import Question from "../models/quiz/Question";
-import Answer from "../models/quiz/Answer";
+import { persist } from "zustand/middleware";
 
+/*
 interface Application {
+  import Quiz from "../models/quiz/Quiz";
   currentPageName: string;
   currentQuiz: Quiz;
   updateCurrentPageName: (pageName: string) => void;
   updateQuiz: (quiz: Quiz) => void;
 }
+*/
 
-const useStore = create<Application>((set) => ({
-  currentPageName: "",
-  currentQuiz: { title: "", questions: [] },
+interface UseStoreState {
+  currentPageName: string;
+}
 
-  updateCurrentPageName: (pageName: string) =>
-    set((state) => ({
-      ...state,
-      currentPageName: pageName,
-    })),
+const useStore = create(
+  persist(
+    (set) => ({
+      currentPageName: "",
 
-  updateQuiz: (quiz: Quiz) => {
-    set((state) => ({
-      ...state,
-      currentQuiz: quiz,
-      questions: quiz.questions,
-    }));
-  },
-
-  // Updating with a Question object
-  pushQuestion: (question: Question) => {
-    set((state) => ({
-      currentQuiz: {
-        ...state.currentQuiz,
-        questions: [...state.currentQuiz.questions, question],
-      },
-    }));
-  },
-
-  // Pushing an Answer object inside a Question object
-  pushAnswer: (questionTitle: string, answer: Answer) => {
-    set((state) => {
-      const questionIndex = state.currentQuiz.questions.findIndex(
-        (q) => q.title === questionTitle
-      );
-      // If changes are
-      if (questionIndex === -1) {
-        return state;
-      }
-      return {
-        currentQuiz: {
-          ...state.currentQuiz,
-          questions: state.currentQuiz.questions.map((q, i) =>
-            i === questionIndex ? { ...q, answers: [...q.answers, answer] } : q
-          ),
-        },
-      };
-    });
-  },
-}));
+      updateCurrentPageName: (pageName: string) =>
+        set((state: UseStoreState) => ({
+          ...state,
+          currentPageName: pageName,
+        })),
+    }),
+    {
+      name: "use-storage",
+    }
+  )
+);
 
 export default useStore;
