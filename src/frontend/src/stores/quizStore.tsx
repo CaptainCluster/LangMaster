@@ -1,6 +1,10 @@
 /**
  * @purpose Zustand state management
  *
+ * @dependencies
+ * 1) Zustand for state management
+ * 2) Zustand persist middleware for persistent state
+ *
  * This file manages global state for quiz creation.
  */
 
@@ -10,37 +14,29 @@ import Answer from "../models/quiz/Answer";
 import Question from "../models/quiz/Question";
 import Quiz from "../models/quiz/Quiz";
 
-/*
-interface QuizStoreInterface {
-  quizName: string;
-  quizId: number | undefined;
-
-  updateQuizName: (quiz: string) => void;
-  updateQuizId: (id: number) => void;
-
-  currentQuiz: { title: ""; questions: [] };
-}
-*/
-
 interface QuizStoreState {
   quizId: number | undefined;
-  currentQuiz: {
-    title: string;
-    questions: Question[];
-  };
+  currentQuiz: Quiz;
+
+  setQuizId: (id: number) => void;
+  updateQuiz: (quiz: Quiz) => void;
+  pushQuestion: (question: Question) => void;
+  pushAnswer: (questionTitle: string, answer: Answer) => void;
 }
 
-const quizStore = create(
+const quizStore = create<QuizStoreState>()(
   persist(
     (set) => ({
       quizId: undefined,
-      updateQuizId: (id: number) => set({ quizId: id }),
+      currentQuiz: { title: "", questions: [] },
 
       /**
        * The following functionality below manages the Quiz creation/customization
        * data as a buffer-ish solution, allowing it to be easily sent when the
        * client wishes to do so.
        */
+
+      setQuizId: (id: number) => set({ quizId: id }),
 
       // Updating the state of the currently stored quiz
       updateQuiz: (quiz: Quiz) => {
@@ -63,9 +59,9 @@ const quizStore = create(
       pushAnswer: (questionTitle: string, answer: Answer) => {
         set((state: QuizStoreState) => {
           const questionIndex = state.currentQuiz.questions.findIndex(
-            (q: Question) => q.title === questionTitle
+            (questionEntry: Question) => questionEntry.title === questionTitle
           );
-          // If the question does not exist, returning with current state
+          // If the question does not exist, no changes are made
           if (questionIndex === -1) {
             return state;
           }

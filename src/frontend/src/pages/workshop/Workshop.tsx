@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import QuizCreate from "../../components/quiz/QuizCreate";
+import QuizCreateForm from "../../components/quiz/QuizCreateForm";
 import { useEffect, useState } from "react";
 import useStore from "../../stores/store";
 
@@ -13,7 +13,9 @@ const Workshop = () => {
     }
     updateCurrentPageName("Workshop");
 
-    setCreateComponent(<QuizCreate setCreateComponent={setCreateComponent} />);
+    setCreateComponent(
+      <QuizCreateForm setCreateComponent={setCreateComponent} />
+    );
   }, []);
 
   return (

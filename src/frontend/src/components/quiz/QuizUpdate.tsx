@@ -1,6 +1,5 @@
 import { useState } from "react";
 import QuestionForm from "./QuestionForm";
-import { useMutation } from "@tanstack/react-query";
 
 interface Form {
   id: number;
@@ -29,7 +28,7 @@ const QuizUpdate = () => {
       <p>Update Quiz</p>
       <button onClick={createQuestion}>Create a Question</button>
       <div>
-        {questionForms.map((form, index) => (
+        {questionForms.map((form) => (
           <div key={form.id} id={`question-form-${form.id}`}>
             <QuestionForm />
           </div>

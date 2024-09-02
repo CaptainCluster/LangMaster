@@ -1,21 +1,12 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-/*
-interface Application {
-  import Quiz from "../models/quiz/Quiz";
-  currentPageName: string;
-  currentQuiz: Quiz;
-  updateCurrentPageName: (pageName: string) => void;
-  updateQuiz: (quiz: Quiz) => void;
-}
-*/
-
 interface UseStoreState {
   currentPageName: string;
+  updateCurrentPageName: (pageName: string) => void;
 }
 
-const useStore = create(
+const useStore = create<UseStoreState>()(
   persist(
     (set) => ({
       currentPageName: "",

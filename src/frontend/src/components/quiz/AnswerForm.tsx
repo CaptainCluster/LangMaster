@@ -1,8 +1,4 @@
-import { useState } from "react";
-import useStore from "../../stores/store";
-
 const AnswerForm = () => {
-  const [answerTitle, setAnswerTitle] = useState("");
   return (
     <>
       <form>

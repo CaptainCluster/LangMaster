@@ -1,18 +1,19 @@
+/**
+ * @Component QuizCreate
+ *
+ * A form where the client creates a new Quiz
+ *
+ */
+
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
 import QuizUpdate from "./QuizUpdate";
-import useStore from "../../stores/store";
 import quizStore from "../../stores/quizStore";
-import { AxiosResponse } from "axios";
-import FailResponse from "../../models/response/FailResponse";
 
-const QuizCreate = ({ setCreateComponent }: any) => {
+const QuizCreateForm = ({ setCreateComponent }: any) => {
   const [quizName, setQuizName] = useState("");
-  const navigate = useNavigate();
-  const { updateQuiz } = useStore();
-  const { updateQuizName, updateQuizId } = quizStore();
+  const { setQuizId } = quizStore();
 
   const { mutate } = useMutation({
     mutationFn: api.workshop.postQuiz,
@@ -20,14 +21,12 @@ const QuizCreate = ({ setCreateComponent }: any) => {
     // Quiz object for state management, rendering component for customizing
     // the newly created quiz
     onSuccess: async () => {
-      updateQuiz({ title: quizName, questions: [] });
-      updateQuizName(quizName);
       try {
         const quizIdResponse = await api.workshop.getQuizById(quizName);
+
+        // Making sure the data is valid
         if (typeof quizIdResponse === "object" && "data" in quizIdResponse) {
-          const quizId = quizIdResponse.data;
-          updateQuizId(quizId.id);
-          console.log("Quiz ID:", quizId);
+          setQuizId(quizIdResponse.data.id);
         } else if ("msg" in quizIdResponse) {
           console.error("Failed to get quiz ID:", quizIdResponse.msg);
         } else {
@@ -40,6 +39,9 @@ const QuizCreate = ({ setCreateComponent }: any) => {
     },
   });
 
+  /**
+   * Upon sub
+   */
   const submitCreation = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     mutate(quizName);
@@ -56,4 +58,4 @@ const QuizCreate = ({ setCreateComponent }: any) => {
   );
 };
 
-export default QuizCreate;
+export default QuizCreateForm;
