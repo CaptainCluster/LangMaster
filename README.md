@@ -6,7 +6,7 @@ _LangMaster_ is a full-stack language learning application that provides an intu
 
 ## Instructions
 
-#### Dependencies
+
 
 ## Technologies Used
 
@@ -15,3 +15,8 @@ _LangMaster_ is a full-stack language learning application that provides an intu
 **Back-End** - Spring Boot (Java)
 
 **DBMS** - PostgreSQL
+
+## Dependencies
+
+This application only uses dependencies that have licenses compatible with **GNU General Public License v3**.
+The goal is to ensure that the application is, and will remains as, **free software** for everyone to use.  
