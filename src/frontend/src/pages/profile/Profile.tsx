@@ -12,12 +12,11 @@ const Profile = () => {
   const { updateCurrentPageName } = useStore(); // State management
   const username: string | undefined = useParams().username; // URL parameter recognition
 
-  const { quizName, quizId } = quizStore();
+  const { quizId } = quizStore();
 
   // Unauthenticated users are redirected
   useEffect(() => {
     console.log(quizId);
-    console.log(quizName);
     if (!localStorage.getItem("auth_token")) {
       window.location.href = "/login";
     }

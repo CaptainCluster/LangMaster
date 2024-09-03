@@ -7,21 +7,16 @@ import java.util.Set;
 public class QuizInput
 {
     private String name;
-    private Set<Question> addQuestions;
-    private Set<Question> removeQuestions;
+    private Set<QuestionInput> questions;
 
     public String getName()
     {
         return name;
     }
 
-    public Set<Question> getAddQuestions()
+    public Set<QuestionInput> getQuestions()
     {
-        return addQuestions;
+        return questions;
     }
 
-    public Set<Question> getRemoveQuestions()
-    {
-        return removeQuestions;
-    }
 }

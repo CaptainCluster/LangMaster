@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.input.QuizInput;
 import com.example.backend.model.Quiz;
+import com.example.backend.service.QuestionService;
 import com.example.backend.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,8 +60,8 @@ public class QuizController
         {
             return ResponseEntity.badRequest().build();
         }
-        quizService.addQuestions(quiz, quizInput.getAddQuestions());
-        quizService.removeQuestions(quiz, quizInput.getRemoveQuestions());
+
+        quizService.putContentToQuiz(quiz, quizInput);
 
         return ResponseEntity.ok().build();
     }

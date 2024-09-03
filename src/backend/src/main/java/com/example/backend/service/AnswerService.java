@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.input.AnswerInput;
 import com.example.backend.model.Answer;
 import com.example.backend.model.Question;
 import com.example.backend.repository.AnswerRepository;
@@ -23,7 +24,7 @@ public class AnswerService
 
     public Set<Answer> getAnswersFromQuestion(Question question)
     {
-        return question.getPossibleAnswers();
+        return question.getAnswers();
     }
 
     public Set<Answer> getAnswersFromQuestionId(long questionId)
@@ -34,7 +35,7 @@ public class AnswerService
         {
             return Collections.emptySet();
         }
-        return question.getPossibleAnswers();
+        return question.getAnswers();
     }
 
     public Answer getAnswerById(long id)
@@ -47,9 +48,22 @@ public class AnswerService
         Set<AnswerResult> answerResults = Collections.emptySet();
         for (Answer answer : answers)
         {
-            AnswerResult answerResult = new AnswerResult(answer.getId(), answer.getContent());
+            AnswerResult answerResult = new AnswerResult(answer.getId(), answer.getTitle());
             answerResults.add(answerResult);
         }
         return answerResults;
+    }
+
+    public Set<Answer> convertInputsToAnswers(Set<AnswerInput> answerInputs)
+    {
+        Set<Answer> answers = Collections.emptySet();
+        for (AnswerInput answerInput : answerInputs)
+        {
+            Answer newAnswer = new Answer();
+            newAnswer.setTitle(answerInput.getTitle());
+            newAnswer.setIsCorrect(answerInput.getIsCorrect());
+            answers.add(newAnswer);
+        }
+        return answers;
     }
 }
