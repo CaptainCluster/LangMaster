@@ -6,7 +6,16 @@ import java.util.Set;
 
 public class QuestionInput
 {
-    private Long quizId;
     private String title;
-    private Set<Answer> answers;
+    private Set<AnswerInput> answers;
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public Set<AnswerInput> getAnswers()
+    {
+        return answers;
+    }
 }

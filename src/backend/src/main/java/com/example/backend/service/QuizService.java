@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.input.QuizInput;
 import com.example.backend.model.Question;
 import com.example.backend.model.Quiz;
 import com.example.backend.repository.QuizRepository;
@@ -14,6 +15,9 @@ public class QuizService {
 
     @Autowired
     private QuizRepository quizRepository;
+
+    @Autowired
+    private QuestionService questionService;
 
     /**
      * Creating a Quiz object and saving it
@@ -68,6 +72,16 @@ public class QuizService {
         {
             quiz.getQuestions().remove(question);
         }
+        quizRepository.save(quiz);
+    }
+
+    public void putContentToQuiz(Quiz quiz, QuizInput quizInput)
+    {
+        quiz.setName(quizInput.getName());
+
+        Set<Question> questions = questionService.convertInputToQuestion(quizInput.getQuestions());
+        quiz.setQuestions(questions);
+
         quizRepository.save(quiz);
     }
 }

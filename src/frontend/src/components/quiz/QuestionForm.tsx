@@ -2,40 +2,52 @@
  * A component representing a form for creating a quiz
  */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import AnswerForm from "./AnswerForm";
-import React from "react";
+import quizStore from "../../stores/quizStore";
+import QuestionState from "../../models/state/QuestionState";
 
-const QuestionForm = () => {
+const QuestionForm = ({ questionIndex }: any) => {
   const [activeAnswerForms, setActiveAnswerForms] = useState(<></>);
-  let formCount = 0;
+  const [formCount, setFormCount] = useState(0);
+  const [questionTitle, setQuestionTitle] = useState("");
+  const { updateExistingQuestion } = quizStore();
+
+  /**
+   * useMemo for interacting with the quizStore Zustand storage.
+   * Stores the updated question into the database.
+   */
+  useMemo(() => {
+    const questionState: QuestionState = {
+      index: questionIndex,
+      title: questionTitle,
+    };
+
+    updateExistingQuestion(questionState);
+  }, [questionTitle]);
 
   const createAnswerForm = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setActiveAnswerForms(
-      <React.Fragment key={formCount}>
+      <div id={`answer-form-${formCount}`}>
         {activeAnswerForms}
-        <AnswerForm />
-      </React.Fragment>
+        <AnswerForm questionIndex={questionIndex} answerIndex={formCount} />
+      </div>
     );
-    formCount++;
-  };
-
-  const sendQuestion = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+    setFormCount(formCount + 1);
   };
 
   return (
     <>
-      <form>
-        <input type="text" placeholder="Question Title" />
-        <input type="submit" value="Create question" />
+      <form className="answer-form-element">
+        <input
+          type="text"
+          placeholder="Question Title"
+          onChange={(event) => setQuestionTitle(event.target.value)}
+        />
       </form>
       <button onClick={createAnswerForm}>Create Answer</button>
       {activeAnswerForms}
-      <form onSubmit={sendQuestion}>
-        <input type="submit" value="Apply changes" />
-      </form>
     </>
   );
 };

@@ -12,7 +12,7 @@ public class Answer
     private long id;
 
     @Column
-    private String content;
+    private String title;
 
     @Column
     private boolean isCorrect;
@@ -26,7 +26,7 @@ public class Answer
 
     public Answer(String content, boolean isCorrect)
     {
-        this.content = content;
+        this.title = content;
         this.isCorrect = isCorrect;
     }
 
@@ -35,11 +35,11 @@ public class Answer
         this.id = id;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String content) {
+        this.title = content;
     }
 
-    public void setCorrect(boolean isCorrect) {
+    public void setIsCorrect(boolean isCorrect) {
         this.isCorrect = isCorrect;
     }
 
@@ -48,8 +48,8 @@ public class Answer
         return id;
     }
 
-    public String getContent() {
-        return content;
+    public String getTitle() {
+        return title;
     }
 
     public boolean getIsCorrect() {

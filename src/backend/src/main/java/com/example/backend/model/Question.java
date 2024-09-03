@@ -24,12 +24,12 @@ public class Question
 
     // One Question, many Answers
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "question")
-    private Set<Answer> possibleAnswers;
+    private Set<Answer> answers;
 
     // Constructors
     public Question() 
     {
-        this.possibleAnswers = Collections.emptySet();
+        this.answers = Collections.emptySet();
     }
 
     // Setters
@@ -43,9 +43,9 @@ public class Question
         this.title = title;
     }
 
-    public void setPossibleAnswers(Set<Answer> possibleAnswers) 
+    public void setAnswers(Set<Answer> answers)
     {
-        this.possibleAnswers = possibleAnswers;
+        this.answers = answers;
     }
 
     // Getters
@@ -59,8 +59,8 @@ public class Question
         return title;
     }
 
-    public Set<Answer> getPossibleAnswers() 
+    public Set<Answer> getAnswers()
     {
-        return possibleAnswers;
+        return answers;
     }
 }
