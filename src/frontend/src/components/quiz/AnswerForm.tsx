@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import quizStore from "../../stores/quizStore";
 import AnswerState from "../../models/state/AnswerState";
 
@@ -7,7 +7,7 @@ const AnswerForm = ({ questionIndex, answerIndex }: any) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const { updateExistingAnswer } = quizStore();
 
-  useMemo(() => {
+  useEffect(() => {
     const answerState: AnswerState = {
       questionIndex: questionIndex,
       answerIndex: answerIndex,

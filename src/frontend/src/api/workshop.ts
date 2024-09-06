@@ -27,9 +27,9 @@ export async function putQuiz(
 ): Promise<AxiosResponse<OkResponse> | FailResponse> {
   try {
     const response = await axios.put<OkResponse>("/api/quiz/", quiz, {
-      headers: {
-        "Content-Type": "text/plain",
-      },
+//      headers: {
+  //      "Content-Type": "text/plain",
+    //  },
     });
     return response;
   } catch (error) {

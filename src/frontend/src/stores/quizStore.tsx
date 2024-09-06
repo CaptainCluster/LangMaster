@@ -21,6 +21,7 @@ interface QuizStoreState {
   quizId: number | undefined;
   currentQuiz: Quiz;
 
+  setQuizTitle: (title: string) => void;
   setQuizId: (id: number) => void;
   updateQuiz: (quiz: Quiz) => void;
   updateExistingQuestion: (questionState: QuestionState) => void;
@@ -36,12 +37,21 @@ const quizStore = create<QuizStoreState>()(
       quizId: undefined,
       currentQuiz: { title: "", questions: [] },
 
+      setQuizTitle: (title: string) => {
+        set((state) => ({
+          ...state,
+          currentQuiz: {
+            ...state.currentQuiz,
+            title: title,
+          },
+        }));
+      },
+
       /**
        * The following functionality below manages the Quiz creation/customization
        * data as a buffer-ish solution, allowing it to be easily sent when the
        * client wishes to do so.
        */
-
       setQuizId: (id: number) => set({ quizId: id }),
 
       // Updating the state of the currently stored quiz
@@ -122,6 +132,20 @@ const quizStore = create<QuizStoreState>()(
 
       updateExistingAnswer: (answerState: AnswerState) => {
         set((state: QuizStoreState) => {
+          const question =
+            state.currentQuiz.questions[answerState.questionIndex];
+          if (!question) {
+            return state;
+          }
+          const answer = question.answers[answerState.answerIndex];
+          if (!answer) {
+            question.answers[answerState.answerIndex] = {
+              title: answerState.title,
+              isCorrect: answerState.isCorrect,
+            };
+            return state;
+          }
+
           return {
             currentQuiz: {
               ...state.currentQuiz,

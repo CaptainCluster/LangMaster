@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -45,7 +46,7 @@ public class AnswerService
 
     public Set<AnswerResult> formatToResult(Set<Answer> answers)
     {
-        Set<AnswerResult> answerResults = Collections.emptySet();
+        Set<AnswerResult> answerResults = new HashSet<>();
         for (Answer answer : answers)
         {
             AnswerResult answerResult = new AnswerResult(answer.getId(), answer.getTitle());
@@ -56,7 +57,7 @@ public class AnswerService
 
     public Set<Answer> convertInputsToAnswers(Set<AnswerInput> answerInputs)
     {
-        Set<Answer> answers = Collections.emptySet();
+        Set<Answer> answers = new HashSet<>();
         for (AnswerInput answerInput : answerInputs)
         {
             Answer newAnswer = new Answer();

@@ -10,7 +10,7 @@ import quizStore from "../../stores/quizStore";
 
 const QuizCreateForm = ({ setCreateComponent }: any) => {
   const [quizName, setQuizName] = useState("");
-  const { setQuizId } = quizStore();
+  const { setQuizTitle, setQuizId } = quizStore();
 
   const { mutate } = useMutation({
     mutationFn: api.workshop.postQuiz,
@@ -29,6 +29,7 @@ const QuizCreateForm = ({ setCreateComponent }: any) => {
          * storage. Otherwise an error message is shown.
          */
         if (typeof quizIdResponse === "object" && "data" in quizIdResponse) {
+          setQuizTitle(quizName);
           setQuizId(quizIdResponse.data.id);
           setCreateComponent(<QuizUpdateForm />);
         } else if ("msg" in quizIdResponse) {

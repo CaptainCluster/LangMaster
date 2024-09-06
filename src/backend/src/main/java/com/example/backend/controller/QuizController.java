@@ -2,7 +2,6 @@ package com.example.backend.controller;
 
 import com.example.backend.input.QuizInput;
 import com.example.backend.model.Quiz;
-import com.example.backend.service.QuestionService;
 import com.example.backend.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -54,8 +53,9 @@ public class QuizController
     @PutMapping("/")
     public ResponseEntity<Quiz> putQuiz(@RequestBody QuizInput quizInput)
     {
+        System.out.println(quizInput.getTitle());
         // Fetching the Quiz obj that matches the existing one
-        Quiz quiz = quizService.findQuiz(quizInput.getName());
+        Quiz quiz = quizService.findQuiz(quizInput.getTitle());
         if (quiz == null)
         {
             return ResponseEntity.badRequest().build();

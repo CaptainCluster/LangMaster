@@ -1,33 +1,29 @@
-import { useState } from "react";
 import QuestionForm from "./QuestionForm";
 import { useMutation } from "@tanstack/react-query";
 import quizStore from "../../stores/quizStore";
 import { api } from "../../api";
+import formStore from "../../stores/quizFormStore";
 
-interface Form {
-  id: number;
-}
-
-const QuizUpdate = () => {
-  const [questionForms, setQuestionForms] = useState<Form[]>([]);
-  const [formCount, setFormCount] = useState<number>(0);
+const QuizUpdateForm = () => {
   const { currentQuiz } = quizStore();
+  const { questionForms, addQuestionForm } = formStore();
 
   const { mutate } = useMutation({
     mutationFn: api.workshop.putQuiz,
-
     onSuccess: async () => {
       console.log(currentQuiz);
-      console.log("wee");
+    },
+    onError: (error) => {
+      console.error(error);
     },
   });
+
   /**
    * Creating a new QuizQuestionForm component
    */
   const createQuestion = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setQuestionForms((prevForms) => [...prevForms, { id: formCount }]);
-    setFormCount((prevCount) => prevCount + 1);
+    addQuestionForm();
   };
 
   /**
@@ -37,6 +33,10 @@ const QuizUpdate = () => {
    */
   const submitUpdates = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    if (!currentQuiz || !currentQuiz.questions) {
+      console.error("Invalid quiz data");
+      return;
+    }
     mutate(currentQuiz);
   };
 
@@ -47,7 +47,7 @@ const QuizUpdate = () => {
       <div>
         {questionForms.map((form) => (
           <div key={form.id} id={`question-form-${form.id}`}>
-            <QuestionForm index={form.id} />
+            <QuestionForm questionIndex={form.id} />
           </div>
         ))}
       </div>
@@ -58,4 +58,4 @@ const QuizUpdate = () => {
   );
 };
 
-export default QuizUpdate;
+export default QuizUpdateForm;

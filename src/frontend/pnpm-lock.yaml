@@ -17,6 +17,9 @@ importers:
       react:
         specifier: ^18.3.1
         version: 18.3.1
+      react-async:
+        specifier: ^10.0.1
+        version: 10.0.1(react@18.3.1)
       react-bootstrap:
         specifier: ^2.10.4
         version: 2.10.4(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4811,6 +4814,11 @@ packages:
   react-app-polyfill@3.0.0:
     resolution: {integrity: sha512-sZ41cxiU5llIB003yxxQBYrARBqe0repqPTTYBTmMqTz9szeBbE37BehCE891NZsmdZqqP+xWKdT3eo3vOzN8w==}
     engines: {node: '>=14'}
+
+  react-async@10.0.1:
+    resolution: {integrity: sha512-ORUz5ca0B57QgBIzEZM5SuhJ6xFjkvEEs0gylLNlWf06vuVcLZsjIw3wx58jJkZG38p+0nUAxRgFW2b7mnVZzA==}
+    peerDependencies:
+      react: '>=16.3.1'
 
   react-bootstrap@2.10.4:
     resolution: {integrity: sha512-W3398nBM2CBfmGP2evneEO3ZZwEMPtHs72q++eNw60uDGDAdiGn0f9yNys91eo7/y8CTF5Ke1C0QO8JFVPU40Q==}
@@ -11559,6 +11567,10 @@ snapshots:
       raf: 3.4.1
       regenerator-runtime: 0.13.11
       whatwg-fetch: 3.6.20
+
+  react-async@10.0.1(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-bootstrap@2.10.4(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:

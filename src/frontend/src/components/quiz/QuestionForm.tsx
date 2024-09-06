@@ -1,40 +1,36 @@
-/**
- * A component representing a form for creating a quiz
- */
-
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import AnswerForm from "./AnswerForm";
 import quizStore from "../../stores/quizStore";
 import QuestionState from "../../models/state/QuestionState";
 
-const QuestionForm = ({ questionIndex }: any) => {
-  const [activeAnswerForms, setActiveAnswerForms] = useState(<></>);
+interface QuestionFormProps {
+  questionIndex: number;
+}
+
+const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
+  const [activeAnswerForms, setActiveAnswerForms] = useState<JSX.Element[]>([]);
   const [formCount, setFormCount] = useState(0);
   const [questionTitle, setQuestionTitle] = useState("");
   const { updateExistingQuestion } = quizStore();
 
-  /**
-   * useMemo for interacting with the quizStore Zustand storage.
-   * Stores the updated question into the database.
-   */
-  useMemo(() => {
+  useEffect(() => {
     const questionState: QuestionState = {
       index: questionIndex,
       title: questionTitle,
     };
 
     updateExistingQuestion(questionState);
-  }, [questionTitle]);
+  }, [questionTitle, questionIndex, updateExistingQuestion]);
 
-  const createAnswerForm = (event: { preventDefault: () => void }) => {
+  const createAnswerForm = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setActiveAnswerForms(
-      <div id={`answer-form-${formCount}`}>
-        {activeAnswerForms}
+    setActiveAnswerForms((prevForms) => [
+      ...prevForms,
+      <div key={formCount} id={`answer-form-${formCount}`}>
         <AnswerForm questionIndex={questionIndex} answerIndex={formCount} />
-      </div>
-    );
-    setFormCount(formCount + 1);
+      </div>,
+    ]);
+    setFormCount((prevCount) => prevCount + 1);
   };
 
   return (

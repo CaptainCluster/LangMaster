@@ -23,7 +23,7 @@ public class Question
     private Quiz quiz;
 
     // One Question, many Answers
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "question")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private Set<Answer> answers;
 
     // Constructors
