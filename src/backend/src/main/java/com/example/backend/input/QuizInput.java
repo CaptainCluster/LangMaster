@@ -1,17 +1,15 @@
 package com.example.backend.input;
 
-import com.example.backend.model.Question;
-
 import java.util.Set;
 
 public class QuizInput
 {
-    private String name;
+    private String title;
     private Set<QuestionInput> questions;
 
-    public String getName()
+    public String getTitle()
     {
-        return name;
+        return title;
     }
 
     public Set<QuestionInput> getQuestions()
@@ -19,4 +17,13 @@ public class QuizInput
         return questions;
     }
 
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public void setQuestions(Set<QuestionInput> questions)
+    {
+        this.questions = questions;
+    }
 }

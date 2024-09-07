@@ -8,7 +8,7 @@ import com.example.backend.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class QuestionService
 
     public Set<Question> convertInputToQuestion(Set<QuestionInput> questionInputs)
     {
-        Set<Question> questions = Collections.emptySet();
+        Set<Question> questions = new HashSet<>();
         for (QuestionInput questionInput : questionInputs)
         {
             Question newQuestion = new Question();

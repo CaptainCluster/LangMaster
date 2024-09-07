@@ -1,7 +1,7 @@
 package com.example.backend.model;
 
 import jakarta.persistence.*;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,15 +25,15 @@ public class Language
     // Constructors
     public Language()
     {
-        this.users = Collections.emptySet();
-        this.quizzes = Collections.emptySet();
+        this.users = new HashSet<>();
+        this.quizzes = new HashSet<>();
     }
 
     public Language(String name)
     {
         this.name = name;
-        this.users = Collections.emptySet();
-        this.quizzes = Collections.emptySet();
+        this.users = new HashSet<>();
+        this.quizzes = new HashSet<>();
     }
 
     // Setters

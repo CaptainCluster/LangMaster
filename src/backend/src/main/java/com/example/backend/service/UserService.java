@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -74,7 +75,7 @@ public class UserService
 
     public Set<String> getUserLanguageNames(User user)
     {
-        Set<String> languages = Collections.emptySet();
+        Set<String> languages = new HashSet<>();
         for (Language language : user.getLanguages())
         {
             languages.add(language.getName());

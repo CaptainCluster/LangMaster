@@ -2,7 +2,7 @@ package com.example.backend.model;
 
 import jakarta.persistence.*;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,13 +23,13 @@ public class Question
     private Quiz quiz;
 
     // One Question, many Answers
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "question")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     private Set<Answer> answers;
 
     // Constructors
     public Question() 
     {
-        this.answers = Collections.emptySet();
+        this.answers = new HashSet<>();
     }
 
     // Setters
