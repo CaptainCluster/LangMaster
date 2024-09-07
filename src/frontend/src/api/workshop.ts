@@ -26,11 +26,7 @@ export async function putQuiz(
   quiz: Quiz
 ): Promise<AxiosResponse<OkResponse> | FailResponse> {
   try {
-    const response = await axios.put<OkResponse>("/api/quiz/", quiz, {
-//      headers: {
-  //      "Content-Type": "text/plain",
-    //  },
-    });
+    const response = await axios.put<OkResponse>("/api/quiz/", quiz);
     return response;
   } catch (error) {
     return {

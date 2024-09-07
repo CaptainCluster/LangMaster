@@ -2,7 +2,7 @@ package com.example.backend.model;
 
 import jakarta.persistence.*;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,7 +29,7 @@ public class Question
     // Constructors
     public Question() 
     {
-        this.answers = Collections.emptySet();
+        this.answers = new HashSet<>();
     }
 
     // Setters

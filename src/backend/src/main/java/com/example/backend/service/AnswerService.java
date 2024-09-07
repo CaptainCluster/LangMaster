@@ -34,7 +34,7 @@ public class AnswerService
         Question question = optionalQuestion.orElse(null);
         if (question == null)
         {
-            return Collections.emptySet();
+            return new HashSet<>();
         }
         return question.getAnswers();
     }

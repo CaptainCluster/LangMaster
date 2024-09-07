@@ -3,7 +3,7 @@ package com.example.backend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -62,7 +62,7 @@ public class User
     public void fillCommon()
     {
         this.registerDate = LocalDate.now();
-        this.languages = Collections.emptySet();
+        this.languages = new HashSet<>();
         this.progress = new Progress();
         this.bio = defaultBio;
     }
