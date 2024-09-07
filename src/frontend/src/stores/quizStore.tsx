@@ -1,16 +1,20 @@
 /**
- * @purpose Zustand state management
+ * This file manages global state for the customization of a quiz. This is
+ * important because the data created while customizing the quiz has to be
+ * able to be sent over to the server.
+ *
+ * The quiz, its questions and the answers of each question are stored here.
+ * This allows them to be conveniently fetched and placed in a request when
+ * the client wishes to save the changes.
  *
  * @dependencies
  * 1) Zustand for state management
  * 2) Zustand persist middleware for persistent state
- *
- * This file manages global state for quiz creation.
  */
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import Answer from "../models/quiz/Answer";
+
 import Question from "../models/quiz/Question";
 import Quiz from "../models/quiz/Quiz";
 
@@ -24,10 +28,8 @@ interface QuizStoreState {
   setQuizTitle: (title: string) => void;
   setQuizId: (id: number) => void;
   updateQuiz: (quiz: Quiz) => void;
-  updateExistingQuestion: (questionState: QuestionState) => void;
-  pushQuestion: (question: Question) => void;
-  pushAnswer: (questionTitle: string, answer: Answer) => void;
-  updateExistingAnswer: (answerState: AnswerState) => void;
+  processQuestionForQuiz: (questionState: QuestionState) => void;
+  processAnswerForQuiz: (answerState: AnswerState) => void;
   resetStore: () => void;
 }
 
@@ -47,11 +49,6 @@ const quizStore = create<QuizStoreState>()(
         }));
       },
 
-      /**
-       * The following functionality below manages the Quiz creation/customization
-       * data as a buffer-ish solution, allowing it to be easily sent when the
-       * client wishes to do so.
-       */
       setQuizId: (id: number) => set({ quizId: id }),
 
       // Updating the state of the currently stored quiz
@@ -62,23 +59,15 @@ const quizStore = create<QuizStoreState>()(
         }));
       },
 
-      // Updating with a Question object
-      pushQuestion: (question: Question) => {
-        set((state: QuizStoreState) => ({
-          currentQuiz: {
-            ...state.currentQuiz,
-            questions: [...state.currentQuiz.questions, question],
-          },
-        }));
-      },
-
       /**
        * An update to an existing Question. Uses its index to pinpoint
        * which object to change and uses the title in the QuestionState
        * object to overwrite the former title.
        */
-      updateExistingQuestion: (questionState: QuestionState) => {
+      processQuestionForQuiz: (questionState: QuestionState) => {
         set((state: QuizStoreState) => {
+          // If the question does not exist, it is pushed into the questions array
+          // of the Quiz object.
           if (state.currentQuiz.questions[questionState.index] === undefined) {
             const newQuestion: Question = {
               title: questionState.title,
@@ -91,6 +80,9 @@ const quizStore = create<QuizStoreState>()(
               },
             };
           }
+
+          // If the Question exists, an index is used to coordinate which object
+          // in the questions array has its data overwritten.
           return {
             currentQuiz: {
               ...state.currentQuiz,
@@ -105,32 +97,7 @@ const quizStore = create<QuizStoreState>()(
         });
       },
 
-      // Pushing an Answer object inside a Question object
-      pushAnswer: (questionTitle: string, answer: Answer) => {
-        set((state: QuizStoreState) => {
-          const questionIndex = state.currentQuiz.questions.findIndex(
-            (questionEntry: Question) => questionEntry.title === questionTitle
-          );
-          // If the question does not exist, no changes are made
-          if (questionIndex === -1) {
-            return state;
-          }
-          // Returning with the Answer pushed to an array within the correct
-          // Question object
-          return {
-            currentQuiz: {
-              ...state.currentQuiz,
-              questions: state.currentQuiz.questions.map((q, i) =>
-                i === questionIndex
-                  ? { ...q, answers: [...q.answers, answer] }
-                  : q
-              ),
-            },
-          };
-        });
-      },
-
-      updateExistingAnswer: (answerState: AnswerState) => {
+      processAnswerForQuiz: (answerState: AnswerState) => {
         set((state: QuizStoreState) => {
           const question =
             state.currentQuiz.questions[answerState.questionIndex];

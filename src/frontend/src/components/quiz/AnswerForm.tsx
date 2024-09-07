@@ -5,7 +5,7 @@ import AnswerState from "../../models/state/AnswerState";
 const AnswerForm = ({ questionIndex, answerIndex }: any) => {
   const [answerTitle, setAnswerTitle] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
-  const { updateExistingAnswer } = quizStore();
+  const { processAnswerForQuiz } = quizStore();
 
   useEffect(() => {
     const answerState: AnswerState = {
@@ -14,7 +14,7 @@ const AnswerForm = ({ questionIndex, answerIndex }: any) => {
       title: answerTitle,
       isCorrect: isCorrect,
     };
-    updateExistingAnswer(answerState);
+    processAnswerForQuiz(answerState);
   }, [answerTitle, isCorrect]);
 
   return (

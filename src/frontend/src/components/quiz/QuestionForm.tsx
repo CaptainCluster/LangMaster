@@ -11,7 +11,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
   const [activeAnswerForms, setActiveAnswerForms] = useState<JSX.Element[]>([]);
   const [formCount, setFormCount] = useState(0);
   const [questionTitle, setQuestionTitle] = useState("");
-  const { updateExistingQuestion } = quizStore();
+  const { processQuestionForQuiz } = quizStore();
 
   useEffect(() => {
     const questionState: QuestionState = {
@@ -19,8 +19,8 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
       title: questionTitle,
     };
 
-    updateExistingQuestion(questionState);
-  }, [questionTitle, questionIndex, updateExistingQuestion]);
+    processQuestionForQuiz(questionState);
+  }, [questionTitle, questionIndex, processQuestionForQuiz]);
 
   const createAnswerForm = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
