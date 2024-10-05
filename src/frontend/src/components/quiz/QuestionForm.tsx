@@ -8,11 +8,14 @@ interface QuestionFormProps {
 }
 
 const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
-  const [activeAnswerForms, setActiveAnswerForms] = useState<JSX.Element[]>([]);
-  const [formCount, setFormCount] = useState(0);
-  const [questionTitle, setQuestionTitle] = useState("");
-  const { processQuestionForQuiz } = quizStore();
+ 
+  const [activeAnswerForms, setActiveAnswerForms] = useState<JSX.Element[]>([]);  // An array of active form elements 
+  const [formCount, setFormCount] = useState(0);                                  // The quantity of forms 
+  const [questionTitle, setQuestionTitle] = useState("");                         // The title of the current question 
+  const { processQuestionForQuiz } = quizStore();                                 // A function from a Zustand storage
 
+  /// Triggering a call for processQuestionForQuiz() everytime the question experiences
+  /// a change.
   useEffect(() => {
     const questionState: QuestionState = {
       index: questionIndex,
@@ -22,6 +25,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
     processQuestionForQuiz(questionState);
   }, [questionTitle, questionIndex, processQuestionForQuiz]);
 
+  /// Upon trigger, creates a form for an answer to the question.
   const createAnswerForm = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setActiveAnswerForms((prevForms) => [

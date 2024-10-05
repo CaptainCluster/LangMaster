@@ -12,6 +12,7 @@ const QuizUpdateForm = () => {
     mutationFn: api.workshop.putQuiz,
     onSuccess: async () => {
       console.log(currentQuiz);
+
     },
     onError: (error) => {
       console.error(error);
@@ -53,6 +54,9 @@ const QuizUpdateForm = () => {
       </div>
       <div>
         <button onClick={submitUpdates}>Submit Updates</button>
+      </div>
+      <div>
+        {}
       </div>
     </>
   );
