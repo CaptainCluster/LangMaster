@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.List;
 
 @Service
 public class QuizService {
@@ -83,5 +84,10 @@ public class QuizService {
         quiz.setQuestions(questions);
 
         quizRepository.save(quiz);
+    }
+
+    public List<Quiz> getAllQuizzes() 
+    {
+      return quizRepository.findAll(); 
     }
 }

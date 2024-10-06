@@ -1,6 +1,7 @@
 import useStore from "../../stores/store";
 import { useEffect } from "react";
 import Header from "../../components/Header";
+import ListQuiz from "../../components/learn/ListQuiz"; 
 
 const Learn = () => {
  
@@ -15,7 +16,8 @@ const Learn = () => {
   }, []);
   return (
     <>
-      <Header />   
+      <Header />
+      <ListQuiz />
     </>
   )
 }

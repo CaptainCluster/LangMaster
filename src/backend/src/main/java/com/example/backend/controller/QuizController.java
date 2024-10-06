@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/quiz")
 public class QuizController
@@ -36,6 +38,11 @@ public class QuizController
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(quiz.getId());
+    }
+  
+    @GetMapping("/all")
+    public ResponseEntity<List<Quiz>> getAllQuizzes() {
+      return ResponseEntity.ok().body(quizService.getAllQuizzes());
     }
 
     @PostMapping("/")
