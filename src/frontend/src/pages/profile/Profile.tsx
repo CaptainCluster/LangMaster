@@ -8,6 +8,7 @@ import useStore from "../../stores/store";
 import Header from "../../components/Header";
 import { api } from "../../api";
 import quizStore from "../../stores/quizStore";
+import { checkLocalStorage } from "../../utils/checkLocalStorage";
 const Profile = () => {
   const { updateCurrentPageName } = useStore(); // State management
   const username: string | undefined = useParams().username; // URL parameter recognition
@@ -17,9 +18,7 @@ const Profile = () => {
   // Unauthenticated users are redirected
   useEffect(() => {
     console.log(quizId);
-    if (!localStorage.getItem("auth_token")) {
-      window.location.href = "/login";
-    }
+    checkLocalStorage();
     updateCurrentPageName("Profile");
   }, []);
 

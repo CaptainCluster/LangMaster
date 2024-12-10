@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useStore from "../../stores/store";
 import { useEffect } from "react";
 import { api } from "../../api";
+import { checkLocalStorage } from "../../utils/checkLocalStorage";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -20,9 +21,7 @@ const Register = () => {
 
   // Redirect to home page if already authenticated. Otherwise displaying current page name.
   useEffect(() => {
-    if (localStorage.getItem("auth_token")) {
-      window.location.href = "/";
-    }
+    checkLocalStorage();
     updateCurrentPageName("Register");
   }, []);
 
