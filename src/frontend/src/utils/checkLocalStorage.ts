@@ -1,9 +1,13 @@
-/**
- * Making sure the user has a valid token for authentication.
- * If not, the user will be redirected into login page.
- */ 
-export const checkLocalStorage = () => {
+const redirectForNoToken = () => {
   if (!localStorage.getItem("auth_token")) {
     window.location.href = "/login";
   }
 }
+
+const redirectForToken = () => {
+  if (localStorage.getItem("auth_token")) {
+    window.location.href = "/login";
+  }
+}
+
+export { redirectForToken, redirectForNoToken }
