@@ -8,8 +8,7 @@ import Error404 from "./pages/Error404";
 import Profile from "./pages/profile/Profile";
 import Workshop from "./pages/workshop/Workshop";
 import Learn from "./pages/learn/Learn";
-
-import "./App.css";
+import "./index.css"
 
 function App() {
   const queryClient = new QueryClient();

@@ -2,6 +2,7 @@ import Header from "../../components/Header";
 import QuizCreateForm from "../../components/quiz/QuizCreateForm";
 import { useEffect, useState } from "react";
 import useStore from "../../stores/store";
+import { checkLocalStorage } from "../../utils/checkLocalStorage";
 
 const Workshop = () => {
   const { updateCurrentPageName } = useStore();
@@ -10,9 +11,7 @@ const Workshop = () => {
   useEffect(() => {
     
     // Redirecting upon lacking authentication
-    if (!localStorage.getItem("auth_token")) {
-      window.location.href = "/login";
-    }
+    checkLocalStorage();
     updateCurrentPageName("Workshop");
 
     // Rendering a component for creating a quiz
