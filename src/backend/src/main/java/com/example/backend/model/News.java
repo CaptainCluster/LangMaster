@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table
+@Table(name = "news", uniqueConstraints = {@UniqueConstraint(columnNames = "content")})
 public class News
 {
   @Id
@@ -14,8 +14,15 @@ public class News
   @Column
   private String content;
 
-  @Column(nullable = false, updatable = false)
+  @Column(nullable = false, updatable = false, unique = true)
   private LocalDateTime publicationDate;
+
+  public News() {}
+
+  public News(String content) 
+  {
+    this.content = content;
+  }
 
   public long getId() 
   {
@@ -45,5 +52,11 @@ public class News
   public void setPublicationDate(LocalDateTime publicationDate)
   {
     this.publicationDate = publicationDate;
+  }
+
+  @PrePersist 
+  protected void onCreate() 
+  { 
+    this.publicationDate = LocalDateTime.now(); 
   }
 }
