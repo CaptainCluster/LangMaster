@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api";
+import Panel from "./Panel";
 
 const NewsPanel = () => {
+  const PANEL_HEADER: string = "News";
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["news"],
@@ -9,21 +11,16 @@ const NewsPanel = () => {
   });
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <Panel header={PANEL_HEADER} text={"Loading..."} />;
   }
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <Panel header={PANEL_HEADER} text={`Error: ${error.message}`} />;
   }
   if (!data || !data.data) {
-    return <span>No data</span>;
+    return <Panel header={PANEL_HEADER} text={"No data"}/>;
   }
 
-  return (
-    <div className="p-8 bg-white rounded-lg shadow-lg transform">
-      <h4 className="text-center border-b border-gray-200 pb-2">News</h4>
-      {data.data.content}
-    </div>
-  );
+  return <Panel header={PANEL_HEADER} text={data.data.content} />;
 }
 
 export default NewsPanel;
