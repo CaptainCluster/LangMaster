@@ -27,6 +27,11 @@ public class News
     return content;
   }
 
+  public LocalDateTime getPublicationDate()
+  {
+    return publicationDate;
+  }
+
   public void setId(long id) 
   {
     this.id = id;
@@ -35,5 +40,10 @@ public class News
   public void setContent(String content)
   {
     this.content = content;
+  }
+
+  public void setPublicationDate(LocalDateTime publicationDate)
+  {
+    this.publicationDate = publicationDate;
   }
 }

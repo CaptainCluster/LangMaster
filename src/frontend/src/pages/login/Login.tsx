@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import useStore from "../../stores/store";
 import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
-
+import { redirectForToken } from "../../utils/checkLocalStorage";
 import { api } from "../../api";
 
 const Login = () => {
@@ -25,9 +25,7 @@ const Login = () => {
 
   // Authenticated users are redirected. Otherwise current page name is displayed.
   useEffect(() => {
-    if (localStorage.getItem("auth_token")) {
-      window.location.href = "/";
-    }
+    redirectForToken();
     updateCurrentPageName("Login");
   }, []);
 
