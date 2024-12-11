@@ -6,7 +6,7 @@ const redirectForNoToken = () => {
 
 const redirectForToken = () => {
   if (localStorage.getItem("auth_token")) {
-    window.location.href = "/login";
+    window.location.href = "/";
   }
 }
 
