@@ -66,7 +66,7 @@ const Header = () => {
 
   // The final return for the Header
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
       <Container>
         <Navbar.Brand>{currentPageName}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

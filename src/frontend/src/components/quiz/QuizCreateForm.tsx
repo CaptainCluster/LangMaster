@@ -51,10 +51,11 @@ const QuizCreateForm = ({ setCreateComponent }: any) => {
   return (
     <form onSubmit={submitCreation}>
       <input
+        className="ml-5"
         type="text"
         onChange={(event) => setQuizName(event.target.value)}
       ></input>
-      <input type="submit" value="Create Quiz"></input>
+      <input className="text-white px-3" type="submit" value="Create Quiz"></input>
     </form>
   );
 };

@@ -9,11 +9,10 @@ const Workshop = () => {
   const [createComponent, setCreateComponent] = useState<JSX.Element>(<></>);
 
   useEffect(() => {
-    
     // Redirecting upon lacking authentication
     redirectForNoToken();
     updateCurrentPageName("Workshop");
-
+    
     // Rendering a component for creating a quiz
     setCreateComponent(
       <QuizCreateForm setCreateComponent={setCreateComponent} />

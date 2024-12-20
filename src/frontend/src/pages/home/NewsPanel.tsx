@@ -16,7 +16,7 @@ const NewsPanel = () => {
   if (isError) {
     return <Panel header={PANEL_HEADER} text={`Error: ${error.message}`} />;
   }
-  if (!data || !data.data) {
+  if (!data) {
     return <Panel header={PANEL_HEADER} text={"No data"}/>;
   }
 
