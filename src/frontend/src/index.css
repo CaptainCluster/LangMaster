@@ -11,6 +11,11 @@
   }
 }
 
+.body { 
+  color: #ffffff;
+  background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
+}
+
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }

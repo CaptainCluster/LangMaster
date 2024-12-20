@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import QuizCreateForm from "../../components/quiz/QuizCreateForm";
+import QuizCreateForm from "./quiz/QuizCreateForm";
 import { useEffect, useState } from "react";
 import useStore from "../../stores/store";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
@@ -22,7 +22,17 @@ const Workshop = () => {
   return (
     <>
       <Header></Header>
-      {createComponent}
+      <div className="grid grid-cols-1 sm:grid-cols-2 justify-center gap-3 p-6 m-14">
+        <button 
+          className="p-8 bg-neutral-700 rounded-lg shadow-lg transform"
+          onClick={() => { window.location.href = "/workshop/create" }}>
+          Create a quiz
+        </button>
+        <button 
+          className="p-8 bg-neutral-700 rounded-lg shadow-lg transform"
+          onClick={() => { window.location.href = "/workshop/search" }}>
+          Select an existing quiz</button>
+      </div>
     </>
   );
 };

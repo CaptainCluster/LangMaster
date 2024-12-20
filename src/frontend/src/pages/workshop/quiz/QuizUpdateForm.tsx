@@ -1,9 +1,9 @@
 import QuestionForm from "./QuestionForm";
-import Notification from "../Notification";
+import Notification from "../../../components/Notification";
 import { useMutation } from "@tanstack/react-query";
-import quizStore from "../../stores/quizStore";
-import { api } from "../../api";
-import formStore from "../../stores/quizFormStore";
+import quizStore from "../../../stores/quizStore";
+import { api } from "../../../api";
+import formStore from "../../../stores/quizFormStore";
 import { useState } from "react";
 
 const NOTIFY_UPDATE_SUCCESS = "The quiz has been updated successfully.";

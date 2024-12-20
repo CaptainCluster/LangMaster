@@ -23,9 +23,12 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile/:username" element={<Profile />} />
-            <Route path="/workshop" element={<Workshop />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/quiz/:id" />
+            
+            <Route path="/workshop" element={<Workshop />} />
+            <Route path="/workshop/create" />
+            <Route path="/workshop/search" />
           </Routes>
         </QueryClientProvider>
       </Router>

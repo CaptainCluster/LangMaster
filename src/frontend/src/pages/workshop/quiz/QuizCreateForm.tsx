@@ -4,9 +4,9 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { api } from "../../api";
+import { api } from "../../../api";
 import QuizUpdateForm from "./QuizUpdateForm";
-import quizStore from "../../stores/quizStore";
+import quizStore from "../../../stores/quizStore";
 
 const QuizCreateForm = ({ setCreateComponent }: any) => {
   const [quizName, setQuizName] = useState("");
@@ -51,11 +51,11 @@ const QuizCreateForm = ({ setCreateComponent }: any) => {
   return (
     <form onSubmit={submitCreation}>
       <input
-        className="ml-5"
+        className="ml-5 text-black"
         type="text"
         onChange={(event) => setQuizName(event.target.value)}
       ></input>
-      <input className="text-white px-3" type="submit" value="Create Quiz"></input>
+      <input className="px-3" type="submit" value="Create Quiz"></input>
     </form>
   );
 };

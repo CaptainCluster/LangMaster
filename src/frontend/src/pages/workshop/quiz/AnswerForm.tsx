@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import quizStore from "../../stores/quizStore";
-import AnswerState from "../../models/state/AnswerState";
+import quizStore from "../../../stores/quizStore";
+import AnswerState from "../../../models/state/AnswerState";
 
 const AnswerForm = ({ questionIndex, answerIndex }: any) => {
   const [answerTitle, setAnswerTitle] = useState("");
@@ -22,6 +22,7 @@ const AnswerForm = ({ questionIndex, answerIndex }: any) => {
       <form>
         <input
           type="text"
+          className="text-black"
           placeholder="Answer Title"
           onChange={(event) => setAnswerTitle(event.target.value)}
         ></input>

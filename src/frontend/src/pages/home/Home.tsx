@@ -25,7 +25,7 @@ const Home = () => {
     <>
       <Header />
       <div className="grid items-center">
-        <h4 className="text-center text-white mt-5">{welcomeMessage}</h4>
+        <h4 className="text-center mt-5">{welcomeMessage}</h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-6 fade-in">
           <NewsPanel />
           <SuggestionsPanel />
