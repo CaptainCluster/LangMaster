@@ -5,11 +5,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { api } from "../../../api";
-import QuizUpdateForm from "./QuizUpdateForm";
 import quizStore from "../../../stores/quizStore";
 
-const QuizCreateForm = ({ setCreateComponent }: any) => {
-  const [quizName, setQuizName] = useState("");
+const QuizCreateForm = () => {
+  const [quizName, setQuizName]               = useState("");
+
   const { setQuizTitle, setQuizId } = quizStore();
 
   const { mutate } = useMutation({
@@ -24,14 +24,19 @@ const QuizCreateForm = ({ setCreateComponent }: any) => {
       try {
         const quizIdResponse = await api.workshop.getQuizById(quizName);
 
-        /**
-         * If the response contains the id, it will be put in the state management
-         * storage. Otherwise an error message is shown.
+        /*
+         * Scenarios
+         * 
+         * 1) Success      - Name and ID given to state management. Redirecting user 
+         *                   to the edit page.
+         * 2) Response msg - Printing the message. Assuming the quiz ID was not 
+         *                   received.
+         * 3) The rest     - In other scenarios, an unexpected response is printed.
          */
         if (typeof quizIdResponse === "object" && "data" in quizIdResponse) {
           setQuizTitle(quizName);
           setQuizId(quizIdResponse.data.id);
-          setCreateComponent(<QuizUpdateForm />);
+          window.location.href = `/workshop/edit/${quizIdResponse.data}`
         } else if ("msg" in quizIdResponse) {
           console.error("Failed to get quiz ID:", quizIdResponse.msg);
         } else {
@@ -51,6 +56,7 @@ const QuizCreateForm = ({ setCreateComponent }: any) => {
   return (
     <form onSubmit={submitCreation}>
       <input
+        id="input-quiz-name"
         className="ml-5 text-black"
         type="text"
         onChange={(event) => setQuizName(event.target.value)}
