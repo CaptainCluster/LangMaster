@@ -38,8 +38,14 @@ public class QuizService {
         return true;
     }
 
-    public Quiz findQuiz(String name) {
+    public Quiz findQuiz(String name) 
+    {
         return quizRepository.findByName(name).orElse(null);
+    }
+
+    public Quiz findQuizById(long id)
+    {
+        return quizRepository.findById(id).orElse(null);
     }
 
     public Set<Question> findQuizzes(String quizName) {
@@ -89,5 +95,5 @@ public class QuizService {
     public List<Quiz> getAllQuizzes() 
     {
       return quizRepository.findAll(); 
-    }
+    } 
 }
