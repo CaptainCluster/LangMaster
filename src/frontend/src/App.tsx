@@ -9,6 +9,7 @@ import Profile from "./pages/profile/Profile";
 import Workshop from "./pages/workshop/Workshop";
 import Learn from "./pages/learn/Learn";
 import "./index.css"
+import CreatePage from "./pages/workshop/CreatePage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -27,7 +28,8 @@ function App() {
             <Route path="/quiz/:id" />
             
             <Route path="/workshop" element={<Workshop />} />
-            <Route path="/workshop/create" />
+            <Route path="/workshop/create" element={<CreatePage />}/>
+            <Route path="/workshop/edit" />
             <Route path="/workshop/search" />
           </Routes>
         </QueryClientProvider>
