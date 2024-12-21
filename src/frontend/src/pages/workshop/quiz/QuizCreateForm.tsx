@@ -22,7 +22,7 @@ const QuizCreateForm = () => {
      */
     onSuccess: async () => {
       try {
-        const quizIdResponse = await api.workshop.getQuizById(quizName);
+        const quizIdResponse = await api.workshop.getQuizId(quizName);
 
         /*
          * Scenarios
@@ -34,8 +34,9 @@ const QuizCreateForm = () => {
          * 3) The rest     - In other scenarios, an unexpected response is printed.
          */
         if (typeof quizIdResponse === "object" && "data" in quizIdResponse) {
+          console.log(quizIdResponse.data)
           setQuizTitle(quizName);
-          setQuizId(quizIdResponse.data.id);
+          setQuizId(quizIdResponse.data);
           window.location.href = `/workshop/edit/${quizIdResponse.data}`
         } else if ("msg" in quizIdResponse) {
           console.error("Failed to get quiz ID:", quizIdResponse.msg);

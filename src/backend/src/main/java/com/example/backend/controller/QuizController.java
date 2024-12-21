@@ -29,7 +29,7 @@ public class QuizController
         return ResponseEntity.ok(quiz);
     }
 
-    @GetMapping("/byid/{name}")
+    @GetMapping("/id/{name}")
     public ResponseEntity<Long> getQuizId(@PathVariable String name)
     {
         Quiz quiz = quizService.findQuiz(name);
@@ -40,8 +40,8 @@ public class QuizController
         return ResponseEntity.ok(quiz.getId());
     }
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity<Quiz>
+//    @GetMapping("/id/{id}")
+  //  public ResponseEntity<Quiz>
   
     @GetMapping("/all")
     public ResponseEntity<List<Quiz>> getAllQuizzes() {

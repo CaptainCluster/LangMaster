@@ -35,14 +35,13 @@ export async function putQuiz(
   }
 }
 
-export async function getQuizById(
+export async function getQuizId(
   quizName: string
 ): Promise<AxiosResponse<{ id: number }> | FailResponse> {
   try {
     const response = await axios.get<{ id: number }>(
       `/api/quiz/id/${quizName}`
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
