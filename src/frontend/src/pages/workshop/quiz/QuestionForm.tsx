@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AnswerForm from "./AnswerForm";
-import quizStore from "../../stores/quizStore";
-import QuestionState from "../../models/state/QuestionState";
+import quizStore from "../../../stores/quizStore";
+import QuestionState from "../../../models/state/QuestionState";
 
 interface QuestionFormProps {
   questionIndex: number;
@@ -42,6 +42,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
       <form className="answer-form-element">
         <input
           type="text"
+          className="text-black"
           placeholder="Question Title"
           onChange={(event) => setQuestionTitle(event.target.value)}
         />
