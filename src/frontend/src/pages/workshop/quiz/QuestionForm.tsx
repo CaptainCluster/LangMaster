@@ -47,7 +47,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
           onChange={(event) => setQuestionTitle(event.target.value)}
         />
       </form>
-      <button onClick={createAnswerForm}>Create Answer</button>
+      <button className="text-black" onClick={createAnswerForm}>Create Answer</button>
       {activeAnswerForms}
     </>
   );

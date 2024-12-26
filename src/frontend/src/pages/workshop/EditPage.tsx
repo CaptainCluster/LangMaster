@@ -42,8 +42,7 @@ const EditPage = () => {
   return (
     <>
       <Header />
-      <div className="flex justify-center items-center h-56">
-        <p>{quizId}</p> 
+      <div className="grid justify-center items-center h-56">
         <QuizUpdateForm />
       </div>
     </>
