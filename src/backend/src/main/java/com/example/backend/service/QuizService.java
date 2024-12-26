@@ -4,6 +4,8 @@ import com.example.backend.input.QuizInput;
 import com.example.backend.model.Question;
 import com.example.backend.model.Quiz;
 import com.example.backend.repository.QuizRepository;
+import com.example.backend.result.QuizResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -95,5 +97,22 @@ public class QuizService {
     public List<Quiz> getAllQuizzes() 
     {
       return quizRepository.findAll(); 
-    } 
+    }
+
+    
+    public QuizResult convertQuizToResult(Quiz quiz) 
+    {
+      if (quiz == null)
+      {
+        return null;
+      }
+      QuizResult quizResult = new QuizResult (
+        quiz.getName(),
+        quiz.getDescription(),
+        quiz.getLanguage(),
+        quiz.getQuestions(),
+        quiz.getReward()
+      );
+      return quizResult;
+    }
 }

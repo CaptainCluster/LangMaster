@@ -12,7 +12,6 @@ const Home = () => {
 
   useEffect(() => {
     redirectForNoToken();
-
     if (localStorage.getItem("auth_username")) {
       setWelcomeMessage(`Welcome, ${localStorage.getItem("auth_username")}!`);
     } else {

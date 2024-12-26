@@ -17,25 +17,30 @@ public class Reward
     private int xp;
 
     // Constructors
-    public Reward() {
+    public Reward() 
+    {
         this.xp = DEFAULT_XP;
     }
 
     // Setters
-    public void setId(long id) {
+    public void setId(long id) 
+    {
         this.id = id;
     }
 
-    public void setXp(int xp) {
+    public void setXp(int xp) 
+    {
         this.xp = xp;
     }
 
     // Getters
-    public long getId() {
+    public long getId() 
+    {
         return id;
     }
 
-    public int getXp() {
+    public int getXp() 
+    {
         return xp;
     }
 }

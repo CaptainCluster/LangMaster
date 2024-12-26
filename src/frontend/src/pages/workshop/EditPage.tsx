@@ -22,7 +22,7 @@ const EditPage = () => {
    
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["news"],
-    queryFn: () => api.workshop.getQuizById(quizId as string),
+    queryFn: () => api.workshop.getQuizById(Number(quizId)),
   });
   
   if (isLoading) {
@@ -35,6 +35,8 @@ const EditPage = () => {
     return <span className="text-white">No data</span>;
   }
   
+  console.log(data.data)
+
   return (
     <>
       <Header />

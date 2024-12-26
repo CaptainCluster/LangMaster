@@ -49,44 +49,64 @@ public class Quiz
     }
 
     // Setters
-    public void setId(long id) {
+    public void setId(long id) 
+    {
         this.id = id;
     }
 
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description) 
+    {
         this.description = description;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setLanguage(Language language)
+    {
+        this.language = language;
+    }
+
+    public void setQuestions(Set<Question> questions) 
+    {
         this.questions = questions;
     }
 
-    public void setReward(Reward reward) {
+    public void setReward(Reward reward) 
+    {
         this.reward = reward;
     }
 
     // Getters
-    public long getId() {
+    public long getId() 
+    {
         return id;
     }
 
-    public String getName() {
+    public String getName() 
+    {
         return name;
     }
 
-    public String getDescription() {
+    public String getDescription() 
+    {
         return description;
     }
+    
+    public Language getLanguage()
+    {
+      return language;
+    }
 
-    public Set<Question> getQuestions() {
+    public Set<Question> getQuestions() 
+    {
         return questions;
     }
 
-    public Reward getReward() {
+    public Reward getReward() 
+    {
         return reward;
     }
 }

@@ -2,11 +2,12 @@ package com.example.backend.controller;
 
 import com.example.backend.input.QuizInput;
 import com.example.backend.model.Quiz;
+import com.example.backend.result.QuizResult;
 import com.example.backend.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.Optional;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,18 @@ public class QuizController
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(quiz);
+    }
+
+    @GetMapping("/getid/{id}")
+    public ResponseEntity<QuizResult> getQuizById(@PathVariable long id)
+    {
+        Quiz quiz = quizService.findQuizById(id);
+        if (quiz == null)
+        {
+          return ResponseEntity.badRequest().build();
+        }
+        QuizResult quizResult = quizService.convertQuizToResult(quiz);
+        return ResponseEntity.ok(quizResult);
     }
 
     @GetMapping("/id/{name}")
