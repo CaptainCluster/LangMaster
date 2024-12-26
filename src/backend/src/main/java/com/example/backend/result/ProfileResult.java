@@ -1,7 +1,5 @@
 package com.example.backend.result;
 
-import com.example.backend.model.Language;
-
 import java.util.Set;
 
 public class ProfileResult

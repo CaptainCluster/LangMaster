@@ -4,6 +4,7 @@ import com.example.backend.input.AnswerInput;
 import com.example.backend.input.QuestionInput;
 import com.example.backend.model.Answer;
 import com.example.backend.model.Question;
+import com.example.backend.model.Quiz;
 import com.example.backend.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +32,14 @@ public class QuestionService
         return questionRepository.findAll();
     }
 
-    public Set<Question> convertInputToQuestion(Set<QuestionInput> questionInputs)
+    public Set<Question> convertInputToQuestion(Set<QuestionInput> questionInputs, Quiz quiz)
     {
         Set<Question> questions = new HashSet<>();
         for (QuestionInput questionInput : questionInputs)
         {
             Question newQuestion = new Question();
             newQuestion.setTitle(questionInput.getTitle());
+            newQuestion.setQuiz(quiz);      
 
             Set<Answer> answers = answerService.convertInputsToAnswers(questionInput.getAnswers());
             newQuestion.setAnswers(answers);

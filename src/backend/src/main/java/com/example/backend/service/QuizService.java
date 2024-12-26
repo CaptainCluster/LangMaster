@@ -4,6 +4,8 @@ import com.example.backend.input.QuizInput;
 import com.example.backend.model.Question;
 import com.example.backend.model.Quiz;
 import com.example.backend.repository.QuizRepository;
+import com.example.backend.result.QuizResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +40,14 @@ public class QuizService {
         return true;
     }
 
-    public Quiz findQuiz(String name) {
+    public Quiz findQuiz(String name) 
+    {
         return quizRepository.findByName(name).orElse(null);
+    }
+
+    public Quiz findQuizById(long id)
+    {
+        return quizRepository.findById(id).orElse(null);
     }
 
     public Set<Question> findQuizzes(String quizName) {
@@ -80,7 +88,7 @@ public class QuizService {
     {
         quiz.setName(quizInput.getTitle());
 
-        Set<Question> questions = questionService.convertInputToQuestion(quizInput.getQuestions());
+        Set<Question> questions = questionService.convertInputToQuestion(quizInput.getQuestions(), quiz);
         quiz.setQuestions(questions);
 
         quizRepository.save(quiz);
@@ -89,5 +97,22 @@ public class QuizService {
     public List<Quiz> getAllQuizzes() 
     {
       return quizRepository.findAll(); 
+    }
+
+    
+    public QuizResult convertQuizToResult(Quiz quiz) 
+    {
+      if (quiz == null)
+      {
+        return null;
+      }
+      QuizResult quizResult = new QuizResult (
+        quiz.getName(),
+        quiz.getDescription(),
+        quiz.getLanguage(),
+        quiz.getQuestions(),
+        quiz.getReward()
+      );
+      return quizResult;
     }
 }

@@ -5,12 +5,13 @@ import quizStore from "../../../stores/quizStore";
 import { api } from "../../../api";
 import formStore from "../../../stores/quizFormStore";
 import { useState } from "react";
+import QuizInput from "../../../models/request/QuizInput";
 
 const NOTIFY_UPDATE_SUCCESS = "The quiz has been updated successfully.";
 const NOTIFY_UPDATE_FAILURE = "The quiz failed to get updated.";
 
 const QuizUpdateForm = () => {
-  const { currentQuiz } = quizStore();
+  const { quizId, currentQuiz } = quizStore();
   const { questionForms, addQuestionForm } = formStore();
   const [displayedNotification, setDisplayedNotification] = useState(<></>);
 
@@ -41,11 +42,18 @@ const QuizUpdateForm = () => {
    */
   const submitUpdates = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    
+    const quizInput: QuizInput = {
+      id:         Number(quizId),
+      title:      currentQuiz.title,
+      questions:  currentQuiz.questions,
+    }
+    console.log(quizInput.id)
     if (!currentQuiz || !currentQuiz.questions) {
       console.error("Invalid quiz data");
       return;
     }
-    mutate(currentQuiz);
+    mutate(quizInput);
   };
 
   return (
