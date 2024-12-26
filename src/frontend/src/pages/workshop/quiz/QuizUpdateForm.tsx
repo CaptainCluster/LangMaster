@@ -18,7 +18,6 @@ const QuizUpdateForm = () => {
   const { mutate } = useMutation({
     mutationFn: api.workshop.putQuiz,
     onSuccess: async () => {
-      console.log(currentQuiz);
       setDisplayedNotification(<Notification messageText={NOTIFY_UPDATE_SUCCESS}/>);
     },
     onError: (error) => {
@@ -62,7 +61,7 @@ const QuizUpdateForm = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6">
         {questionForms.map((form) => (
-          <div key={form.id} id={`question-form-${form.id}`}>
+          <div className="bg-white rounded-lg p-2" key={form.id} id={`question-form-${form.id}`}>
             <QuestionForm questionIndex={form.id} />
           </div>
         ))}

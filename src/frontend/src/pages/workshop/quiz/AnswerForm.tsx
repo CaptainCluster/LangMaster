@@ -29,6 +29,7 @@ const AnswerForm = ({ questionIndex, answerIndex }: any) => {
         <label htmlFor="is-correct">Is Correct</label>
         <input
           id="is-correct"
+          className="text-black"
           type="checkbox"
           onChange={(event) => setIsCorrect(event.target.checked)}
         ></input>
