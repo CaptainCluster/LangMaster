@@ -19,10 +19,10 @@ const AnswerForm = ({ questionIndex, answerIndex }: any) => {
 
   return (
     <div className="answer-form-element">
-      <form>
+      <form className="my-2">
         <input
           type="text"
-          className="text-black"
+          className="text-black w-1/2"
           placeholder="Answer Title"
           onChange={(event) => setAnswerTitle(event.target.value)}
         ></input>

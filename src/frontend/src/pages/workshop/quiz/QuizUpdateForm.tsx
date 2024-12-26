@@ -48,7 +48,6 @@ const QuizUpdateForm = () => {
       title:      currentQuiz.title,
       questions:  currentQuiz.questions,
     }
-    console.log(quizInput.id)
     if (!currentQuiz || !currentQuiz.questions) {
       console.error("Invalid quiz data");
       return;
@@ -58,16 +57,17 @@ const QuizUpdateForm = () => {
 
   return (
     <>
-      <p>Update Quiz</p>
-      <button onClick={createQuestion}>Create a Question</button>
-      <div>
+      <div className="flex justify-center">
+        <button onClick={createQuestion}>Create a Question</button>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-6">
         {questionForms.map((form) => (
           <div key={form.id} id={`question-form-${form.id}`}>
             <QuestionForm questionIndex={form.id} />
           </div>
         ))}
       </div>
-      <div>
+      <div className="flex justify-center">
         <button onClick={submitUpdates}>Submit Updates</button>
       </div>
       <>
