@@ -5,6 +5,8 @@ import useStore from "../../stores/store";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api";
+import QuizUpdateForm from "./quiz/QuizUpdateForm";
+import quizStore from "../../stores/quizStore";
 /**
  * Uses a GET request to confirm the existence of a quiz. 
  * 1) Exists         - The user can edit the quiz 
@@ -14,10 +16,12 @@ import { api } from "../../api";
 const EditPage = () => {
   const { updateCurrentPageName } = useStore(); // State management
   const quizId: string | undefined = useParams().id; 
-  
+  const { setQuizId } = quizStore();
+
   useEffect(() => {
     redirectForNoToken();
     updateCurrentPageName("Workshop");
+    setQuizId(Number(quizId));
   }, []);
    
   const { isLoading, isError, data, error } = useQuery({
@@ -34,14 +38,13 @@ const EditPage = () => {
   if (data === undefined) {
     return <span className="text-white">No data</span>;
   }
-  
-  console.log(data.data)
 
   return (
     <>
       <Header />
       <div className="flex justify-center items-center h-56">
         <p>{quizId}</p> 
+        <QuizUpdateForm />
       </div>
     </>
   )

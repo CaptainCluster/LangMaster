@@ -48,6 +48,11 @@ public class Question
         this.answers = answers;
     }
 
+    public void setQuiz(Quiz quiz)
+    {
+        this.quiz = quiz;
+    } 
+
     // Getters
     public long getId() 
     {
@@ -63,4 +68,9 @@ public class Question
     {
         return answers;
     }
+
+    public Quiz getQuiz()
+    {
+        return quiz;
+    } 
 }

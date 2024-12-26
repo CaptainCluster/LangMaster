@@ -88,7 +88,7 @@ public class QuizService {
     {
         quiz.setName(quizInput.getTitle());
 
-        Set<Question> questions = questionService.convertInputToQuestion(quizInput.getQuestions());
+        Set<Question> questions = questionService.convertInputToQuestion(quizInput.getQuestions(), quiz);
         quiz.setQuestions(questions);
 
         quizRepository.save(quiz);

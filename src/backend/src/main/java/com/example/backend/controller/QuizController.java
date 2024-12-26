@@ -78,14 +78,13 @@ public class QuizController
     {
         System.out.println(quizInput.getTitle());
         // Fetching the Quiz obj that matches the existing one
-        Quiz quiz = quizService.findQuiz(quizInput.getTitle());
+        Quiz quiz = quizService.findQuizById(quizInput.getId());
         if (quiz == null)
         {
             return ResponseEntity.badRequest().build();
         }
 
         quizService.putContentToQuiz(quiz, quizInput);
-
         return ResponseEntity.ok().build();
     }
 

@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from "axios";
 import OkResponse from "../models/response/OkResponse";
 import FailResponse from "../models/response/FailResponse";
 import QuizResponse from "../models/response/QuizResponse";
-import Quiz from "../models/quiz/Quiz";
 import Question from "../models/quiz/Question";
+import QuizInput from "../models/request/QuizInput";
 
 export async function postQuiz(
   quizName: string
@@ -24,7 +24,7 @@ export async function postQuiz(
 }
 
 export async function putQuiz(
-  quiz: Quiz
+  quiz: QuizInput
 ): Promise<AxiosResponse<OkResponse> | FailResponse> {
   try {
     const response = await axios.put<OkResponse>("/api/quiz/", quiz);
