@@ -11,6 +11,7 @@ import Learn from "./pages/learn/Learn";
 import "./index.css"
 import CreatePage from "./pages/workshop/CreatePage";
 import EditPage from "./pages/workshop/EditPage";
+import SearchPage from "./pages/workshop/SearchPage";
 
 function App() {
   const queryClient = new QueryClient();
@@ -31,7 +32,7 @@ function App() {
             <Route path="/workshop" element={<Workshop />} />
             <Route path="/workshop/create" element={<CreatePage />}/>
             <Route path="/workshop/edit/:id" element={<EditPage />}/>
-            <Route path="/workshop/search" />
+            <Route path="/workshop/search" element={<SearchPage />}/>
           </Routes>
         </QueryClientProvider>
       </Router>
