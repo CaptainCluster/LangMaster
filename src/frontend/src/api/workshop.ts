@@ -68,6 +68,20 @@ export async function getQuizById(
   }
 }
 
+export async function getAllQuizzes(): Promise<AxiosResponse<QuizResponse[]> | FailResponse> {
+  try {
+    const response = await axios.get<QuizResponse[]>(
+      "/api/quiz/all"
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+    return {
+      msg: "Failed to fetch the quizzes.",
+    }
+  }
+}
+
 export async function postQuestion(
   question: Question
 ): Promise<AxiosResponse<OkResponse> | FailResponse> {
