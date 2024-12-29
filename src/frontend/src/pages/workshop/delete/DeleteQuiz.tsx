@@ -6,8 +6,10 @@ const DeleteQuiz = ({ id }: { id: number }) => {
   const [clicked, setClicked]           = useState(false);
   
   const handleDeleteClick = () => {
-    setClicked(!clicked);
-    clicked ? setConfirmation(<ConfirmDelete id={id} />) : setConfirmation(<></>);
+    setClicked(previousClicked => {
+      !previousClicked ? setConfirmation(<ConfirmDelete id={id} />) : setConfirmation(<></>);
+      return !clicked;
+    })
   }
 
   return (
