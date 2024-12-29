@@ -82,6 +82,20 @@ export async function getAllQuizzes(): Promise<AxiosResponse<QuizResponse[]> | F
   }
 }
 
+export async function deleteQuiz(
+  quizId: number
+): Promise<AxiosResponse<OkResponse> | FailResponse> {
+  try {
+    const response = await axios.delete<OkResponse>(`/api/quiz/${quizId}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+    return {
+      msg: "Failed to create the quiz.",
+    };
+  }
+}
+
 export async function postQuestion(
   question: Question
 ): Promise<AxiosResponse<OkResponse> | FailResponse> {
@@ -99,3 +113,4 @@ export async function postQuestion(
     };
   }
 }
+

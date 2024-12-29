@@ -53,9 +53,6 @@ public class QuizController
         return ResponseEntity.ok(quiz.getId());
     }
 
-//    @GetMapping("/id/{id}")
-  //  public ResponseEntity<Quiz>
-  
     @GetMapping("/all")
     public ResponseEntity<List<Quiz>> getAllQuizzes() {
       return ResponseEntity.ok().body(quizService.getAllQuizzes());
@@ -88,10 +85,10 @@ public class QuizController
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/")
-    public ResponseEntity<Quiz> deleteQuiz(@RequestBody String name)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Quiz> deleteQuiz(@PathVariable long id)
     {
-        Quiz quiz = quizService.findQuiz(name);
+        Quiz quiz = quizService.findQuizById(id);
         if (quiz == null)
         {
             return ResponseEntity.badRequest().build();
