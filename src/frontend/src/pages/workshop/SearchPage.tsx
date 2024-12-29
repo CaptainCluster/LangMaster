@@ -1,12 +1,12 @@
-import { useQuery }         from "@tanstack/react-query";
-import { api }              from "../../api";
-import { useState }         from "react";
-import filterBySearchParam  from "../../utils/filterBySearchParam";
-import Header               from "../../components/Header";
-import useStore             from "../../stores/store";
-import { useEffect }        from "react";
+import { useQuery }           from "@tanstack/react-query";
+import { api }                from "../../api";
+import { useState }           from "react";
+import filterBySearchParam    from "../../utils/filterBySearchParam";
+import Header                 from "../../components/Header";
+import useStore               from "../../stores/store";
+import { useEffect }          from "react";
+import DeleteQuiz             from "./delete/DeleteQuiz";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
-import DeleteQuiz from "./quiz/DeleteQuiz";
 
 const SearchPage = () => {  
   const { updateCurrentPageName } = useStore(); // State management

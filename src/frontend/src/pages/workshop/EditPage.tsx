@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api";
 import QuizUpdateForm from "./quiz/QuizUpdateForm";
 import quizStore from "../../stores/quizStore";
+
 /**
  * Uses a GET request to confirm the existence of a quiz. 
  * 1) Exists         - The user can edit the quiz 
