@@ -1,15 +1,16 @@
-import { useQuery }         from "@tanstack/react-query";
-import { api }              from "../../api";
-import { useState }         from "react";
-import filterBySearchParam  from "../../utils/filterBySearchParam";
-import Header               from "../../components/Header";
-import useStore             from "../../stores/store";
-import { useEffect }        from "react";
+import { useQuery }           from "@tanstack/react-query";
+import { api }                from "../../api";
+import { useState }           from "react";
+import filterBySearchParam    from "../../utils/filterBySearchParam";
+import Header                 from "../../components/Header";
+import useStore               from "../../stores/store";
+import { useEffect }          from "react";
+import DeleteQuiz             from "./delete/DeleteQuiz";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
 
 const SearchPage = () => {  
   const { updateCurrentPageName } = useStore(); // State management
-  const [searchParam, setSearchParam] = useState("kakka");
+  const [searchParam, setSearchParam] = useState("");
 
   useEffect(() => {
     redirectForNoToken();
@@ -46,10 +47,14 @@ const SearchPage = () => {
       </div>
       <div className="content grid justify-center"> 
         {filteredData.map((dataEntry) => (
-          <div className="flex justify-between w-screen border border-white rounded p-2 my-1"
-            onClick={() => window.location.href = `/workshop/edit/${dataEntry.id}`}
-          >{dataEntry.name}
-            <button className="self-end text-red-800">DELETE</button>
+          <div className="flex justify-between w-screen border border-white rounded p-2 my-1">
+            <div
+              className="cursor-pointer hover:text-yellow-400 hover:font-bold"
+              onClick={() => window.location.href = `/workshop/edit/${dataEntry.id}`}
+            >
+              {dataEntry.name}
+            </div>
+            <DeleteQuiz id={dataEntry.id}/>
           </div>
         ))}
       </div>
