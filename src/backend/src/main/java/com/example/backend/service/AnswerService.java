@@ -9,7 +9,6 @@ import com.example.backend.result.AnswerResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -55,7 +54,7 @@ public class AnswerService
         return answerResults;
     }
 
-    public Set<Answer> convertInputsToAnswers(Set<AnswerInput> answerInputs)
+    public Set<Answer> convertInputsToAnswers(Set<AnswerInput> answerInputs, Question question)
     {
         Set<Answer> answers = new HashSet<>();
         for (AnswerInput answerInput : answerInputs)
@@ -63,6 +62,7 @@ public class AnswerService
             Answer newAnswer = new Answer();
             newAnswer.setTitle(answerInput.getTitle());
             newAnswer.setIsCorrect(answerInput.getIsCorrect());
+            newAnswer.setQuestion(question);
             answers.add(newAnswer);
         }
         return answers;

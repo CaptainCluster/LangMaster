@@ -73,14 +73,12 @@ public class QuizController
     @PutMapping("/")
     public ResponseEntity<Quiz> putQuiz(@RequestBody QuizInput quizInput)
     {
-        System.out.println(quizInput.getTitle());
         // Fetching the Quiz obj that matches the existing one
         Quiz quiz = quizService.findQuizById(quizInput.getId());
         if (quiz == null)
         {
             return ResponseEntity.badRequest().build();
         }
-
         quizService.putContentToQuiz(quiz, quizInput);
         return ResponseEntity.ok().build();
     }

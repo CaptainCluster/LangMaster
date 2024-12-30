@@ -1,8 +1,8 @@
 package com.example.backend.model;
 
 import jakarta.persistence.*;
-
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table
@@ -20,6 +20,7 @@ public class Quiz
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="language_id")
+    @JsonBackReference
     private Language language;
 
     // A written description to describe the quiz
