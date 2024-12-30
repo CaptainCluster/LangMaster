@@ -13,7 +13,6 @@
  */
 
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 import Question from "../models/quiz/Question";
 import Quiz from "../models/quiz/Quiz";
@@ -23,10 +22,12 @@ import AnswerState from "../models/state/AnswerState";
 
 interface QuizStoreState {
   quizId: number | undefined;
+  quizName: string;
   currentQuiz: Quiz;
 
   setQuizTitle: (title: string) => void;
   setQuizId: (id: number) => void;
+  setQuizName: (name: string) => void;
   updateQuiz: (quiz: Quiz) => void;
   processQuestionForQuiz: (questionState: QuestionState) => void;
   processAnswerForQuiz: (answerState: AnswerState) => void;
@@ -34,119 +35,118 @@ interface QuizStoreState {
 }
 
 const quizStore = create<QuizStoreState>()(
-  persist(
-    (set) => ({
-      quizId: undefined,
-      currentQuiz: { title: "", questions: [] },
+  (set) => ({
+    quizId: undefined,
+    quizName: "",
+    currentQuiz: { name: "", questions: [] },
 
-      setQuizTitle: (title: string) => {
-        set((state) => ({
-          ...state,
-          currentQuiz: {
-            ...state.currentQuiz,
-            title: title,
-          },
-        }));
-      },
+    setQuizTitle: (name: string) => {
+      set((state) => ({
+        ...state,
+        currentQuiz: {
+          ...state.currentQuiz,
+          name: name,
+        },
+      }));
+    },
 
-      setQuizId: (id: number) => set({ quizId: id }),
+    setQuizId: (id: number) => set({ quizId: id }),
 
-      // Updating the state of the currently stored quiz
-      updateQuiz: (quiz: Quiz) => {
-        set((state: QuizStoreState) => ({
-          ...state,
-          currentQuiz: quiz,
-        }));
-      },
+    setQuizName: (name: string) => set({ quizName: name }),
 
-      /**
+    // Updating the state of the currently stored quiz
+    updateQuiz: (quiz: Quiz) => {
+      set((state: QuizStoreState) => ({
+        ...state,
+        currentQuiz: quiz,
+      }));
+    },
+
+    /**
        * An update to an existing Question. Uses its index to pinpoint
        * which object to change and uses the title in the QuestionState
        * object to overwrite the former title.
        */
-      processQuestionForQuiz: (questionState: QuestionState) => {
-        set((state: QuizStoreState) => {
-          // If the question does not exist, it is pushed into the questions array
-          // of the Quiz object.
-          if (state.currentQuiz.questions[questionState.index] === undefined) {
-            const newQuestion: Question = {
-              title: questionState.title,
-              answers: [],
-            };
-            return {
-              currentQuiz: {
-                ...state.currentQuiz,
-                questions: [...state.currentQuiz.questions, newQuestion],
-              },
-            };
-          }
-
-          // If the Question exists, an index is used to coordinate which object
-          // in the questions array has its data overwritten.
+    processQuestionForQuiz: (questionState: QuestionState) => {
+      set((state: QuizStoreState) => {
+        // If the question does not exist, it is pushed into the questions array
+        // of the Quiz object.
+        if (state.currentQuiz.questions[questionState.index] === undefined) {
+          const newQuestion: Question = {
+            title: questionState.title,
+            answers: [],
+          };
           return {
             currentQuiz: {
               ...state.currentQuiz,
-              questions: state.currentQuiz.questions.map(
-                (questionEntry, index) =>
-                  index === questionState.index
-                    ? { ...questionEntry, title: questionState.title }
-                    : questionEntry
-              ),
+              questions: [...state.currentQuiz.questions, newQuestion],
             },
           };
-        });
-      },
+        }
 
-      processAnswerForQuiz: (answerState: AnswerState) => {
-        set((state: QuizStoreState) => {
-          const question =
-            state.currentQuiz.questions[answerState.questionIndex];
-          if (!question) {
-            return state;
-          }
-          const answer = question.answers[answerState.answerIndex];
-          if (!answer) {
-            question.answers[answerState.answerIndex] = {
-              title: answerState.title,
-              isCorrect: answerState.isCorrect,
-            };
-            return state;
-          }
+        // If the Question exists, an index is used to coordinate which object
+        // in the questions array has its data overwritten.
+        return {
+          currentQuiz: {
+            ...state.currentQuiz,
+            questions: state.currentQuiz.questions.map(
+              (questionEntry, index) =>
+                index === questionState.index
+                  ? { ...questionEntry, title: questionState.title }
+                  : questionEntry
+            ),
+          },
+        };
+      });
+    },
 
-          return {
-            currentQuiz: {
-              ...state.currentQuiz,
-              questions: state.currentQuiz.questions.map((q, i) =>
-                i === answerState.questionIndex
-                  ? {
-                      ...q,
-                      answers: q.answers.map((a, j) =>
-                        j === answerState.answerIndex
-                          ? {
-                              ...a,
-                              title: answerState.title,
-                              isCorrect: answerState.isCorrect,
-                            }
-                          : a
-                      ),
-                    }
-                  : q
-              ),
-            },
+    processAnswerForQuiz: (answerState: AnswerState) => {
+      set((state: QuizStoreState) => {
+        const question =
+          state.currentQuiz.questions[answerState.questionIndex];
+        if (!question) {
+          return state;
+        }
+        const answer = question.answers[answerState.answerIndex];
+        if (!answer) {
+          question.answers[answerState.answerIndex] = {
+            title: answerState.title,
+            isCorrect: answerState.isCorrect,
           };
-        });
-      },
-      resetStore: () => {
-        set(() => ({
-          quizId: undefined,
-          currentQuiz: { title: "", questions: [] },
-        }));
-      },
-    }),
-    {
-      name: "quiz-storage",
-    }
-  )
+          return state;
+        }
+
+        return {
+          currentQuiz: {
+            ...state.currentQuiz,
+            questions: state.currentQuiz.questions.map((q, i) =>
+              i === answerState.questionIndex
+                ? {
+                  ...q,
+                  answers: q.answers.map((a, j) =>
+                    j === answerState.answerIndex
+                      ? {
+                        ...a,
+                        title: answerState.title,
+                        isCorrect: answerState.isCorrect,
+                      }
+                      : a
+                  ),
+                }
+                : q
+            ),
+          },
+        };
+      });
+    },
+    resetStore: () => {
+      set(() => ({
+        quizId: undefined,
+        quizName: undefined,
+        currentQuiz: { name: "", questions: [] },
+      }));
+    },
+  }),
 );
 
 export default quizStore;

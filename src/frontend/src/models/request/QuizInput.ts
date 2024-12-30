@@ -2,6 +2,6 @@ import Question from "../quiz/Question";
 
 export default interface QuizInput {
   id:         number;
-  title:      String;
+  name:      String;
   questions:  Question[];
 }

@@ -18,7 +18,7 @@ const EditPage = () => {
   const { updateCurrentPageName } = useStore(); // State management
   const quizId: string | undefined = useParams().id; 
   const { setQuizId } = quizStore();
-
+  
   useEffect(() => {
     redirectForNoToken();
     updateCurrentPageName("Workshop");

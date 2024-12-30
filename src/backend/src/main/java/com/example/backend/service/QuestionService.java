@@ -41,7 +41,14 @@ public class QuestionService
             newQuestion.setTitle(questionInput.getTitle());
             newQuestion.setQuiz(quiz);      
 
-            Set<Answer> answers = answerService.convertInputsToAnswers(questionInput.getAnswers());
+            Set<Answer> answers = answerService.convertInputsToAnswers(questionInput.getAnswers(), newQuestion);
+            
+            System.out.println("Testing answers...");
+            for (Answer answer : answers)
+            {
+              System.out.println(answer.getTitle());
+            }
+
             newQuestion.setAnswers(answers);
 
             questions.add(newQuestion);

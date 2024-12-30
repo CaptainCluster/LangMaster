@@ -34,11 +34,13 @@ public class Answer
     }
 
     // Setters
-    public void setId(long id) {
+    public void setId(long id) 
+    {
         this.id = id;
     }
 
-    public void setTitle(String content) {
+    public void setTitle(String content) 
+    {
         this.title = content;
     }
 
@@ -46,16 +48,29 @@ public class Answer
         this.isCorrect = isCorrect;
     }
 
+    public void setQuestion(Question question)
+    {
+      this.question = question;
+    }
+
     // Getters
-    public long getId() {
+    public long getId() 
+    {
         return id;
     }
 
-    public String getTitle() {
+    public String getTitle() 
+    {
         return title;
     }
 
-    public boolean getIsCorrect() {
+    public boolean getIsCorrect() 
+    {
         return isCorrect;
+    }
+
+    public Question getQuestion()
+    {
+        return question;
     }
 }

@@ -30,10 +30,7 @@ public class Question
     private Set<Answer> answers;
 
     // Constructors
-    public Question() 
-    {
-        this.answers = new HashSet<>();
-    }
+    public Question() {}
 
     // Setters
     public void setId(long id) 
