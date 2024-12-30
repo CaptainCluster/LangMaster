@@ -12,6 +12,7 @@ import "./index.css"
 import CreatePage from "./pages/workshop/CreatePage";
 import EditPage from "./pages/workshop/EditPage";
 import SearchPage from "./pages/workshop/SearchPage";
+import QuizContainer from "./pages/learn/QuizContainer";
 
 function App() {
   const queryClient = new QueryClient();
@@ -27,7 +28,9 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/learn" element={<Learn />} />
-            <Route path="/quiz/:id" />
+
+
+            <Route path="/quiz/:id" element={<QuizContainer />}/>
             
             <Route path="/workshop" element={<Workshop />} />
             <Route path="/workshop/create" element={<CreatePage />}/>

@@ -21,7 +21,6 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
       index: questionIndex,
       title: questionTitle,
     };
-
     processQuestionForQuiz(questionState);
   }, [questionTitle, questionIndex, processQuestionForQuiz]);
 

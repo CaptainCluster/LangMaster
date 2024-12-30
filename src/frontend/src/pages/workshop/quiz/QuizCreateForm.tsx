@@ -1,15 +1,10 @@
-/**
- * @Component QuizCreate
- */
-
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { api } from "../../../api";
 import quizStore from "../../../stores/quizStore";
 
 const QuizCreateForm = () => {
-  const [quizName, setQuizName]               = useState("");
-
+  const [quizName, setQuizName]     = useState("");
   const { setQuizTitle, setQuizId } = quizStore();
 
   const { mutate } = useMutation({
