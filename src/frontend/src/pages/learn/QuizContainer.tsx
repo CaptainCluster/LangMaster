@@ -22,7 +22,6 @@ const QuizContainer = () => {
     return <span className="text-white">No data</span>;
   }
 
-
   return (
     <div className="grid h-screen">
       <div id="quiz-header" className="text-center">
@@ -30,7 +29,7 @@ const QuizContainer = () => {
       </div>
       <div id="content">
         <ProgressIndicator questionAmount={data.data.questions.length}/>
-        <QuestionDisplay />
+        <QuestionDisplay questionData={data.data.questions[0]}/>
       </div>
       <div id="quiz-footer" className="text-center">
         LangMaster
