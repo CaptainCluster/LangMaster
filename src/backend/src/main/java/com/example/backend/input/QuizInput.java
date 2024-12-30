@@ -5,7 +5,7 @@ import java.util.Set;
 public class QuizInput
 {
     private long id;
-    private String title;
+    private String name;
     private Set<QuestionInput> questions;
 
     public long getId()
@@ -13,9 +13,9 @@ public class QuizInput
         return id;
     } 
     
-    public String getTitle()
+    public String getName()
     {
-        return title;
+        return name;
     }
 
     public Set<QuestionInput> getQuestions()
@@ -28,9 +28,9 @@ public class QuizInput
         this.id = id;
     }
 
-    public void setTitle(String title)
+    public void setName(String name)
     {
-        this.title = title;
+        this.name = name;
     }
 
     public void setQuestions(Set<QuestionInput> questions)

@@ -7,7 +7,6 @@ import com.example.backend.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Optional;
 import java.util.List;
 
 @RestController
@@ -53,6 +52,17 @@ public class QuizController
         return ResponseEntity.ok(quiz.getId());
     }
 
+    @GetMapping("/name/{id}") 
+    public ResponseEntity<String> getQuizNameById(@PathVariable long id)
+    {
+      Quiz quiz = quizService.findQuizById(id);
+      if (quiz == null)
+      {
+          return ResponseEntity.badRequest().build();
+      }
+      return ResponseEntity.ok(quiz.getName()); 
+    }
+    
     @GetMapping("/all")
     public ResponseEntity<List<Quiz>> getAllQuizzes() {
       return ResponseEntity.ok().body(quizService.getAllQuizzes());

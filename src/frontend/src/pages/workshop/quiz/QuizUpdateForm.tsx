@@ -1,6 +1,6 @@
 import QuestionForm from "./QuestionForm";
 import Notification from "../../../components/Notification";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import quizStore from "../../../stores/quizStore";
 import { api } from "../../../api";
 import formStore from "../../../stores/quizFormStore";
@@ -39,14 +39,25 @@ const QuizUpdateForm = () => {
    * it is ready to be sent over to the server in a POST request,
    * effectively updating a quiz with all the implemented changes.
    */
-  const submitUpdates = (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const submitUpdates = async  (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();   
+    const response = await api.workshop.getQuizNameById(Number(quizId));
     
+    if (!response) {
+      console.error("No name for the quiz was found!");
+      return;
+    }
+    if (!response?.data) {
+      console.error("No name for the quiz was found!");
+      return;
+    }
+
     const quizInput: QuizInput = {
       id:         Number(quizId),
-      name:      currentQuiz.name,
+      name:       response.data,
       questions:  currentQuiz.questions,
     }
+
     if (!currentQuiz || !currentQuiz.questions) {
       console.error("Invalid quiz data");
       return;

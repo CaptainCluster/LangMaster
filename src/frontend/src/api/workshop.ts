@@ -68,6 +68,22 @@ export async function getQuizById(
   }
 }
 
+export async function getQuizNameById(
+  quizId: number
+): Promise<AxiosResponse<string> | FailResponse> {
+  try {
+    const response = await axios.get<string>(
+      `/api/quiz/name/${quizId}`
+    );
+    return response;
+  } catch (error) {
+    console.error(error);
+    return {
+      msg: "Failed to fetch the quiz.",
+    }
+  }
+}
+
 export async function getAllQuizzes(): Promise<AxiosResponse<QuizResponse[]> | FailResponse> {
   try {
     const response = await axios.get<QuizResponse[]>(

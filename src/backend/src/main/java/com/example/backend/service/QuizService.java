@@ -86,7 +86,7 @@ public class QuizService {
 
     public void putContentToQuiz(Quiz quiz, QuizInput quizInput)
     {
-        quiz.setName(quizInput.getTitle());
+        quiz.setName(quizInput.getName());
         
         Set<Question> questions = questionService.convertInputToQuestion(quizInput.getQuestions(), quiz);
         quiz.setQuestions(questions);

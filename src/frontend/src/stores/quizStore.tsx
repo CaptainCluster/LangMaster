@@ -22,10 +22,12 @@ import AnswerState from "../models/state/AnswerState";
 
 interface QuizStoreState {
   quizId: number | undefined;
+  quizName: string;
   currentQuiz: Quiz;
 
   setQuizTitle: (title: string) => void;
   setQuizId: (id: number) => void;
+  setQuizName: (name: string) => void;
   updateQuiz: (quiz: Quiz) => void;
   processQuestionForQuiz: (questionState: QuestionState) => void;
   processAnswerForQuiz: (answerState: AnswerState) => void;
@@ -35,6 +37,7 @@ interface QuizStoreState {
 const quizStore = create<QuizStoreState>()(
   (set) => ({
     quizId: undefined,
+    quizName: "",
     currentQuiz: { name: "", questions: [] },
 
     setQuizTitle: (name: string) => {
@@ -48,6 +51,8 @@ const quizStore = create<QuizStoreState>()(
     },
 
     setQuizId: (id: number) => set({ quizId: id }),
+
+    setQuizName: (name: string) => set({ quizName: name }),
 
     // Updating the state of the currently stored quiz
     updateQuiz: (quiz: Quiz) => {
@@ -137,6 +142,7 @@ const quizStore = create<QuizStoreState>()(
     resetStore: () => {
       set(() => ({
         quizId: undefined,
+        quizName: undefined,
         currentQuiz: { name: "", questions: [] },
       }));
     },

@@ -4,8 +4,8 @@ import { api } from "../../../api";
 import quizStore from "../../../stores/quizStore";
 
 const QuizCreateForm = () => {
-  const [quizName, setQuizName]     = useState("");
-  const { setQuizTitle, setQuizId } = quizStore();
+  const [quizNameForm, setQuizNameForm]     = useState("");
+  const { setQuizTitle, setQuizName, setQuizId } = quizStore();
 
   const { mutate } = useMutation({
     mutationFn: api.workshop.postQuiz,
@@ -17,7 +17,7 @@ const QuizCreateForm = () => {
      */
     onSuccess: async () => {
       try {
-        const quizIdResponse = await api.workshop.getQuizId(quizName);
+        const quizIdResponse = await api.workshop.getQuizId(quizNameForm);
 
         /*
          * Scenarios
@@ -29,7 +29,8 @@ const QuizCreateForm = () => {
          * 3) The rest     - In other scenarios, an unexpected response is printed.
          */
         if (typeof quizIdResponse === "object" && "data" in quizIdResponse) {
-          setQuizTitle(quizName);
+          setQuizTitle(quizNameForm);
+          setQuizName(quizNameForm);
           setQuizId(quizIdResponse.data);
           window.location.href = `/workshop/edit/${quizIdResponse.data}`
         } else if ("msg" in quizIdResponse) {
@@ -45,7 +46,7 @@ const QuizCreateForm = () => {
 
   const submitCreation = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    mutate(quizName);
+    mutate(quizNameForm);
   };
 
   return (
@@ -54,7 +55,7 @@ const QuizCreateForm = () => {
         id="input-quiz-name"
         className="ml-5 text-black"
         type="text"
-        onChange={(event) => setQuizName(event.target.value)}
+        onChange={(event) => setQuizNameForm(event.target.value)}
       ></input>
       <input className="px-3" type="submit" value="Create Quiz"></input>
     </form>
