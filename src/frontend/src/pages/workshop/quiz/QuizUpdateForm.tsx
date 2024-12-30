@@ -44,7 +44,7 @@ const QuizUpdateForm = () => {
     
     const quizInput: QuizInput = {
       id:         Number(quizId),
-      title:      currentQuiz.title,
+      name:      currentQuiz.name,
       questions:  currentQuiz.questions,
     }
     if (!currentQuiz || !currentQuiz.questions) {

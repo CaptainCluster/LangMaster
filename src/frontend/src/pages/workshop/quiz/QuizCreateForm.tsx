@@ -29,7 +29,6 @@ const QuizCreateForm = () => {
          * 3) The rest     - In other scenarios, an unexpected response is printed.
          */
         if (typeof quizIdResponse === "object" && "data" in quizIdResponse) {
-          console.log(quizIdResponse.data)
           setQuizTitle(quizName);
           setQuizId(quizIdResponse.data);
           window.location.href = `/workshop/edit/${quizIdResponse.data}`

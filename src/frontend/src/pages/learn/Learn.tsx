@@ -13,6 +13,7 @@ const Learn = () => {
     redirectForNoToken();
     updateCurrentPageName("Learn");
   }, []);
+
   return (
     <>
       <Header />

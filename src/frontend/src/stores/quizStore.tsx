@@ -35,14 +35,14 @@ interface QuizStoreState {
 const quizStore = create<QuizStoreState>()(
   (set) => ({
     quizId: undefined,
-    currentQuiz: { title: "", questions: [] },
+    currentQuiz: { name: "", questions: [] },
 
-    setQuizTitle: (title: string) => {
+    setQuizTitle: (name: string) => {
       set((state) => ({
         ...state,
         currentQuiz: {
           ...state.currentQuiz,
-          title: title,
+          name: name,
         },
       }));
     },
@@ -137,7 +137,7 @@ const quizStore = create<QuizStoreState>()(
     resetStore: () => {
       set(() => ({
         quizId: undefined,
-        currentQuiz: { title: "", questions: [] },
+        currentQuiz: { name: "", questions: [] },
       }));
     },
   }),

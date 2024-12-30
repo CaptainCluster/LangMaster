@@ -20,8 +20,13 @@ const QuizContainer = () => {
     return <span className="text-white">No data</span>;
   }
 
+  console.log(data.data)
+
   return (
     <div>
+      <div>
+        {data.data.name}
+      </div>
       {quizId} 
     </div>
   );

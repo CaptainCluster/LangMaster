@@ -17,10 +17,9 @@ import quizStore from "../../stores/quizStore";
 const EditPage = () => {
   const { updateCurrentPageName } = useStore(); // State management
   const quizId: string | undefined = useParams().id; 
-  const { setQuizId, currentQuiz } = quizStore();
+  const { setQuizId } = quizStore();
   
   useEffect(() => {
-    console.log(currentQuiz)
     redirectForNoToken();
     updateCurrentPageName("Workshop");
     setQuizId(Number(quizId));
