@@ -45,7 +45,7 @@ const SearchPage = () => {
           onChange={(event) => setSearchParam(event.target.value)}>
         </input>
       </div>
-      <SearchPanel searchData={filteredData}/>
+      <SearchPanel searchData={filteredData} urlInitialPart={"/workshop/edit/"}/>
     </div>
   );
 }
