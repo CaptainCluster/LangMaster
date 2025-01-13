@@ -3,10 +3,10 @@ import { api }                from "../../api";
 import { useState }           from "react";
 import filterBySearchParam    from "../../utils/filterBySearchParam";
 import Header                 from "../../components/Header";
+import SearchPanel            from "../../components/search/SearchPanel";
 import useStore               from "../../stores/store";
 import { useEffect }          from "react";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
-import SearchPanel from "./search/SearchPanel";
 
 const SearchPage = () => {  
   const { updateCurrentPageName } = useStore(); 

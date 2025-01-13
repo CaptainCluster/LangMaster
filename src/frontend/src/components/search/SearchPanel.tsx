@@ -1,4 +1,4 @@
-import DeleteQuiz from "../delete/DeleteQuiz";
+import DeleteQuiz from "../../pages/workshop/delete/DeleteQuiz";
 
 const SearchPanel = ({ searchData, urlInitialPart }) => {
   return (
