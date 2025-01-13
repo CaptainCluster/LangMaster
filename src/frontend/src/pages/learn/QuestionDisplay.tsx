@@ -8,7 +8,7 @@ const QuestionDisplay = ({ questionData }: { questionData: Question }) => {
       </h4>
       <div className="grid grid-cols-2 md:grid-cols-3">
         {questionData.answers.map((answer) => (
-          <div className="text-center my-3">
+          <div className="text-center my-3 border border-white rounded-lg p-5 mx-2">
             {answer.title}
           </div>
         ))}

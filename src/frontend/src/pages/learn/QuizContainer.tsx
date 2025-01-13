@@ -24,15 +24,15 @@ const QuizContainer = () => {
 
   return (
     <div className="grid h-screen">
-      <div id="quiz-header" className="text-center">
-        <h2>{data.data.name}</h2>
+      <div id="quiz-header" className="text-center border border-white h-1/2">
+        <h2 className="font-bold">{data.data.name}</h2>
       </div>
-      <div id="content">
+      <div id="content border border-white">
         <ProgressIndicator questionAmount={data.data.questions.length}/>
         <QuestionDisplay questionData={data.data.questions[0]}/>
       </div>
-      <div id="quiz-footer" className="text-center">
-        LangMaster
+      <div id="quiz-footer" className="text-center border self-end border-white h-1/2">
+        <h2 className="font-bold">{LangMaster}</h2>
       </div>
     </div>
   );

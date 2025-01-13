@@ -1,7 +1,6 @@
 import useStore from "../../stores/store";
 import { useEffect } from "react";
 import Header from "../../components/Header";
-import ListQuiz from "../../components/learn/ListQuiz"; 
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
 import SearchPanel from "../../components/search/SearchPanel";
 import { useQuery } from "@tanstack/react-query";
