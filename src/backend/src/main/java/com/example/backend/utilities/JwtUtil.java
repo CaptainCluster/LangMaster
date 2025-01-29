@@ -16,7 +16,7 @@ public class JwtUtil
 {
     String secretKey = Dotenv.load().get("JWT_SECRET");
 
-    public static final int EXPIRATION_TIME = 3600;
+    public static final int EXPIRATION_TIME = 60 * 60 * 1000;
 
     /**
      * Creates a JWT token for the authenticated user.
@@ -26,7 +26,7 @@ public class JwtUtil
      */
     public String createJwt(String username)
     {
-        Date now = new Date();
+        Date now = new Date(System.currentTimeMillis());
         Date exp = new Date(System.currentTimeMillis() + EXPIRATION_TIME);
 
         Map<String, Object> claims = new HashMap<>();
