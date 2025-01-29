@@ -53,3 +53,26 @@ export async function loginUser(
     };
   }
 }
+
+export async function checkTokenExpiration(): Promise<AxiosResponse<OkResponse> | FailResponse> {
+  try {
+    const token = localStorage.getItem("auth_token");
+    if (token?.length === 0) {
+      console.error("No token found!");
+      return {
+        msg: "No token found!"
+      };
+    }
+    const response = await axios.post<OkResponse> (
+      "/api/authenticate/",
+      token
+    );
+    return response;
+  } catch (error) {
+    localStorage.removeItem("auth_token");
+    localStorage.removeItem("auth_username");
+    return {
+      msg: "Token either expired or some other error occurred.",
+    }
+  }
+}

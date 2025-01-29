@@ -5,12 +5,14 @@ import { redirectForNoToken } from "../../utils/checkLocalStorage";
 import NewsPanel from "./NewsPanel";
 import SuggestionsPanel from "./SuggestionsPanel";
 import LinksPanel from "./LinksPanel";
+import { checkTokenExpiration } from "../../api/authenticate";
 
 const Home = () => {
   const { updateCurrentPageName } = useStore();
   const [welcomeMessage, setWelcomeMessage] = useState<String | null>("");
 
   useEffect(() => {
+    checkTokenExpiration();
     redirectForNoToken();
     if (localStorage.getItem("auth_username")) {
       setWelcomeMessage(`Welcome, ${localStorage.getItem("auth_username")}!`);
