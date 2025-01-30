@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import AnswerForm from "./AnswerForm";
 import quizStore from "../../../stores/quizStore";
-import QuestionState from "../../../models/state/QuestionState";
+import QuestionState from "../../../types/state/QuestionState";
 
 interface QuestionFormProps {
   questionIndex: number;
 }
 
 const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
- 
-  const [activeAnswerForms, setActiveAnswerForms] = useState<JSX.Element[]>([]);  // An array of active form elements 
-  const [formCount, setFormCount] = useState(0);                                  // The quantity of forms 
-  const [questionTitle, setQuestionTitle] = useState("");                         // The title of the current question 
-  const { processQuestionForQuiz } = quizStore();                                 // A function from a Zustand storage
+  const [activeAnswerForms, setActiveAnswerForms] = useState<JSX.Element[]>([]); // An array of active form elements
+  const [formCount, setFormCount] = useState(0); // The quantity of forms
+  const [questionTitle, setQuestionTitle] = useState(""); // The title of the current question
+  const { processQuestionForQuiz } = quizStore(); // A function from a Zustand storage
 
   /// Triggering a call for processQuestionForQuiz() everytime the question experiences
   /// a change.
@@ -46,7 +45,9 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ questionIndex }) => {
           onChange={(event) => setQuestionTitle(event.target.value)}
         />
       </form>
-      <button className="text-black" onClick={createAnswerForm}>Create Answer</button>
+      <button className="text-black" onClick={createAnswerForm}>
+        Create Answer
+      </button>
       {activeAnswerForms}
     </>
   );

@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
-import UserCredentials from "../models/UserCredentials";
-import LoginResponse from "../models/response/LoginResponse";
-import FailResponse from "../models/response/FailResponse";
-import OkResponse from "../models/response/OkResponse";
+import UserCredentials from "../types/UserCredentials";
+import LoginResponse from "../types/response/LoginResponse";
+import FailResponse from "../types/response/FailResponse";
+import OkResponse from "../types/response/OkResponse";
 
 /**
  * a POST request
@@ -54,25 +54,24 @@ export async function loginUser(
   }
 }
 
-export async function checkTokenExpiration(): Promise<AxiosResponse<OkResponse> | FailResponse> {
+export async function checkTokenExpiration(): Promise<
+  AxiosResponse<OkResponse> | FailResponse
+> {
   try {
     const token = localStorage.getItem("auth_token");
     if (token?.length === 0) {
       console.error("No token found!");
       return {
-        msg: "No token found!"
+        msg: "No token found!",
       };
     }
-    const response = await axios.post<OkResponse> (
-      "/api/authenticate/",
-      token
-    );
+    const response = await axios.post<OkResponse>("/api/authenticate/", token);
     return response;
   } catch (error) {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("auth_username");
     return {
       msg: "Token either expired or some other error occurred.",
-    }
+    };
   }
 }
