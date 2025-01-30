@@ -1,12 +1,11 @@
-import NotificationInterface from "../models/NotificationInterface";
+import NotificationInterface from "../types/NotificationInterface";
 
 const Notification = ({ messageText }: NotificationInterface) => {
-  return (<>
-    <div className="application-notification">
-      {messageText}
-    </div>
-  </>)
-}
-
+  return (
+    <>
+      <div className="application-notification">{messageText}</div>
+    </>
+  );
+};
 
 export default Notification;

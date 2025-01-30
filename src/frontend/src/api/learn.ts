@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios"
-import FailResponse from "../models/response/FailResponse"
+import FailResponse from "../types/response/FailResponse"
 
 export async const getQuizzes(): Promise<AxiosResponse<> | FailResponse> => {
   

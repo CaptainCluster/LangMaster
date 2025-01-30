@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import quizStore from "../../../stores/quizStore";
-import AnswerState from "../../../models/state/AnswerState";
+import AnswerState from "../../../types/state/AnswerState";
 
 const AnswerForm = ({ questionIndex, answerIndex }: any) => {
   const [answerTitle, setAnswerTitle] = useState("");

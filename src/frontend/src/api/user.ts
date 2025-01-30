@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import ProfileResponse from "../models/response/ProfileResponse";
-import FailResponse from "../models/response/FailResponse";
+import ProfileResponse from "../types/response/ProfileResponse";
+import FailResponse from "../types/response/FailResponse";
 
 /**
  * Fetches profile data based on the current user. The data is based

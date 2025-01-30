@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import OkResponse from "../models/response/OkResponse";
-import FailResponse from "../models/response/FailResponse";
-import QuizResponse from "../models/response/QuizResponse";
-import Question from "../models/quiz/Question";
-import QuizInput from "../models/request/QuizInput";
+import OkResponse from "../types/response/OkResponse";
+import FailResponse from "../types/response/FailResponse";
+import QuizResponse from "../types/response/QuizResponse";
+import Question from "../types/quiz/Question";
+import QuizInput from "../types/request/QuizInput";
 
 export async function postQuiz(
   quizName: string
@@ -56,15 +56,13 @@ export async function getQuizById(
   quizId: number
 ): Promise<AxiosResponse<QuizResponse> | FailResponse> {
   try {
-    const response = await axios.get<QuizResponse>(
-      `/api/quiz/getid/${quizId}`
-    );
+    const response = await axios.get<QuizResponse>(`/api/quiz/getid/${quizId}`);
     return response;
   } catch (error) {
     console.error(error);
     return {
       msg: "Failed to fetch the quiz.",
-    }
+    };
   }
 }
 
@@ -72,29 +70,27 @@ export async function getQuizNameById(
   quizId: number
 ): Promise<AxiosResponse<string> | FailResponse> {
   try {
-    const response = await axios.get<string>(
-      `/api/quiz/name/${quizId}`
-    );
+    const response = await axios.get<string>(`/api/quiz/name/${quizId}`);
     return response;
   } catch (error) {
     console.error(error);
     return {
       msg: "Failed to fetch the quiz.",
-    }
+    };
   }
 }
 
-export async function getAllQuizzes(): Promise<AxiosResponse<QuizResponse[]> | FailResponse> {
+export async function getAllQuizzes(): Promise<
+  AxiosResponse<QuizResponse[]> | FailResponse
+> {
   try {
-    const response = await axios.get<QuizResponse[]>(
-      "/api/quiz/all"
-    );
+    const response = await axios.get<QuizResponse[]>("/api/quiz/all");
     return response;
   } catch (error) {
     console.error(error);
     return {
       msg: "Failed to fetch the quizzes.",
-    }
+    };
   }
 }
 
@@ -129,4 +125,3 @@ export async function postQuestion(
     };
   }
 }
-
