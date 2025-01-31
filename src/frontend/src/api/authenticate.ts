@@ -3,6 +3,7 @@ import UserCredentials from "../types/UserCredentials";
 import LoginResponse from "../types/response/LoginResponse";
 import FailResponse from "../types/response/FailResponse";
 import OkResponse from "../types/response/OkResponse";
+import removeStorageItems from "../utils/removeStorageItems";
 
 /**
  * a POST request
@@ -68,8 +69,7 @@ export async function checkTokenExpiration(): Promise<
     const response = await axios.post<OkResponse>("/api/authenticate/", token);
     return response;
   } catch (error) {
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("auth_username");
+    removeStorageItems();
     return {
       msg: "Token either expired or some other error occurred.",
     };
