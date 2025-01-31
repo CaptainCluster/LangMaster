@@ -11,7 +11,7 @@ const QuizContainer = () => {
     queryKey: ["news"],
     queryFn: () => getQuizById(Number(quizId)),
   });
-  
+
   if (isLoading) {
     return <span className="text-white">Loading...</span>;
   }
@@ -28,14 +28,14 @@ const QuizContainer = () => {
         <h2>{data.data.name}</h2>
       </div>
       <div id="content">
-        <ProgressIndicator questionAmount={data.data.questions.length}/>
-        <QuestionDisplay questionData={data.data.questions[0]}/>
+        <ProgressIndicator questionAmount={data.data.questions.length} />
+        <QuestionDisplay questionData={data.data.questions[0]} />
       </div>
       <div id="quiz-footer" className="text-center">
         LangMaster
       </div>
     </div>
   );
-}
+};
 
 export default QuizContainer;
