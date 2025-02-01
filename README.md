@@ -18,8 +18,9 @@ _LangMaster_ is a full-stack language learning application that provides an intu
 
 Ensure that you hav _pnpm_ installed. The front end dependencies must be installed. After this, the client-side can be run.
 
-_pnpm i_
-_pnpm dev_
+> _pnpm i_
+
+> _pnpm dev_
 
 **Database**
 
