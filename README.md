@@ -49,7 +49,7 @@ installed.
 
 After all the mentioned steps have been completed, enter the following command:
 
-> gradle bootRun
+> *gradle bootRun*
 
 Now the LangMaster full-stack application should be running.
 
