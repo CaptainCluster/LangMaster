@@ -8,7 +8,6 @@ import Error404 from "./pages/Error404";
 import Profile from "./pages/profile/Profile";
 import Workshop from "./pages/workshop/Workshop";
 import Learn from "./pages/learn/Learn";
-import "./index.css"
 import CreatePage from "./pages/workshop/CreatePage";
 import EditPage from "./pages/workshop/EditPage";
 import SearchPage from "./pages/workshop/SearchPage";
