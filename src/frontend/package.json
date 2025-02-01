@@ -15,12 +15,14 @@
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.3",
+    "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "postcss": ">=8.4.31",
+    "nth-check": ">=2.0.1"
   },
   "devDependencies": {
-    "@tanstack/react-query": "^5.65.1",
+    "@tanstack/react-query": "^5.66.0",
     "@types/axios": "^0.14.4",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
@@ -32,7 +34,9 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.18",
     "typescript": "^5.7.3",
-    "vite": "^6.0.11"
+    "vite": "^6.0.11",
+    "postcss": ">=8.4.31",
+    "nth-check": ">=2.0.1"
   },
   "proxy": "http://localhost:8080"
 }
