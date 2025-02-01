@@ -4,10 +4,6 @@
 
 _LangMaster_ is a full-stack language learning application that provides an intuitive way to learn languages.
 
-## Instructions
-
-
-
 ## Technologies Used
 
 **Front-End** - React (TypeScript), pnpm
@@ -15,6 +11,41 @@ _LangMaster_ is a full-stack language learning application that provides an intu
 **Back-End** - Spring Boot (Java)
 
 **DBMS** - PostgreSQL
+
+## Instructions for setup
+
+**Front End**
+
+The front end dependencies must be installed. After this, the client-side can be run.
+
+*pnpm i*
+*pnpm dev*
+
+** Database **
+
+In order to make the back end function, the database must function properly. In order to 
+do this, the following have to be put in a .env file:
+
+DB_HOST: This could be "localhost", for instance
+DB_PORT: The port number your database runs on
+DB_NAME: The name of the database you have created
+DB_USERNAME: The username of a user with privileges towards the database
+DB_PASSWORD: The user password
+JWT_SECRET: A 256-letter secret key for the authentication. You can generate this in any website. 
+
+Now make sure your Postgresql instance is running.
+
+**Back End**
+
+The back end is a more complex case than front-end. You need to have both Gradle and Java installed.
+Java 21 and Gradle 8.12 should be enough when it comes to ensuring correct versions have been 
+installed.
+
+After all the mentioned steps have been completed, enter the following command:
+gradle bootRun
+
+Now the LangMaster full-stack application should be running.
+
 
 ## Dependencies
 
