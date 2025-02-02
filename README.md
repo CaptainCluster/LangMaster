@@ -6,7 +6,7 @@ _LangMaster_ is a full-stack language learning application that provides an intu
 
 ## Technologies Used
 
-**Front-End** - React (TypeScript), pnpm
+**Front-End** - React (TypeScript), pnpm, TailwindCSS
 
 **Back-End** - Spring Boot (Java)
 
