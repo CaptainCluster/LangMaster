@@ -16,9 +16,11 @@
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
+    "tailwindcss": "^4.0.3",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.0.3",
     "@tanstack/react-query": "^5.66.0",
     "@types/axios": "^0.14.4",
     "@types/react": "^19.0.8",
