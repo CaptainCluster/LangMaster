@@ -1,9 +1,7 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import useStore from "../stores/store";
+import HeaderLink from "./HeaderLink";
 import Logout from "./Logout";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const { currentPageName } = useStore();
@@ -30,49 +28,30 @@ const Header = () => {
      */
     if (!localStorage.getItem("auth_token")) {
       return (
-        <Nav className="me-auto">
-          <Nav.Link href="/register">Register</Nav.Link>
-          <Nav.Link href="/login">Login</Nav.Link>
-        </Nav>
+        <>
+          <HeaderLink url="/register" text="Register"/>
+          <HeaderLink url="/login" text="Login"/>
+        </>
       );
     }
 
-    /**
-     * For authenticated users
-     *
-     * @Displays
-     * ---------
-     * 1) Link to home page
-     * 2) Link to profile page
-     *
-     * 3) Dropdown
-     *    3.1 - Settings
-     *    3.2 - Log Out
-     */
     return (
-      <Nav className="me-auto">
-        <Nav.Link href="/">Home</Nav.Link>
-        <Nav.Link href={`/profile/${username}`}>Profile</Nav.Link>
-        <Nav.Link href="/learn">Learn</Nav.Link>
-        <Nav.Link href="/workshop">Workshop</Nav.Link>
-        <NavDropdown title="" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#action/3.1">Settings</NavDropdown.Item>
-          <NavDropdown.Item href="/leaderboards">Leaderboards</NavDropdown.Item>
-          <Logout />
-        </NavDropdown>
-      </Nav>
+      <>
+        <HeaderLink url="/" text="Home"/>
+        <HeaderLink url={`/profile/${username}`} text="Profile"/>
+        <HeaderLink url="/learn" text="Learn"/>
+        <HeaderLink url="/workshop" text="Workshop"/>
+        <Logout />
+      </>
     );
   };
 
-  // The final return for the Header
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
-      <Container>
-        <Navbar.Brand>{currentPageName}</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">{displayNav()}</Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className="w-screen flex">
+      <div className="flex w-fit border border-white rounded-lg p-2">
+        {displayNav()}
+      </div>
+    </div>
   );
 };
 

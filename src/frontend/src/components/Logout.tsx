@@ -1,5 +1,3 @@
-import NavDropdown from "react-bootstrap/NavDropdown";
-
 const Logout = () => {
   const logUserOut = () => {
     localStorage.clear();
@@ -7,7 +5,10 @@ const Logout = () => {
   };
 
   return (
-    <NavDropdown.Item onClick={() => logUserOut()}>Log Out</NavDropdown.Item>
+    <a 
+      className="mx-1 p-2 text-white cursor-pointer" 
+      style={{ textDecoration: "none" }}
+      onClick={() => logUserOut()}>Log Out</a>
   );
 };
 
