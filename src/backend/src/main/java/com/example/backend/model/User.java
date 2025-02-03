@@ -48,7 +48,8 @@ public class User
     private Progress progress;
 
     // Constructors
-    public User(){
+    public User()
+    {
         fillCommon();
     }
 
