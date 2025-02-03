@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -37,14 +36,32 @@ public class UserService
      */
     public void createUser(User user)
     {
-        User newUser = new User();
-        newUser.setUsername(user.getUsername());
+      if (user == null)
+      {
+        return;
+      }
 
-        // Hashing the password with bCrypt
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+      if (user.getPassword().length() == 0 || user.getUsername().length() == 0) 
+      {
+        return;
+      }
 
-        userRepository.save(newUser);
+      User newUser = new User();
+      newUser.setUsername(user.getUsername());
+
+      // Hashing the password with bCrypt
+      BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+      newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+
+      userRepository.save(newUser);
+    }
+
+    public void deleteUser(User user)
+    {
+      if (user != null)
+      {
+        userRepository.delete(user);
+      }
     }
 
     /**
@@ -52,7 +69,12 @@ public class UserService
      * @param loggingUser The user object with the credentials
      */
     public boolean checkCredentials(User loggingUser)
-    {
+    { 
+      // Returning with failure if the passed user is a null value
+      if (loggingUser == null)
+      {
+        return false;
+      }
 
         // Figuring out whether the user exists
         Optional<User> potentialUser = userRepository.findByUsername(loggingUser.getUsername());
