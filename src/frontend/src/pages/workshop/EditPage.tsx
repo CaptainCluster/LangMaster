@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../../api";
 import QuizUpdateForm from "./quiz/QuizUpdateForm";
 import quizStore from "../../stores/quizStore";
-
+import Notification from "../../components/notification/Notification";
 /**
  * Uses a GET request to confirm the existence of a quiz. 
  * 1) Exists         - The user can edit the quiz 
@@ -46,6 +46,7 @@ const EditPage = () => {
       <div className="grid justify-center items-center h-56">
         <QuizUpdateForm />
       </div>
+      <Notification />
     </>
   )
 }

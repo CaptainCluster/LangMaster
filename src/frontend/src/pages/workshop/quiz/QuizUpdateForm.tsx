@@ -1,11 +1,10 @@
 import QuestionForm from "./QuestionForm";
-import Notification from "../../../components/Notification";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation} from "@tanstack/react-query";
 import quizStore from "../../../stores/quizStore";
 import { api } from "../../../api";
 import formStore from "../../../stores/quizFormStore";
-import { useState } from "react";
 import QuizInput from "../../../types/request/QuizInput";
+import { useNotificationStore } from "../../../stores/notificationStore";
 
 const NOTIFY_UPDATE_SUCCESS = "The quiz has been updated successfully.";
 const NOTIFY_UPDATE_FAILURE = "The quiz failed to get updated.";
@@ -13,20 +12,15 @@ const NOTIFY_UPDATE_FAILURE = "The quiz failed to get updated.";
 const QuizUpdateForm = () => {
   const { quizId, currentQuiz } = quizStore();
   const { questionForms, addQuestionForm } = formStore();
-  const [displayedNotification, setDisplayedNotification] = useState(<></>);
+  const {triggerNotification} = useNotificationStore();
 
   const { mutate } = useMutation({
     mutationFn: api.workshop.putQuiz,
     onSuccess: async () => {
-      setDisplayedNotification(
-        <Notification messageText={NOTIFY_UPDATE_SUCCESS} />
-      );
+      triggerNotification(NOTIFY_UPDATE_SUCCESS, "success");
     },
-    onError: (error) => {
-      console.error(error);
-      setDisplayedNotification(
-        <Notification messageText={NOTIFY_UPDATE_FAILURE} />
-      );
+    onError: () => {
+      triggerNotification(NOTIFY_UPDATE_FAILURE, "error");
     },
   });
 
@@ -51,7 +45,7 @@ const QuizUpdateForm = () => {
       console.error("No name for the quiz was found!");
       return;
     }
-    if (!response?.data) {
+    if (!("data" in response)) {
       console.error("No name for the quiz was found!");
       return;
     }
@@ -88,7 +82,6 @@ const QuizUpdateForm = () => {
       <div className="flex justify-center">
         <button onClick={submitUpdates}>Submit Updates</button>
       </div>
-      <>{displayedNotification}</>
     </>
   );
 };
