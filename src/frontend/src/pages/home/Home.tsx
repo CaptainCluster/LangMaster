@@ -6,7 +6,7 @@ import NewsPanel from "./NewsPanel";
 import SuggestionsPanel from "./SuggestionsPanel";
 import LinksPanel from "./LinksPanel";
 import { checkTokenExpiration } from "../../api/authenticate";
-import Notification from "../../components/Notification";
+import Notification from "../../components/notification/Notification";
 
 const Home = () => {
   const { updateCurrentPageName } = useStore();
