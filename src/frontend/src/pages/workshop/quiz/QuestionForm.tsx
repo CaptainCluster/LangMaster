@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import AnswerForm from "./AnswerForm";
 import quizStore from "../../../stores/quizStore";
 import QuestionState from "../../../types/state/QuestionState";

@@ -10,8 +10,8 @@ import Workshop from "./pages/workshop/Workshop";
 import Learn from "./pages/learn/Learn";
 import CreatePage from "./pages/workshop/CreatePage";
 import EditPage from "./pages/workshop/EditPage";
-import SearchPage from "./pages/workshop/SearchPage";
 import QuizContainer from "./pages/learn/QuizContainer";
+import ListQuizzes from "./components/learn/ListQuiz";
 
 function App() {
   const queryClient = new QueryClient();
@@ -34,7 +34,7 @@ function App() {
             <Route path="/workshop" element={<Workshop />} />
             <Route path="/workshop/create" element={<CreatePage />}/>
             <Route path="/workshop/edit/:id" element={<EditPage />}/>
-            <Route path="/workshop/search" element={<SearchPage />}/>
+            <Route path="/workshop/search" element={<ListQuizzes redirectInit="/workshop/edit/"/>}/>
           </Routes>
         </QueryClientProvider>
       </Router>

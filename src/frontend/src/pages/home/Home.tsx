@@ -6,7 +6,7 @@ import NewsPanel from "./NewsPanel";
 import SuggestionsPanel from "./SuggestionsPanel";
 import LinksPanel from "./LinksPanel";
 import { checkTokenExpiration } from "../../api/authenticate";
-import Notification from "../../components/Notification";
+import Notification from "../../components/notification/Notification";
 
 const Home = () => {
   const { updateCurrentPageName } = useStore();
@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="grid items-center">
+      <div className="container grid items-center">
         <h4 className="text-center mt-5">
           Welcome, <span className="animate-flash">{welcomeMessage}</span>
         </h4>

@@ -2,10 +2,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { api } from "../../../api";
 import quizStore from "../../../stores/quizStore";
+import { useNavigate } from "react-router-dom";
 
 const QuizCreateForm = () => {
-  const [quizNameForm, setQuizNameForm]     = useState("");
+  const [quizNameForm, setQuizNameForm] = useState("");
   const { setQuizTitle, setQuizName, setQuizId } = quizStore();
+  const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: api.workshop.postQuiz,
@@ -32,7 +34,7 @@ const QuizCreateForm = () => {
           setQuizTitle(quizNameForm);
           setQuizName(quizNameForm);
           setQuizId(quizIdResponse.data);
-          window.location.href = `/workshop/edit/${quizIdResponse.data}`
+          navigate(`/workshop/edit/${quizIdResponse.data}`);
         } else if ("msg" in quizIdResponse) {
           console.error("Failed to get quiz ID:", quizIdResponse.msg);
         } else {
@@ -53,7 +55,7 @@ const QuizCreateForm = () => {
     <form onSubmit={submitCreation}>
       <input
         id="input-quiz-name"
-        className="ml-5 text-black"
+        className="ml-5 text-black bg-white rounded-md"
         type="text"
         onChange={(event) => setQuizNameForm(event.target.value)}
       ></input>

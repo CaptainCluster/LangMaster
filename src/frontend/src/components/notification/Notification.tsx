@@ -1,5 +1,5 @@
 import "./notification.css";
-import { useNotificationStore } from "../stores/notificationStore";
+import { useNotificationStore } from "../../stores/notificationStore";
 
 const Notification = () => {
     const { text, type } = useNotificationStore();
