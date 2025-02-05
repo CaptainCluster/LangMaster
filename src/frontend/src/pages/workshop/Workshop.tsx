@@ -23,7 +23,7 @@ const Workshop = () => {
         <button 
           className="p-8 bg-neutral-700 rounded-lg shadow-lg transform transition-transform hover:scale-105 py-14"
           onClick={() => { window.location.href = "/workshop/search" }}>
-          Select an existing quiz</button>
+          Alter an existing quiz</button>
       </div>
     </>
   );
