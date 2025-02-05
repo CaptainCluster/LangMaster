@@ -5,7 +5,7 @@ import quizStore from "../../../stores/quizStore";
 import { useNavigate } from "react-router-dom";
 
 const QuizCreateForm = () => {
-  const [quizNameForm, setQuizNameForm]     = useState("");
+  const [quizNameForm, setQuizNameForm] = useState("");
   const { setQuizTitle, setQuizName, setQuizId } = quizStore();
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ const QuizCreateForm = () => {
     <form onSubmit={submitCreation}>
       <input
         id="input-quiz-name"
-        className="ml-5 text-black"
+        className="ml-5 text-black bg-white rounded-md"
         type="text"
         onChange={(event) => setQuizNameForm(event.target.value)}
       ></input>

@@ -17,7 +17,7 @@ const Learn = () => {
   return (
     <>
       <Header />
-      <ListQuiz />
+      <ListQuiz redirectInit="/quiz/"/>
     </>
   )
 }

@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <div className="grid items-center">
+      <div className="container grid items-center">
         <h4 className="text-center mt-5">
           Welcome, <span className="animate-flash">{welcomeMessage}</span>
         </h4>
