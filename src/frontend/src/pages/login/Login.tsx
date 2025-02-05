@@ -40,8 +40,10 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div id="page-register">
-        <Credentials onSubmit={submitLogin} />
+      <div className="container my-5" id="page-login">
+        <div>
+          <Credentials onSubmit={submitLogin} />
+        </div>
       </div>
     </>
   );

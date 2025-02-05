@@ -36,7 +36,7 @@ const Register = () => {
   return (
     <>
       <Header />
-      <div id="page-register">
+      <div className="container my-5" id="page-register">
         <Credentials onSubmit={submitRegister} />
       </div>
     </>
