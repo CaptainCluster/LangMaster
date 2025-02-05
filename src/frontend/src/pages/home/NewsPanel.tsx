@@ -19,8 +19,10 @@ const NewsPanel = () => {
   if (!data) {
     return <Panel header={PANEL_HEADER} text={"No data"}/>;
   }
-
-  return <Panel header={PANEL_HEADER} text={data.data.content} />;
+  if ("data" in data) {
+     return <Panel header={PANEL_HEADER} text={data.data.content} />;
+  }
+  return <Panel header={PANEL_HEADER} text={"Error in loading news data."}/>;
 }
 
 export default NewsPanel;

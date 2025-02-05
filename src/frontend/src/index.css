@@ -9,9 +9,18 @@
   }
 }
 
+@keyframes flash {
+  0% { color: #ffffff; } 
+  50% { color: var(--color-yellow-300); } 
+  100% { color: #ffffff; }
+}
+.animate-flash {
+  animation: flash 2s infinite ease-in-out;
+}
+
 .body { 
   color: #ffffff;
-  background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
+  background-color: #2C2C2C;
 }
 
 .fade-in {

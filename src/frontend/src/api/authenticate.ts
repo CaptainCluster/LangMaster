@@ -4,6 +4,7 @@ import LoginResponse from "../types/response/LoginResponse";
 import FailResponse from "../types/response/FailResponse";
 import OkResponse from "../types/response/OkResponse";
 import removeStorageItems from "../utils/removeStorageItems";
+import GeneralResponse from "../types/response/GeneralResponse";
 
 /**
  * a POST request
@@ -13,17 +14,21 @@ import removeStorageItems from "../utils/removeStorageItems";
  */
 export async function registerUser(
   userCredentials: UserCredentials
-): Promise<AxiosResponse<OkResponse> | FailResponse> {
+): Promise<GeneralResponse> {
   try {
-    const response = await axios.post<OkResponse>(
+    await axios.post<string>(
       "/api/users/register",
       userCredentials
     );
-    return response;
+    return {
+      msg:      "Registration successful.",
+      success:  true
+    };
   } catch (error) {
     console.error(error);
-    return {
-      msg: "Failed to register user.",
+    return { 
+      msg:      "Failed to register user.",
+      success:  false
     };
   }
 }

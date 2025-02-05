@@ -6,15 +6,23 @@ import useStore from "../../stores/store";
 import { useEffect } from "react";
 import { api } from "../../api";
 import { redirectForToken } from "../../utils/checkLocalStorage";
+import Notification from "../../components/Notification";
+import { useNotificationStore } from "../../stores/notificationStore";
 
 const Register = () => {
   const navigate = useNavigate();
   const { updateCurrentPageName } = useStore();
-
+  const { triggerNotification } = useNotificationStore();
+  
   // POST request for registering user, redirecting to login page upon success
   const { mutate } = useMutation({
     mutationFn: api.auth.registerUser,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      if (data.success) {
+        triggerNotification(data.msg, "success");
+        return;
+      }
+      triggerNotification(data.msg, "error");
       navigate("/login");
     },
   });
@@ -36,9 +44,10 @@ const Register = () => {
   return (
     <>
       <Header />
-      <div id="page-register">
+      <div className="container my-5" id="page-register">
         <Credentials onSubmit={submitRegister} />
       </div>
+      <Notification />
     </>
   );
 };

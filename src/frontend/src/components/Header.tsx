@@ -1,7 +1,6 @@
 import useStore from "../stores/store";
 import HeaderLink from "./HeaderLink";
 import Logout from "./Logout";
-import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const { currentPageName } = useStore();
@@ -47,8 +46,11 @@ const Header = () => {
   };
 
   return (
-    <div className="w-screen flex">
-      <div className="flex w-fit border border-white rounded-lg p-2">
+    <div className="flex w-screen bg-[#292929] border border-white rounded-lg p-2">
+      <div className="italic ml-2 mr-6 hover:text-yellow-300">
+        {currentPageName}
+      </div>
+      <div>
         {displayNav()}
       </div>
     </div>

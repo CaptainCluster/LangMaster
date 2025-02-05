@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import ProfileResponse from "../types/response/ProfileResponse";
 import FailResponse from "../types/response/FailResponse";
 
@@ -10,12 +10,12 @@ import FailResponse from "../types/response/FailResponse";
  */
 export async function getProfileData(
   username: string
-): Promise<AxiosResponse<ProfileResponse> | FailResponse> {
+): Promise<ProfileResponse | FailResponse> {
   try {
     const response = await axios.get<ProfileResponse>(
       `/api/users/profile/${username}`
     );
-    return response;
+    return response.data;
   } catch (error) {
     console.error(error);
     return {
