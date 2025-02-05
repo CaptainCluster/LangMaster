@@ -7,12 +7,10 @@ import { useEffect }          from "react";
 import DeleteQuiz             from "../../pages/workshop/delete/DeleteQuiz";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
 import QuizResponse from "../../types/response/QuizResponse";
-import { useNavigate } from "react-router-dom";
 
 const ListQuizzes = ({ redirectInit }: { redirectInit: string; }) => {  
   const { updateCurrentPageName } = useStore(); // State management
   const [searchParam, setSearchParam] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     redirectForNoToken();
@@ -55,7 +53,7 @@ const ListQuizzes = ({ redirectInit }: { redirectInit: string; }) => {
               <li className="flex justify-between border border-white rounded p-2 my-1">
                 <div
                   className="cursor-pointer hover:text-yellow-400"
-                  onClick={() => navigate(`${redirectInit}${dataEntry.id}`)}
+                  onClick={() => window.location.href = `${redirectInit}${dataEntry.id}`}
                 >
                   {dataEntry.name}
                 </div>

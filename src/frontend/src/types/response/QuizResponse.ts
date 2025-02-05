@@ -3,8 +3,8 @@ import Question from "../quiz/Question";
 
 export default interface QuizResponse {
   id:           number;
-  name:         String;
-  description:  String;
+  name:         string;
+  description:  string;
   language:     Language;
   questions:    Question[]
 }

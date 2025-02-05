@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import { getQuizById } from "../../api/workshop";
 import ProgressIndicator from "./ProgressIndicator";
 import QuestionDisplay from "./QuestionDisplay";
+import Question from "../../types/quiz/Question";
 
 const QuizContainer = () => {
   const quizId: string | undefined = useParams().id; // URL parameter recognition
@@ -21,18 +22,38 @@ const QuizContainer = () => {
   if (data === undefined) {
     return <span className="text-white">No data</span>;
   }
+  
+  let name = "";
+  let questions: Question[] = [];
+
+  // Letting the user know if no questions exit for the quiz.
+  if ("data" in data) {
+    if (data.data.questions.length === 0) {
+      return (
+        <div className="flex justify-center">
+          <h1 className="py-10">This quiz has no questions!</h1>  
+        </div>
+      );
+    }
+
+    if ("name" in data.data) {
+      name = data.data.name
+    }
+
+    if ("questions" in data.data) {
+      questions = data.data.questions;
+    }
+  }
 
   return (
-    <div className="grid h-screen">
-      <div id="quiz-header" className="text-center">
-        <h2>{data.data.name}</h2>
+    <div className="grid">
+      <div id="quiz-header" className="mt-4 border-bottom border-white text-center">
+        <h2 className="animate-flash">{name.toUpperCase()}</h2>
       </div>
+      
       <div id="content">
-        <ProgressIndicator questionAmount={data.data.questions.length} />
-        <QuestionDisplay questionData={data.data.questions[0]} />
-      </div>
-      <div id="quiz-footer" className="text-center">
-        LangMaster
+        <ProgressIndicator questionAmount={questions.length} />
+        <QuestionDisplay questionData={questions[0]} />
       </div>
     </div>
   );

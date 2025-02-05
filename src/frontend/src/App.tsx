@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import Header from "./components/Header";
 import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
@@ -10,8 +10,8 @@ import Workshop from "./pages/workshop/Workshop";
 import Learn from "./pages/learn/Learn";
 import CreatePage from "./pages/workshop/CreatePage";
 import EditPage from "./pages/workshop/EditPage";
-import QuizContainer from "./pages/learn/QuizContainer";
 import ListQuizzes from "./components/learn/ListQuiz";
+import Quiz from "./pages/learn/Quiz";
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,12 +29,16 @@ function App() {
             <Route path="/learn" element={<Learn />} />
 
 
-            <Route path="/quiz/:id" element={<QuizContainer />}/>
+            <Route path="/quiz/:id" element={<Quiz/>}/>
             
             <Route path="/workshop" element={<Workshop />} />
             <Route path="/workshop/create" element={<CreatePage />}/>
             <Route path="/workshop/edit/:id" element={<EditPage />}/>
-            <Route path="/workshop/search" element={<ListQuizzes redirectInit="/workshop/edit/"/>}/>
+            <Route path="/workshop/search" element={
+              <>
+                <Header />
+                <ListQuizzes redirectInit="/workshop/edit/"/>
+              </>}/>
           </Routes>
         </QueryClientProvider>
       </Router>
