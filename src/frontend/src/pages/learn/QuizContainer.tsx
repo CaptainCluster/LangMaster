@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import { getQuizById } from "../../api/workshop";
 import ProgressIndicator from "./ProgressIndicator";
 import QuestionDisplay from "./QuestionDisplay";
@@ -20,6 +20,16 @@ const QuizContainer = () => {
   }
   if (data === undefined) {
     return <span className="text-white">No data</span>;
+  }
+
+  if ("data" in data) {
+    if (data.data.questions.length === 0) {
+      return (
+        <div className="flex justify-center">
+          <h1 className="py-10">This quiz has no questions!</h1>  
+        </div>
+      );
+    }
   }
 
   return (
