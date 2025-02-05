@@ -1,7 +1,14 @@
+import { useNavigate } from "react-router-dom";
+import { useNotificationStore } from "../stores/notificationStore";
+
 const Logout = () => {
+  const { triggerNotification } = useNotificationStore();
+  let navigate = useNavigate();
+
   const logUserOut = () => {
     localStorage.clear();
-    window.location.href = "/login";
+    triggerNotification("You have been logged out.", "neutral");
+    navigate("/login");
   };
 
   return (

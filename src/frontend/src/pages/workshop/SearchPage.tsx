@@ -7,6 +7,7 @@ import useStore               from "../../stores/store";
 import { useEffect }          from "react";
 import DeleteQuiz             from "./delete/DeleteQuiz";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
+import QuizResponse from "../../types/response/QuizResponse";
 
 const SearchPage = () => {  
   const { updateCurrentPageName } = useStore(); // State management
@@ -32,33 +33,39 @@ const SearchPage = () => {
     return <span className="text-white">No data</span>;
   }
 
-  const filteredData = filterBySearchParam(searchParam, data.data); 
-  
+  let filteredData = [];
+
+  if ("data" in data) {
+    filteredData = filterBySearchParam(searchParam, data.data); 
+  }
+
   return (
-    <div>
+    <>
       <Header />
-      <div className="search grid justify-start p-6">
-        <p>Search for quizzes</p>
-        <input
-          className="text-black"
-          value={searchParam}
-          onChange={(event) => setSearchParam(event.target.value)}>
-        </input>
+      <div className="container">
+        <div className="search grid justify-start p-6">
+          <p>Search for quizzes</p>
+          <input
+            className="text-black bg-white rounded-md"
+            value={searchParam}
+            onChange={(event) => setSearchParam(event.target.value)}>
+          </input>
+        </div>
+        <ul>
+            {filteredData.map((dataEntry: QuizResponse) => (
+              <li className="flex justify-between border border-white rounded p-2 my-1">
+                <div
+                  className="cursor-pointer hover:text-yellow-400"
+                  onClick={() => window.location.href = `/workshop/edit/${dataEntry.id}`}
+                >
+                  {dataEntry.name}
+                </div>
+                <DeleteQuiz id={dataEntry.id}/>
+              </li>
+            ))}
+        </ul>
       </div>
-      <div className="content grid justify-center"> 
-        {filteredData.map((dataEntry) => (
-          <div className="flex justify-between w-screen border border-white rounded p-2 my-1">
-            <div
-              className="cursor-pointer hover:text-yellow-400 hover:font-bold"
-              onClick={() => window.location.href = `/workshop/edit/${dataEntry.id}`}
-            >
-              {dataEntry.name}
-            </div>
-            <DeleteQuiz id={dataEntry.id}/>
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
 

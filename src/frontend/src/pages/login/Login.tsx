@@ -7,20 +7,27 @@ import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
 import { redirectForToken } from "../../utils/checkLocalStorage";
 import { api } from "../../api";
+import Notification from "../../components/Notification";
+import { useNotificationStore } from "../../stores/notificationStore";
 
 const Login = () => {
   const navigate = useNavigate();
   const { updateCurrentPageName } = useStore();
+  const { triggerNotification } = useNotificationStore();
 
   // Sending a POST request request in order to log the client in.
   // Redirects if JWT was obtained.
   const { mutate } = useMutation({
     mutationFn: api.auth.loginUser,
+
     onSuccess: () => {
       if (localStorage.getItem("auth_token")) {
         navigate("/");
+        triggerNotification("Login successful!", "success"); 
+        return;
       }
-    },
+      triggerNotification("Login failed!", "error"); 
+    }
   });
 
   // Authenticated users are redirected. Otherwise current page name is displayed.
@@ -45,6 +52,7 @@ const Login = () => {
           <Credentials onSubmit={submitLogin} />
         </div>
       </div>
+      <Notification />
     </>
   );
 };

@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { JSX, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useStore from "../../stores/store";
@@ -39,32 +36,51 @@ const Profile = () => {
   if (data === undefined) {
     return <span className="text-white">No data</span>;
   }
+  
+  let responseData = {
+    languages: ["No languages found"],
+    bio: "No bio found",
+    username: "No username found",
+  }
+
+  if ("bio" in data) {
+    responseData.bio = data.bio;
+  }
+  if ("username" in data) {
+    responseData.username = data.username;
+  }
+  if ("languages" in data) {
+    responseData.languages = data.languages;
+  }
 
   //Displaying the languages the user has studied
-  const displayLanguages = (): JSX.Element => {
-    if (!data.data.languages || data.data.languages.length === 0) {
-      return <span className="text-white">No languages found.</span>;
-    }
+  const displayLanguages = () => {
     const languagesList: JSX.Element[] = [];
-    data.data.languages.map((language: String) => {
+    if (responseData.languages.length === 0) {
+      return <span>No languages found.</span>
+    }
+    responseData.languages.map((language: String) => {
       languagesList.push(<li className="text-white">{language}</li>);
     });
     return <ul>{languagesList}</ul>;
   };
 
+
   // Returning the intended content upon successful query fetch
   return (
     <>
       <Header />
-      <Container>
-        <Row>
-          <Col>
-            <h2 className="text-white">{username}</h2>
-            <h6 className="text-white">{data.data.bio}</h6>
-            {displayLanguages()}
-          </Col>
-        </Row>
-      </Container>
+      <div className="container">
+        <div className="mt-3">
+          <h2 className="animate-flash">{responseData.username}</h2>
+        </div>
+        <div className="my-10 p-3 border border-white rounded-xl">
+          <h6 className="text-white">{responseData.bio}</h6>
+        </div>
+        <div className="p-3 border border-white rounded-xl">
+          {displayLanguages()}
+        </div>
+      </div>
     </>
   );
 };

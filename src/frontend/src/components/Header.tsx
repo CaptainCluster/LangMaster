@@ -46,8 +46,8 @@ const Header = () => {
   };
 
   return (
-    <div className="flex w-screen border border-white rounded-lg p-2">
-      <div className="italic hover:text-yellow-300">
+    <div className="flex w-screen bg-[#292929] border border-white rounded-lg p-2">
+      <div className="italic ml-2 mr-6 hover:text-yellow-300">
         {currentPageName}
       </div>
       <div>
