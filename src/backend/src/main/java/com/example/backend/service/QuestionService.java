@@ -1,6 +1,5 @@
 package com.example.backend.service;
 
-import com.example.backend.input.AnswerInput;
 import com.example.backend.input.QuestionInput;
 import com.example.backend.model.Answer;
 import com.example.backend.model.Question;

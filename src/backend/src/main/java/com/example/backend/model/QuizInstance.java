@@ -88,8 +88,18 @@ public class QuizInstance
     return completedQuestions;
   }
 
+  public void setTotalQuestions(int newTotalQuestions)
+  {
+    this.totalQuestions = newTotalQuestions;
+  }
+
   public void setLives(int newLives)
   {
     this.lives = newLives;
+  }
+
+  public void setCompletedQuestions(Set<Question> newCompletedQuestions)
+  {
+    this.completedQuestions = newCompletedQuestions;
   }
 }
