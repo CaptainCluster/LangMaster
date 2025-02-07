@@ -28,7 +28,6 @@ function App() {
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/learn" element={<Learn />} />
 
-
             <Route path="/quiz/:id" element={<Quiz/>}/>
             
             <Route path="/workshop" element={<Workshop />} />

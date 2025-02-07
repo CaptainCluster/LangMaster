@@ -53,6 +53,16 @@ After all the mentioned steps have been completed, enter the following command:
 
 Now the LangMaster full-stack application should be running.
 
+## Mascot
+<img style="width: 250px;" src="https://github.com/user-attachments/assets/11a347b0-d804-49ae-af99-fc5aa956a4a9" />
+
+Lance is the mascot of *LangMaster*. He was made by [Oyzix](https://github.com/oyzix). Lance is happy to join you,
+as you embark on your journey to learn languages.
+
+
+
+
+
 ## Dependencies
 
 This application only uses dependencies that have licenses compatible with **GNU General Public License v3**.
