@@ -71,12 +71,16 @@ const Profile = () => {
     <>
       <Header />
       <div className="container">
-        <div className="mt-3">
+        <div className="mt-3 mb-14">
           <h2 className="animate-flash">{responseData.username}</h2>
         </div>
-        <div className="my-10 p-3 border border-white rounded-xl">
-          <h6 className="text-white">{responseData.bio}</h6>
+
+        <h4>Bio</h4>
+        <div className="mb-10 p-3 border border-white rounded-xl">
+          {responseData.bio}
         </div>
+
+        <h4 className="mb-3">Languages</h4>
         <div className="p-3 border border-white rounded-xl">
           {displayLanguages()}
         </div>
