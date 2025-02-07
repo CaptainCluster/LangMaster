@@ -30,9 +30,10 @@ public class QuizInstance
 
   private int totalQuestions;
   private int lives;
+
+  @OneToMany(cascade = CascadeType.ALL)
   private Set<Question> completedQuestions;
 
-  
   public QuizInstance(User user, Quiz quiz)
   {
     this.user = user;
