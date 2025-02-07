@@ -4,6 +4,7 @@ import com.example.backend.input.QuestionInput;
 import com.example.backend.model.Answer;
 import com.example.backend.model.Question;
 import com.example.backend.model.Quiz;
+import com.example.backend.result.QuestionResult;
 import com.example.backend.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,4 +55,9 @@ public class QuestionService
         }
         return questions;
     }
+
+  public QuestionResult convertQuestionToResult(Question question)
+  {
+    return new QuestionResult(question.getTitle(), question.getAnswers()); 
+  }
 }

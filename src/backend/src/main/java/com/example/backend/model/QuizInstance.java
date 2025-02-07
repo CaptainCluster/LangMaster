@@ -6,9 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.List;
 import java.util.HashSet;
-import java.util.ArrayList;
 
 @Entity
 @Table
@@ -34,8 +32,6 @@ public class QuizInstance
   private int lives;
   private Set<Question> completedQuestions;
 
-  @OneToMany(mappedBy = "quizInstance", cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Answer> userAnswers;
   
   public QuizInstance(User user, Quiz quiz)
   {
@@ -44,7 +40,6 @@ public class QuizInstance
     this.lives = 3;
     this.startTime = LocalDateTime.now();
     this.completedQuestions = new HashSet<>();
-    this.userAnswers = new ArrayList<>();
     findTotalQuestions();
   }
 

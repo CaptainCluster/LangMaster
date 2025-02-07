@@ -4,10 +4,12 @@ import com.example.backend.model.Question;
 import com.example.backend.model.QuizInstance;
 import com.example.backend.result.QuestionResult;
 import com.example.backend.result.QuizInstanceResult;
+import com.example.backend.service.QuestionService;
 import com.example.backend.service.QuizInstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Optional;
 
@@ -17,6 +19,9 @@ public class QuizInstanceController
 {
   @Autowired
   QuizInstanceService quizInstanceService;
+
+  @Autowired
+  QuestionService questionService;
   
   @PostMapping("/create")
   public ResponseEntity<QuizInstance> createInstance(@RequestBody long quizId, long userId)
@@ -54,6 +59,13 @@ public class QuizInstanceController
     {
       return ResponseEntity.badRequest().build();
     }
-    Question question = quizInstanceService.selectRandomQuestion(quizInstance.get()); 
+    Question question = quizInstanceService.selectRandomQuestion(quizInstance.get());
+    QuestionResult questionResult = questionService.convertQuestionToResult(question);
+
+    if (questionResult == null)
+    {
+      return ResponseEntity.badRequest().build();
+    }
+    return ResponseEntity.ok(questionResult);
   }
 }

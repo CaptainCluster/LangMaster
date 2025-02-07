@@ -6,6 +6,12 @@ public class QuestionResult
 {
   private String title;
   private Set<Answer> answers;
+  
+  public QuestionResult(String title, Set<Answer> answers)
+  {
+    this.title = title;
+    this.answers = answers;
+  }
 
   public String getTitle()
   {
