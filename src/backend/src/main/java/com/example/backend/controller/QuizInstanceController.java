@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.input.InstanceCreationInput;
 import com.example.backend.model.Question;
 import com.example.backend.model.QuizInstance;
 import com.example.backend.result.QuestionResult;
@@ -24,13 +25,21 @@ public class QuizInstanceController
   QuestionService questionService;
   
   @PostMapping("/create")
-  public ResponseEntity<QuizInstance> createInstance(@RequestBody long quizId, long userId)
+  public ResponseEntity<Long> createInstance(@RequestBody InstanceCreationInput instanceCreationInput)
   {
+    Long quizId = instanceCreationInput.getQuizId();
+    Long userId = instanceCreationInput.getUserId();
+
     if(!quizInstanceService.createQuizInstance(quizId, userId))
     {
       return ResponseEntity.badRequest().build();
-    }     
-    return ResponseEntity.ok().build();
+    }
+    QuizInstance quizInstance =  quizInstanceService.findByQuizIdAndUserId(quizId, userId);
+    if (quizInstance == null)
+    {
+      return ResponseEntity.badRequest().build();
+    }
+    return ResponseEntity.ok(quizInstance.getId());
   }
 
   @PostMapping("/submission")
