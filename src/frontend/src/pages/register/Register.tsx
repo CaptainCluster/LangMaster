@@ -10,20 +10,20 @@ import Notification from "../../components/notification/Notification";
 import { useNotificationStore } from "../../stores/notificationStore";
 
 const Register = () => {
-  const navigate = useNavigate();
   const { updateCurrentPageName } = useStore();
   const { triggerNotification } = useNotificationStore();
-  
+  const navigate = useNavigate();
+
   // POST request for registering user, redirecting to login page upon success
   const { mutate } = useMutation({
     mutationFn: api.auth.registerUser,
     onSuccess: (data) => {
       if (data.success) {
         triggerNotification(data.msg, "success");
+        navigate("/login");
         return;
       }
       triggerNotification(data.msg, "error");
-      navigate("/login");
     },
   });
 
