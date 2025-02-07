@@ -37,7 +37,9 @@
 }
 
 .neutral {
-    background-color: yellow;
+    background-color: #ffffff;
+    color: black;
+    animation: none;
     box-shadow:
         darkcyan 0 2px 4px,
         darkyellow 7px 13px -3px,
