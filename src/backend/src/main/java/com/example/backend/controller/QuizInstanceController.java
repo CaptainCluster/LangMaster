@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.input.IdInput;
 import com.example.backend.input.InstanceCreationInput;
 import com.example.backend.model.Question;
 import com.example.backend.model.QuizInstance;
@@ -23,20 +24,56 @@ public class QuizInstanceController
 
   @Autowired
   QuestionService questionService;
-  
+
   @PostMapping("/create")
   public ResponseEntity<Long> createInstance(@RequestBody InstanceCreationInput instanceCreationInput)
   {
     Long quizId = instanceCreationInput.getQuizId();
     Long userId = instanceCreationInput.getUserId();
+    String username = instanceCreationInput.getUsername();
 
-    if(!quizInstanceService.createQuizInstance(quizId, userId))
+    System.out.println(quizId + " " + userId + " " + username);
+
+    if (quizId == null || (userId == null && username == null))
     {
       return ResponseEntity.badRequest().build();
     }
-    QuizInstance quizInstance =  quizInstanceService.findByQuizIdAndUserId(quizId, userId);
+
+    QuizInstance quizInstance;
+    if (userId == null)
+    {
+      quizInstance = quizInstanceService.findByQuizIdAndUsername(quizId, username);
+    }
+    else
+    {
+      quizInstance = quizInstanceService.findByQuizIdAndUserId(quizId, userId);
+    }
+
     if (quizInstance == null)
     {
+      if (userId == null)
+      {
+        if(quizInstanceService.createQuizInstanceWithUsername(quizId, username))
+        {
+          quizInstance = quizInstanceService.findByQuizIdAndUsername(quizId, username);
+          if (quizInstance == null)
+          {
+            return ResponseEntity.badRequest().build();
+          }
+          return ResponseEntity.ok(quizInstance.getId());
+        }
+        return ResponseEntity.badRequest().build();
+      }
+
+      if (quizInstanceService.createQuizInstance(quizId, userId))
+      {
+        quizInstance = quizInstanceService.findByQuizIdAndUserId(quizId, userId);
+        if (quizInstance == null)
+        {
+          return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(quizInstance.getId());
+      }
       return ResponseEntity.badRequest().build();
     }
     return ResponseEntity.ok(quizInstance.getId());
@@ -76,5 +113,20 @@ public class QuizInstanceController
       return ResponseEntity.badRequest().build();
     }
     return ResponseEntity.ok(questionResult);
+  }
+
+  @GetMapping("/core")
+  public ResponseEntity<QuizInstanceResult> getCoreInstanceInformation(@RequestBody IdInput idInput)
+  {
+    if (idInput.getId() == null)
+    {
+      return ResponseEntity.badRequest().build();
+    }
+    QuizInstance quizInstance = quizInstanceService.findQuizInstanceById(idInput.getId()).orElse(null);
+    if (quizInstance == null)
+    {
+      return ResponseEntity.badRequest().build();
+    }
+    return ResponseEntity.ok(quizInstanceService.convertInstanceToResult(quizInstance));
   }
 }

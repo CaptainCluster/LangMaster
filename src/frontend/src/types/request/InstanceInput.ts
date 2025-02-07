@@ -1,4 +1,5 @@
 export default interface InstanceInput {
   quizId: number;
-  userId: number;
+  userId?: number;
+  username: string;
 }

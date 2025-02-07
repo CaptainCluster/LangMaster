@@ -27,12 +27,13 @@ public class QuizInstance
   private User user;
 
   private LocalDateTime startTime;
-
   private int totalQuestions;
   private int lives;
 
   @OneToMany(cascade = CascadeType.ALL)
   private Set<Question> completedQuestions;
+
+  public QuizInstance() {}
 
   public QuizInstance(User user, Quiz quiz)
   {

@@ -9,6 +9,7 @@ import com.example.backend.repository.QuizInstanceRepository;
 
 import java.util.*;
 
+import com.example.backend.result.QuizInstanceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +49,36 @@ public class QuizInstanceService
     {
       System.out.println("No user with the id " + userId + " found.");
       return false; 
+    }
+
+    QuizInstance quizInstance = findByQuizIdAndUserId(quizId, userId);
+    if (quizInstance != null)
+    {
+      resetInstance(quizInstance);
+    }
+    else
+    {
+      quizInstance = new QuizInstance(user, quiz);
+    }
+    quizInstanceRepository.save(quizInstance);
+    return true;
+  }
+
+  public boolean createQuizInstanceWithUsername(long quizId, String username)
+  {
+    long userId = userService.getIdByUsername(username);
+
+    Quiz quiz = quizService.findQuizById(quizId);
+    if (quiz == null)
+    {
+      System.out.println("No quiz with the id " + quizId + " found.");
+      return false;
+    }
+    User user = userService.findUserById(userId);
+    if (user == null)
+    {
+      System.out.println("No user with the id " + userId + " found.");
+      return false;
     }
 
     QuizInstance quizInstance = findByQuizIdAndUserId(quizId, userId);
@@ -128,6 +159,22 @@ public class QuizInstanceService
     return null;
   }
 
+  public QuizInstance findByQuizIdAndUsername(long quizId, String username)
+  {
+    long userId = userService.getIdByUsername(username);
+    List<QuizInstance> quizInstances = quizInstanceRepository.findAll();
+    for (QuizInstance quizInstance : quizInstances)
+    {
+      // If a matching instance is found, it will be reset and returned
+      if (quizInstance.getQuiz().getId() == quizId && quizInstance.getUser().getId() == userId)
+      {
+        resetInstance(quizInstance);
+        return quizInstance;
+      }
+    }
+    return null;
+  }
+
   /**
    * Resetting the instance so that it is in a state where it can be 
    * restarted.
@@ -162,5 +209,13 @@ public class QuizInstanceService
       }
       return randomQuestion;
     }
+  }
+
+  public QuizInstanceResult convertInstanceToResult(QuizInstance quizInstance)
+  {
+    QuizInstanceResult quizInstanceResult = new QuizInstanceResult();
+    quizInstanceResult.setTotalQuestions(quizInstance.getTotalQuestions());
+    quizInstanceResult.setLives(quizInstance.getLives());
+    return quizInstanceResult;
   }
 }
