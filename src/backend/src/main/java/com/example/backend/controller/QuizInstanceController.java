@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.input.IdInput;
 import com.example.backend.input.InstanceAnswerSubmissionInput;
 import com.example.backend.input.InstanceCreationInput;
 import com.example.backend.model.Question;
@@ -32,8 +31,6 @@ public class QuizInstanceController
     Long quizId = instanceCreationInput.getQuizId();
     Long userId = instanceCreationInput.getUserId();
     String username = instanceCreationInput.getUsername();
-
-    System.out.println(quizId + " " + userId + " " + username);
 
     if (quizId == null || (userId == null && username == null))
     {
@@ -141,5 +138,16 @@ public class QuizInstanceController
       return ResponseEntity.badRequest().build();
     }
     return ResponseEntity.ok(quizInstanceService.convertInstanceToResult(quizInstance));
+  }
+
+  @GetMapping("/lives/{quizInstanceId}")
+  public Boolean inspectLives(@PathVariable("quizInstanceId") Long quizInstanceId)
+  {
+    Optional<QuizInstance> optionalQuizInstance = quizInstanceService.findQuizInstanceById(quizInstanceId);
+    if (optionalQuizInstance.isEmpty())
+    {
+      return false;  
+    } 
+    return quizInstanceService.inspectLives(optionalQuizInstance.get());
   }
 }
