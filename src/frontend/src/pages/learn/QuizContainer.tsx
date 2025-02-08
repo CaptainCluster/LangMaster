@@ -77,7 +77,7 @@ const QuizContainer = () => {
       <div id="content">
         <ProgressIndicator questionAmount={Number(quizInstanceData?.totalQuestions)} />
         <Lives lives={Number(quizInstanceData?.lives)}/>
-        <QuestionDisplay quizInstanceId={Number(quizInstanceData?.id)}/>
+        <QuestionDisplay quizInstanceId={Number(quizInstanceData?.id)} />
       </div>
     </div>
   );

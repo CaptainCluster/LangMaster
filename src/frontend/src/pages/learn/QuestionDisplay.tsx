@@ -1,5 +1,6 @@
 import { getRandomQuestion } from "../../api/learn";
 import { useQuery } from "@tanstack/react-query";
+import AnswerButton from "./AnswerButton";
 
 const QuestionDisplay = ({ quizInstanceId }: { quizInstanceId: number }) => {
   
@@ -32,13 +33,10 @@ const QuestionDisplay = ({ quizInstanceId }: { quizInstanceId: number }) => {
       {data.answers.length > 0 
         ? 
         <div className="grid grid-cols-2 md:grid-cols-3">
-          {data.answers.map((answer) => (
-            <div className="text-center my-5 mx-2 px-2 py-4 border border-white rounded-lg transform transition-transform hover:scale-105 hover:cursor-pointer"
-              onClick={() => console.log("The answer should be submitted to the server.")}
-            >
-              <span>{answer.title}</span>
-            </div>
-          ))
+          {
+            data.answers.map((answer) => (
+              <AnswerButton answer={answer} quizInstanceId={quizInstanceId}/>
+            ))
           }
         </div>
         : 

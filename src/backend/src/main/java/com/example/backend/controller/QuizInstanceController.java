@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.input.IdInput;
+import com.example.backend.input.InstanceAnswerSubmissionInput;
 import com.example.backend.input.InstanceCreationInput;
 import com.example.backend.model.Question;
 import com.example.backend.model.QuizInstance;
@@ -76,16 +77,27 @@ public class QuizInstanceController
       }
       return ResponseEntity.badRequest().build();
     }
+    quizInstanceService.resetInstance(quizInstance);
     return ResponseEntity.ok(quizInstance.getId());
   }
 
   @PostMapping("/submission")
-  public ResponseEntity<QuizInstanceResult> processSubmission(@RequestBody long quizInstanceId, long questionId, long answerId)
+  public ResponseEntity<QuizInstanceResult> processSubmission(@RequestBody InstanceAnswerSubmissionInput instanceAnswerSubmissionInput)
   {
-    quizInstanceService.processUserSubmission(quizInstanceId, questionId, answerId);
+    Long quizInstanceId = instanceAnswerSubmissionInput.getQuizInstanceId();
+    Long answerId = instanceAnswerSubmissionInput.getAnswerId();
+
+    if (quizInstanceId == null || answerId == null)
+    {
+      System.out.println("One of the IDs is null when submitting answer.");
+      return ResponseEntity.badRequest().build();
+    }
+
+    quizInstanceService.processUserSubmission(quizInstanceId, answerId);
     QuizInstance quizInstance = quizInstanceService.findQuizInstanceById(quizInstanceId).orElse(null);
     if (quizInstance == null)
     {
+      System.out.println("Did not find quiz instance.");
       return ResponseEntity.badRequest().build();
     }
 
