@@ -115,14 +115,14 @@ public class QuizInstanceController
     return ResponseEntity.ok(questionResult);
   }
 
-  @GetMapping("/core")
-  public ResponseEntity<QuizInstanceResult> getCoreInstanceInformation(@RequestBody IdInput idInput)
+  @GetMapping("/core/{idInput}")
+  public ResponseEntity<QuizInstanceResult> getCoreInstanceInformation(@PathVariable("idInput") Long idInput)
   {
-    if (idInput.getId() == null)
+    if (idInput == null)
     {
       return ResponseEntity.badRequest().build();
     }
-    QuizInstance quizInstance = quizInstanceService.findQuizInstanceById(idInput.getId()).orElse(null);
+    QuizInstance quizInstance = quizInstanceService.findQuizInstanceById(idInput).orElse(null);
     if (quizInstance == null)
     {
       return ResponseEntity.badRequest().build();

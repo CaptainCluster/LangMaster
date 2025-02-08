@@ -1,17 +1,42 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import { getQuizById } from "../../api/workshop";
 import ProgressIndicator from "./ProgressIndicator";
-import { postQuizInstanceCreation } from "../../api/learn";
 import QuestionDisplay from "./QuestionDisplay";
 import Question from "../../types/quiz/Question";
+import { useEffect, useState } from "react";
+import { getQuizInstanceCoreData, postQuizInstanceCreation } from "../../api/learn";
+import QuizInstanceResponse from "../../types/response/QuizInstanceResponse";
+import Lives from "./Lives";
 
 const QuizContainer = () => {
   const quizId: string | undefined = useParams().id; // URL parameter recognition
+  const username: string | null = localStorage.getItem("auth_username");
 
-  /**
+  const [ quizInstanceData, setQuizInstanceData ] = useState<QuizInstanceResponse>();
+
+  // Fetching the data from the quizInstance
+  useEffect(() => {
+    const fetchData = async () => {
+      const quizInstanceId = await postQuizInstanceCreation({ quizId: Number(quizId), username: `${username}`});
+
+      if (!quizInstanceId) {
+        return;
+      }
+      const quizInstanceCoreData = await getQuizInstanceCoreData(Number(quizInstanceId));
+      console.log(quizInstanceCoreData)
+
+      if ("msg" in quizInstanceCoreData) {
+        return;
+      }
+      setQuizInstanceData(quizInstanceCoreData);
+    }
+    fetchData();
+  }, []);
+
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["news"],
-    queryFn: () => postQuizInstanceCreation,
+    queryFn: () => getQuizById(Number(quizId)),
   });
 
   if (isLoading) {
@@ -22,35 +47,21 @@ const QuizContainer = () => {
   }
   if (data === undefined) {
     return <span className="text-white">No data</span>;
-  }*/
-  
-  const { mutate } = useMutation({
-    mutationFn: postQuizInstanceCreation,
-
-    onSuccess: (data) => {
-      console.log(data);
-    }
-  });
-
-  mutate({
-    quizId: Number(quizId),
-    username: localStorage.getItem("auth_username") as string,
-  });
+  }
 
   let name = "";
   let questions: Question[] = [];
 
+  if (quizInstanceData?.totalQuestions === 0) {
+    return (
+      <div className="flex justify-center">
+        <h1 className="py-10">This quiz has no questions!</h1>  
+      </div>
+    );
+  }
+
   // Letting the user know if no questions exit for the quiz.
-  //
-  /**
   if ("data" in data) {
-    if (data.data.questions.length === 0) {
-      return (
-        <div className="flex justify-center">
-          <h1 className="py-10">This quiz has no questions!</h1>  
-        </div>
-      );
-    }
 
     if ("name" in data.data) {
       name = data.data.name
@@ -60,7 +71,6 @@ const QuizContainer = () => {
       questions = data.data.questions;
     }
   }
-  */
 
   return (
     <div className="grid">
@@ -69,7 +79,8 @@ const QuizContainer = () => {
       </div>
 
       <div id="content">
-        <ProgressIndicator questionAmount={questions.length} />
+        <ProgressIndicator questionAmount={Number(quizInstanceData?.totalQuestions)} />
+        <Lives lives={Number(quizInstanceData?.lives)}/>
         <QuestionDisplay questionData={questions[0]} />
       </div>
     </div>
