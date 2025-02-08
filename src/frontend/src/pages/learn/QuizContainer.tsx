@@ -4,15 +4,19 @@ import { getQuizById } from "../../api/workshop";
 import ProgressIndicator from "./ProgressIndicator";
 import QuestionDisplay from "./QuestionDisplay";
 import { useEffect, useState } from "react";
-import { getQuizInstanceCoreData, postQuizInstanceCreation } from "../../api/learn";
+import { getQuizInstanceCoreData, inspectLives, postQuizInstanceCreation } from "../../api/learn";
 import QuizInstanceResponse from "../../types/response/QuizInstanceResponse";
 import Lives from "./Lives";
+import { quizInstanceStore } from "../../stores/quizInstanceStore";
+import FailureScreen from "./FailureScreen";
 
 const QuizContainer = () => {
   const quizId: string | undefined = useParams().id; // URL parameter recognition
   const username: string | null = localStorage.getItem("auth_username");
 
   const [ quizInstanceData, setQuizInstanceData ] = useState<QuizInstanceResponse>();
+  const [ enoughLives, setEnoughLives ] = useState<boolean>(false);
+  const { lives, updateLives } = quizInstanceStore();
 
   // Fetching the data from the quizInstance
   useEffect(() => {
@@ -22,12 +26,21 @@ const QuizContainer = () => {
       if (!creationData) {
         return;
       }
+
+      const enoughLivesResponse = await inspectLives(Number(creationData));
+      
+      if (!(typeof enoughLivesResponse == "boolean")) {
+        return;
+      }
+      setEnoughLives(enoughLivesResponse);
+
       const quizInstanceCoreData = await getQuizInstanceCoreData(Number(creationData));
 
       if ("msg" in quizInstanceCoreData) {
         return;
       }
       setQuizInstanceData(quizInstanceCoreData);
+      updateLives(quizInstanceCoreData.lives);
     }
     fetchData();
   }, []);
@@ -69,17 +82,25 @@ const QuizContainer = () => {
   }
 
   return (
-    <div className="grid">
-      <div id="quiz-header" className="mt-4 border-b border-gray-400 text-center">
-        <h2 className="animate-flash">{name.toUpperCase()}</h2>
-      </div>
+    <>
+      {
+        lives > 0
+          ?
+          <div className="grid">
+            <div id="quiz-header" className="mt-4 border-b border-gray-400 text-center">
+              <h2 className="animate-flash">{name.toUpperCase()}</h2>
+            </div>
 
-      <div id="content">
-        <ProgressIndicator questionAmount={Number(quizInstanceData?.totalQuestions)} />
-        <Lives lives={Number(quizInstanceData?.lives)}/>
-        <QuestionDisplay quizInstanceId={Number(quizInstanceData?.id)} />
-      </div>
-    </div>
+            <div id="content">
+              <ProgressIndicator questionAmount={Number(quizInstanceData?.totalQuestions)} />
+              <Lives lives={lives}/>
+              <QuestionDisplay quizInstanceId={Number(quizInstanceData?.id)} />
+            </div>
+          </div>
+
+          :  <FailureScreen /> 
+      }
+    </>
   );
 };
 

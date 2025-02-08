@@ -26,7 +26,11 @@ const QuestionDisplay = ({ quizInstanceId }: { quizInstanceId: number }) => {
   // Returning either a component with the question and answers or span notifying of lacking options for an asnwer
   return (
     <div className="mt-20 grid">
-      <h4 className="text-center">{data.title}</h4>
+      {
+        data.title.length > 0 
+        ? <h4 className="text-center">{data.title}</h4>
+        : <h4 className="text-center">No question title found!</h4>
+      }
       <div>
         <p className="italic font-[18px]">Select your answer!</p>
       </div>

@@ -1,13 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../api/";
+import { quizInstanceStore } from "../../stores/quizInstanceStore";
 
 const AnswerButton = ({ answer, quizInstanceId }: { answer: any, quizInstanceId: number }) => {
-
-  console.log(answer)
+  const { updateLives } = quizInstanceStore();
   const { mutate } = useMutation({
     mutationFn: api.learn.submitAnswer,
     onSuccess: (data) => {
-      console.log(data);
+      if ("lives" in data) {
+        updateLives(data.lives); 
+      }
     }
   });
 

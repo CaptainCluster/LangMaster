@@ -74,8 +74,6 @@ export async function submitAnswer(
   instanceAnswer: InstanceAnswer
 ): Promise<QuizInstanceResponse | FailResponse> {
   try {
-
-    console.log(instanceAnswer)
     const response = await axios.post<QuizInstanceResponse>(
       "/api/instance/submission",
       instanceAnswer
@@ -88,3 +86,17 @@ export async function submitAnswer(
     };
   }
 }
+
+export async function inspectLives(
+  quizInstanceId: number
+): Promise<boolean | FailResponse> {
+  try {
+    const response = await axios.get<boolean>(`/api/instance/lives/${quizInstanceId}`);
+    return response.data;
+  } catch(error) {
+    console.error(error);
+    return {
+      msg: "Error when attempting to receive lives."
+    }
+  }
+} 

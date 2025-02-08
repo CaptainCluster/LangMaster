@@ -135,9 +135,9 @@ public class QuizInstanceService
    * If no lives remain, false is returned and it is game over.
    * If there are still lives remaining, true is returned.
    */ 
-  public boolean inspectLives(QuizInstance quizInstance)
+  public Boolean inspectLives(QuizInstance quizInstance)
   {
-    if (!(quizInstance.getLives() <= 0))
+    if (quizInstance.getLives() <= 0)
     {
       return false;
     }
