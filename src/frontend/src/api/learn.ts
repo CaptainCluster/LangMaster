@@ -3,7 +3,12 @@ import InstanceInput from "../types/request/InstanceInput";
 import FailResponse from "../types/response/FailResponse";
 import QuizInstanceResponse from "../types/response/QuizInstanceResponse";
 import Question from "../types/quiz/Question";
+import InstanceAnswer from "../types/request/InstanceAnswer";
 
+/**
+ * POST request 
+ * @route /api/instance/create
+ */ 
 export async function postQuizInstanceCreation(
   instanceInput: InstanceInput
 ): Promise<{ quizInstanceId: number } | FailResponse> {
@@ -21,6 +26,10 @@ export async function postQuizInstanceCreation(
   }
 }
 
+/**
+ * GET request
+ * @route /api/instance/core/<quizInstanceId>
+ */ 
 export async function getQuizInstanceCoreData(
   quizInstanceId: number
 ): Promise<QuizInstanceResponse | FailResponse> {
@@ -37,6 +46,10 @@ export async function getQuizInstanceCoreData(
   }
 }
 
+/**
+ * GET request
+ * @route /api/instance/random/<quizInstanceId>
+ */ 
 export async function getRandomQuestion(
   quizInstanceId: number
 ): Promise<Question| FailResponse> {
@@ -49,6 +62,29 @@ export async function getRandomQuestion(
     console.error(error);
     return {
       msg: "Failed to fetch core data for the instance.",
+    };
+  }
+}
+
+/**
+ * POST request
+ * @route /api/instance/submission
+ */ 
+export async function submitAnswer(
+  instanceAnswer: InstanceAnswer
+): Promise<QuizInstanceResponse | FailResponse> {
+  try {
+
+    console.log(instanceAnswer)
+    const response = await axios.post<QuizInstanceResponse>(
+      "/api/instance/submission",
+      instanceAnswer
+    );
+    return response.data;
+  } catch(error) {
+    console.error(error);
+    return {
+      msg: "Error when attempting to submit the answer.",
     };
   }
 }

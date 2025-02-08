@@ -99,7 +99,7 @@ public class QuizInstanceService
    * Correct? Returning true.
    * False? Returning false and taking one life from the user (if the instance exists).
    */ 
-  public boolean processUserSubmission(long quizInstanceId, long questionId, long answerId)
+  public boolean processUserSubmission(long quizInstanceId, long answerId)
   {
     Answer answer = answerService.getAnswerById(answerId);
     
@@ -119,7 +119,7 @@ public class QuizInstanceService
     }
 
     // Upon a correct answer, the question will be marked as complete
-    Question question = questionService.getById(questionId);
+    Question question = answer.getQuestion();
     quizInstance.getCompletedQuestions().add(question);
     quizInstanceRepository.save(quizInstance);
     return true;
@@ -185,6 +185,7 @@ public class QuizInstanceService
     quizInstance.setLives(defaultLives);
     quizInstance.setCompletedQuestions(new HashSet<>());
     quizInstance.findTotalQuestions();
+    quizInstanceRepository.save(quizInstance);
   }
 
   public Question selectRandomQuestion(QuizInstance quizInstance)
