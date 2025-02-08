@@ -104,4 +104,21 @@ public class UserService
         }
         return languages;
     }
+
+    public long getIdByUsername(String username)
+    {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if (optionalUser.isEmpty())
+        {
+            return -1;
+        }
+        return optionalUser.get().getId();
+    }
+
+    public User findByUsername(String username)
+    {
+        return userRepository
+                .findByUsername(username)
+                .orElse(null);
+    }
 }
