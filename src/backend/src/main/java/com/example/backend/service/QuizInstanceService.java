@@ -137,7 +137,7 @@ public class QuizInstanceService
    */ 
   public Boolean inspectLives(QuizInstance quizInstance)
   {
-    if (!(quizInstance.getLives() <= 0))
+    if (quizInstance.getLives() <= 0)
     {
       return false;
     }
