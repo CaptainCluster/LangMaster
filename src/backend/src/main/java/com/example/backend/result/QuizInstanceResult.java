@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class QuizInstanceResult
 {
+  private Long id;
   private Quiz quiz;
   private int totalQuestions;
   private int lives;
@@ -18,6 +19,8 @@ public class QuizInstanceResult
   {
     this.lives = lives;  
   }
+
+  public Long getId() { return id; }
 
   public Quiz getQuiz() {
     return quiz;
@@ -35,6 +38,8 @@ public class QuizInstanceResult
   {
     return lives;
   }
+
+  public void setId(Long id) { this.id = id; }
 
   public void setQuiz(Quiz quiz) {
     this.quiz = quiz;

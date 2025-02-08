@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { getQuizById } from "../../api/workshop";
 import ProgressIndicator from "./ProgressIndicator";
 import QuestionDisplay from "./QuestionDisplay";
-import Question from "../../types/quiz/Question";
 import { useEffect, useState } from "react";
 import { getQuizInstanceCoreData, postQuizInstanceCreation } from "../../api/learn";
 import QuizInstanceResponse from "../../types/response/QuizInstanceResponse";
@@ -18,13 +17,12 @@ const QuizContainer = () => {
   // Fetching the data from the quizInstance
   useEffect(() => {
     const fetchData = async () => {
-      const quizInstanceId = await postQuizInstanceCreation({ quizId: Number(quizId), username: `${username}`});
+      const creationData = await postQuizInstanceCreation({ quizId: Number(quizId), username: `${username}`});
 
-      if (!quizInstanceId) {
+      if (!creationData) {
         return;
       }
-      const quizInstanceCoreData = await getQuizInstanceCoreData(Number(quizInstanceId));
-      console.log(quizInstanceCoreData)
+      const quizInstanceCoreData = await getQuizInstanceCoreData(Number(creationData));
 
       if ("msg" in quizInstanceCoreData) {
         return;
@@ -49,8 +47,11 @@ const QuizContainer = () => {
     return <span className="text-white">No data</span>;
   }
 
+  if (!quizInstanceData) {
+    return <span>Loading</span>
+  }
+
   let name = "";
-  let questions: Question[] = [];
 
   if (quizInstanceData?.totalQuestions === 0) {
     return (
@@ -62,26 +63,21 @@ const QuizContainer = () => {
 
   // Letting the user know if no questions exit for the quiz.
   if ("data" in data) {
-
     if ("name" in data.data) {
       name = data.data.name
-    }
-
-    if ("questions" in data.data) {
-      questions = data.data.questions;
     }
   }
 
   return (
     <div className="grid">
-      <div id="quiz-header" className="mt-4 border-bottom border-white text-center">
+      <div id="quiz-header" className="mt-4 border-b border-gray-400 text-center">
         <h2 className="animate-flash">{name.toUpperCase()}</h2>
       </div>
 
       <div id="content">
         <ProgressIndicator questionAmount={Number(quizInstanceData?.totalQuestions)} />
         <Lives lives={Number(quizInstanceData?.lives)}/>
-        <QuestionDisplay questionData={questions[0]} />
+        <QuestionDisplay quizInstanceId={Number(quizInstanceData?.id)}/>
       </div>
     </div>
   );

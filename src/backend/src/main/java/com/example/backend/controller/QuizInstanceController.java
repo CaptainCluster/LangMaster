@@ -97,8 +97,8 @@ public class QuizInstanceController
   /**
    * Sending a random question to the client
    */ 
-  @PostMapping("/random")
-  public ResponseEntity<QuestionResult> fetchRandomQuestion(@RequestBody int quizInstanceId)
+  @GetMapping("/random/{quizInstanceId}")
+  public ResponseEntity<QuestionResult> fetchRandomQuestion(@PathVariable("quizInstanceId") Long quizInstanceId)
   {
     Optional<QuizInstance> quizInstance = quizInstanceService.findQuizInstanceById(quizInstanceId);
     if (quizInstance.isEmpty())
@@ -118,6 +118,7 @@ public class QuizInstanceController
   @GetMapping("/core/{idInput}")
   public ResponseEntity<QuizInstanceResult> getCoreInstanceInformation(@PathVariable("idInput") Long idInput)
   {
+    System.out.println("input: " + idInput);
     if (idInput == null)
     {
       return ResponseEntity.badRequest().build();

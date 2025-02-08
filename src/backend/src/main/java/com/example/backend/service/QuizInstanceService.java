@@ -214,6 +214,7 @@ public class QuizInstanceService
   public QuizInstanceResult convertInstanceToResult(QuizInstance quizInstance)
   {
     QuizInstanceResult quizInstanceResult = new QuizInstanceResult();
+    quizInstanceResult.setId(quizInstance.getId());
     quizInstanceResult.setTotalQuestions(quizInstance.getTotalQuestions());
     quizInstanceResult.setLives(quizInstance.getLives());
     return quizInstanceResult;
