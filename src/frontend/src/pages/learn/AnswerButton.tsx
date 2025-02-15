@@ -1,15 +1,22 @@
 import { useMutation } from "@tanstack/react-query";
 import { api } from "../../api/";
 import { quizInstanceStore } from "../../stores/quizInstanceStore";
+import { useNotificationStore } from "../../stores/notificationStore";
 
 const AnswerButton = ({ answer, quizInstanceId }: { answer: any, quizInstanceId: number }) => {
   const { updateLives } = quizInstanceStore();
+  const { triggerNotification } = useNotificationStore();
+
   const { mutate } = useMutation({
     mutationFn: api.learn.submitAnswer,
     onSuccess: (data) => {
       if ("lives" in data) {
         updateLives(data.lives); 
       }
+      console.log(answer)
+      answer.isCorrect
+        ? triggerNotification("You answered correctly!", "success")  
+        : triggerNotification("Wrong answer!", "error")
     }
   });
 

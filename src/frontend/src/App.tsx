@@ -12,6 +12,7 @@ import CreatePage from "./pages/workshop/CreatePage";
 import EditPage from "./pages/workshop/EditPage";
 import ListQuizzes from "./components/learn/ListQuiz";
 import Quiz from "./pages/learn/Quiz";
+import Notification from "./components/notification/Notification";
 
 function App() {
   const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ function App() {
           </Routes>
         </QueryClientProvider>
       </Router>
+      <Notification />
     </>
   );
 }
