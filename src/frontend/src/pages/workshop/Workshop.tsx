@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import { useEffect } from "react";
 import useStore from "../../stores/store";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
@@ -13,7 +12,6 @@ const Workshop = () => {
 
   return (
     <>
-      <Header/>
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 justify-center gap-3 p-6 m-14 fade-in">
           <button 

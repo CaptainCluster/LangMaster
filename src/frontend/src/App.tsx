@@ -20,6 +20,7 @@ function App() {
   return (
     <>
       <Router>
+        <Header />
         <QueryClientProvider client={queryClient}>
           <Routes>
             <Route path="*" element={<Error404 />} />

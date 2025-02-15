@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -41,12 +40,9 @@ const Register = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className="container my-5" id="page-register">
-        <Credentials onSubmit={submitRegister} />
-      </div>
-    </>
+    <div className="container my-5" id="page-register">
+      <Credentials onSubmit={submitRegister} />
+    </div>
   );
 };
 

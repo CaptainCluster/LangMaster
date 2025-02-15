@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import useStore from "../../stores/store";
 import { useEffect, useState } from "react";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
@@ -23,19 +22,16 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      <Header />
-      <div className="container grid items-center">
-        <h4 className="text-center mt-5">
-          Welcome, <span className="animate-flash">{welcomeMessage}</span>
-        </h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-6 fade-in">
-          <NewsPanel />
-          <SuggestionsPanel />
-          <LinksPanel />
-        </div>
+    <div className="container grid items-center">
+      <h4 className="text-center mt-5">
+        Welcome, <span className="animate-flash">{welcomeMessage}</span>
+      </h4>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-6 fade-in">
+        <NewsPanel />
+        <SuggestionsPanel />
+        <LinksPanel />
       </div>
-    </>
+    </div>
   );
 };
 
