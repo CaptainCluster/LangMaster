@@ -7,7 +7,6 @@ import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
 import { redirectForToken } from "../../utils/checkLocalStorage";
 import { api } from "../../api";
-import Notification from "../../components/notification/Notification";
 import { useNotificationStore } from "../../stores/notificationStore";
 
 const Login = () => {
@@ -52,7 +51,6 @@ const Login = () => {
           <Credentials onSubmit={submitLogin} />
         </div>
       </div>
-      <Notification />
     </>
   );
 };

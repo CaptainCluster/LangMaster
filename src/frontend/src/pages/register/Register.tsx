@@ -6,7 +6,6 @@ import useStore from "../../stores/store";
 import { useEffect } from "react";
 import { api } from "../../api";
 import { redirectForToken } from "../../utils/checkLocalStorage";
-import Notification from "../../components/notification/Notification";
 import { useNotificationStore } from "../../stores/notificationStore";
 
 const Register = () => {
@@ -47,7 +46,6 @@ const Register = () => {
       <div className="container my-5" id="page-register">
         <Credentials onSubmit={submitRegister} />
       </div>
-      <Notification />
     </>
   );
 };

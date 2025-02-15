@@ -6,7 +6,6 @@ import NewsPanel from "./NewsPanel";
 import SuggestionsPanel from "./SuggestionsPanel";
 import LinksPanel from "./LinksPanel";
 import { checkTokenExpiration } from "../../api/authenticate";
-import Notification from "../../components/notification/Notification";
 
 const Home = () => {
   const { updateCurrentPageName } = useStore();
@@ -36,7 +35,6 @@ const Home = () => {
           <LinksPanel />
         </div>
       </div>
-      <Notification />
     </>
   );
 };

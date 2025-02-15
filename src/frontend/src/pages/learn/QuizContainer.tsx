@@ -21,7 +21,6 @@ const QuizContainer = () => {
   useEffect(() => {
     const fetchData = async () => {
       const creationData = await postQuizInstanceCreation({ quizId: Number(quizId), username: `${username}`});
-
       if (!creationData) {
         return;
       }
@@ -95,7 +94,6 @@ const QuizContainer = () => {
               <QuestionDisplay quizInstanceId={Number(quizInstanceData?.id)} />
             </div>
           </div>
-
           :  <FailureScreen /> 
       }
     </>
