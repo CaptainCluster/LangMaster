@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import useStore from "../../stores/store";
-import Header from "../../components/Header";
 import Credentials from "../../components/Credentials";
 import { redirectForToken } from "../../utils/checkLocalStorage";
 import { api } from "../../api";
@@ -44,14 +43,11 @@ const Login = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className="container my-5" id="page-login">
-        <div>
-          <Credentials onSubmit={submitLogin} />
-        </div>
+    <div className="container my-5" id="page-login">
+      <div>
+        <Credentials onSubmit={submitLogin} />
       </div>
-    </>
+    </div>
   );
 };
 

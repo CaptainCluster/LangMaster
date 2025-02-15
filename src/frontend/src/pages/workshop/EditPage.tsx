@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useStore from "../../stores/store";
@@ -41,7 +40,6 @@ const EditPage = () => {
 
   return (
     <>
-      <Header />
       <div className="container">
         <div className="grid justify-center items-center h-56">
           <QuizUpdateForm />

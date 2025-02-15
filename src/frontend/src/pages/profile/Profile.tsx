@@ -2,7 +2,6 @@ import { JSX, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useStore from "../../stores/store";
-import Header from "../../components/Header";
 import { api } from "../../api";
 import { redirectForNoToken } from "../../utils/checkLocalStorage";
 
@@ -69,7 +68,6 @@ const Profile = () => {
   // Returning the intended content upon successful query fetch
   return (
     <>
-      <Header />
       <div className="container">
         <div className="mt-3 mb-14">
           <h2 className="animate-flash">{responseData.username}</h2>
