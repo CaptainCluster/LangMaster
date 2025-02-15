@@ -15,7 +15,6 @@ const QuizContainer = () => {
   const username: string | null = localStorage.getItem("auth_username");
 
   const [ quizInstanceData, setQuizInstanceData ] = useState<QuizInstanceResponse>();
-  const [ enoughLives, setEnoughLives ] = useState<boolean>(false);
   const { lives, updateLives } = quizInstanceStore();
 
   // Fetching the data from the quizInstance
@@ -32,7 +31,6 @@ const QuizContainer = () => {
       if (!(typeof enoughLivesResponse == "boolean")) {
         return;
       }
-      setEnoughLives(enoughLivesResponse);
 
       const quizInstanceCoreData = await getQuizInstanceCoreData(Number(creationData));
 
