@@ -2,6 +2,7 @@
 
 @theme {
     --color-header: #347236;
+    --color-page:  	#388036; 
 }
 
 @keyframes fadeIn {

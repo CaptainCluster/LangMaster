@@ -22,7 +22,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container grid items-center">
+    <div className="container flex flex-col items-center">
       <h4 className="text-center mt-5">
         Welcome, <span className="animate-flash">{welcomeMessage}</span>
       </h4>
