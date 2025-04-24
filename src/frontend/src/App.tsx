@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Home from "./pages/home/Home";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
@@ -30,16 +30,20 @@ function App() {
             <Route path="/profile/:username" element={<Profile />} />
             <Route path="/learn" element={<Learn />} />
 
-            <Route path="/quiz/:id" element={<Quiz/>}/>
-            
+            <Route path="/quiz/:id" element={<Quiz />} />
+
             <Route path="/workshop" element={<Workshop />} />
-            <Route path="/workshop/create" element={<CreatePage />}/>
-            <Route path="/workshop/edit/:id" element={<EditPage />}/>
-            <Route path="/workshop/search" element={
-              <>
-                <Header />
-                <ListQuizzes redirectInit="/workshop/edit/"/>
-              </>}/>
+            <Route path="/workshop/create" element={<CreatePage />} />
+            <Route path="/workshop/edit/:id" element={<EditPage />} />
+            <Route
+              path="/workshop/search"
+              element={
+                <>
+                  <Header />
+                  <ListQuizzes redirectInit="/workshop/edit/" />
+                </>
+              }
+            />
           </Routes>
         </QueryClientProvider>
       </Router>

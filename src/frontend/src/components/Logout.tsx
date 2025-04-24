@@ -12,10 +12,13 @@ const Logout = () => {
   };
 
   return (
-    <a 
-      className="mx-1 p-2 text-white cursor-pointer" 
+    <a
+      className="mx-1 p-2 text-[24px] text-black cursor-pointer"
       style={{ textDecoration: "none" }}
-      onClick={() => logUserOut()}>Log Out</a>
+      onClick={() => logUserOut()}
+    >
+      Log Out
+    </a>
   );
 };
 
