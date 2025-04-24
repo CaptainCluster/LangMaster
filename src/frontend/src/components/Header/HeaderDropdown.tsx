@@ -15,13 +15,13 @@ const HeaderDropDown = ({
   console.log(options);
 
   return (
-    <div className="mx-14">
+    <div className="mx-[1vw]">
       <div
         className="flex flex-col items-center"
         onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       >
-        <div className="flex text-[32px] flex-row items-center">
+        <div className="flex text-[30px] flex-row items-center">
           {dropdownText}
           <img className="w-1/4 h-1/4 mx-3" src={arrowDown} />
         </div>
