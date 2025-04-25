@@ -18,7 +18,7 @@ function App() {
   const queryClient = new QueryClient();
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-[var(--color-page)]">
       <Router>
         <Header />
         <QueryClientProvider client={queryClient}>
@@ -48,7 +48,7 @@ function App() {
         </QueryClientProvider>
       </Router>
       <Notification />
-    </>
+    </div>
   );
 }
 
