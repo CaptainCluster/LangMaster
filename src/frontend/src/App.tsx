@@ -18,7 +18,7 @@ function App() {
   const queryClient = new QueryClient();
 
   return (
-    <div className="flex flex-col h-screen bg-[var(--color-page)]">
+    <div className="flex flex-col min-h-screen bg-[var(--color-page)]">
       <Router>
         <Header />
         <QueryClientProvider client={queryClient}>

@@ -26,7 +26,7 @@ const Home = () => {
       <h4 className="text-center mt-5">
         Welcome, <span className="animate-flash">{welcomeMessage}</span>
       </h4>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-6 fade-in">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-3 p-6 fade-in">
         <NewsPanel />
         <SuggestionsPanel />
         <LinksPanel />
