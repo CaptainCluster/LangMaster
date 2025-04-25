@@ -48,3 +48,18 @@
 .core-background {
   background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
 }
+
+/* Hamburger Menu Expansion */
+@keyframes hamburger-menu-expansion {
+  from {
+    max-width: 0;
+    margin-left: -5vw;
+  }
+  to {
+    max-width: 100vw;
+    margin-right: 0vw;
+  }
+}
+.hamburger-expansion {
+  animation: hamburger-menu-expansion 0.2s ease-in-out;
+}

@@ -12,7 +12,6 @@ const HeaderDropDown = ({
   options: NavEntry[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(options);
 
   return (
     <div className="mx-[1vw]">
@@ -44,7 +43,7 @@ const HeaderDropDown = ({
               </NavLink>
             ) : (
               <Logout />
-            ),
+            )
           )}
         </div>
       ) : (

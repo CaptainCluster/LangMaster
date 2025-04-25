@@ -3,10 +3,9 @@ import HeaderLogo from "./HeaderLogo";
 import HeaderDropDown from "./HeaderDropdown";
 import NavEntry from "../../types/NavEntry";
 import dropdownOptions from "../../data/dropdownOptions";
+import dropdownTexts from "../../data/dropdownTexts";
 
 const Header = () => {
-  const dropdownTexts: string[] = ["Quiz", "Account"];
-
   /**
    * Checks whether user is authenticated and selects what
    * content will be in the header for navigation.
@@ -45,7 +44,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex w-screen items-center bg-header">
+    <div className="hidden md:flex w-screen items-center bg-header">
       <HeaderLogo />
       <div className="flex w-[100%] justify-end items-center">
         {displayNav()}
