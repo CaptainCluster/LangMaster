@@ -17,7 +17,7 @@ const HamburgerDropdownElements = ({
         <NavLink
           key={`navlink-${index}`}
           to={entry.url ? entry.url : ""}
-          className="m-1 p-4 px-7 text-[2vh] text-white"
+          className="m-1 p-2 px-7 text-[14px] text-white"
           style={{ textDecoration: "none" }}
           onClick={() => updateIsOpen(false)}
         >

@@ -22,7 +22,7 @@ const HamburgerDropdown = ({
         className="flex flex-col  items-end"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex text-white text-[2.5vh] py-4 flex-row items-center">
+        <div className="flex text-white text-[16px] py-2 flex-row items-center">
           {title}
           <img className="w-1/4 h-1/4 mx-3" src={arrowDown} />
         </div>

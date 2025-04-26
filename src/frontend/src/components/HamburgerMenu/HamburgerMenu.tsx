@@ -15,7 +15,7 @@ const HamburgerMenu = () => {
   return (
     <>
       {/* Hamburger Icon for Mobile */}
-      <div>
+      <div className="bg-[var(--color-header)]">
         <button
           className="flex content-start md:hidden p-2"
           onClick={() => updateIsOpen(!isOpen)}
@@ -41,7 +41,7 @@ const HamburgerMenu = () => {
       <div
         className={`md:hidden ${
           isOpen ? "block" : "hidden"
-        } px-6 list-none min-h-[20vh] text-right side-menu bg-[var(--color-cluster)] hamburger-expansion`}
+        } bg-[var(--color-header)] px-6 pb-3 list-none min-h-[20vh] text-right side-menu bg-[var(--color-cluster)] hamburger-expansion`}
       >
         {dropdownOptions.length === 0 ? (
           <p>No side content</p>
