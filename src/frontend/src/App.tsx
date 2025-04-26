@@ -13,6 +13,7 @@ import EditPage from "./pages/workshop/EditPage";
 import ListQuizzes from "./components/learn/ListQuiz";
 import Quiz from "./pages/learn/Quiz";
 import Notification from "./components/notification/Notification";
+import HamburgerMenu from "./components/HamburgerMenu/HamburgerMenu";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ function App() {
     <div className="flex flex-col min-h-screen bg-[var(--color-page)]">
       <Router>
         <Header />
+        <HamburgerMenu />
         <QueryClientProvider client={queryClient}>
           <Routes>
             <Route path="*" element={<Error404 />} />

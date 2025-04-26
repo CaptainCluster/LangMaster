@@ -2,38 +2,10 @@ import HeaderLink from "./HeaderLink";
 import HeaderLogo from "./HeaderLogo";
 import HeaderDropDown from "./HeaderDropdown";
 import NavEntry from "../../types/NavEntry";
+import dropdownOptions from "../../data/dropdownOptions";
+import dropdownTexts from "../../data/dropdownTexts";
 
 const Header = () => {
-  // Fetching user from JWT, allowing redirection to profile page
-  const username = localStorage.getItem("auth_username")
-    ? localStorage.getItem("auth_username")
-    : "";
-
-  const quizDropdownOptions: NavEntry[] = [
-    {
-      url: "/workshop",
-      text: "Workshop",
-      isLink: true,
-    },
-    {
-      url: "/learn",
-      text: "Learn",
-      isLink: true,
-    },
-  ];
-
-  const accountDropdownOptions: NavEntry[] = [
-    {
-      url: `/profile/${username}`,
-      text: "Profile",
-      isLink: true,
-    },
-    {
-      text: "Logout",
-      isLink: false,
-    },
-  ];
-
   /**
    * Checks whether user is authenticated and selects what
    * content will be in the header for navigation.
@@ -61,17 +33,18 @@ const Header = () => {
     return (
       <>
         <HeaderLink url="/" text="Home" />
-        <HeaderDropDown dropdownText="Quiz" options={quizDropdownOptions} />
-        <HeaderDropDown
-          dropdownText="Account"
-          options={accountDropdownOptions}
-        />
+        {dropdownOptions.map((dropdownOption: NavEntry[], index: number) => (
+          <HeaderDropDown
+            dropdownText={dropdownTexts[index]}
+            options={dropdownOption}
+          />
+        ))}
       </>
     );
   };
 
   return (
-    <div className="flex w-screen items-center bg-header">
+    <div className="hidden md:flex w-screen items-center bg-header">
       <HeaderLogo />
       <div className="flex w-[100%] justify-end items-center">
         {displayNav()}
