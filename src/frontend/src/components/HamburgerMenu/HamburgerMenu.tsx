@@ -3,8 +3,8 @@ import useHamburgerMenuStore from "../../stores/useHamburgerMenuStore";
 import dropdownTexts from "../../data/dropdownTexts";
 import dropdownOptions from "../../data/dropdownOptions";
 import NavEntry from "../../types/NavEntry";
-import HeaderDropDown from "../Header/HeaderDropdown";
 import HeaderLink from "../HeaderLink";
+import HamburgerDropdown from "./HamburgerDropdown";
 
 const username = localStorage.getItem("auth_username")
   ? localStorage.getItem("auth_username")
@@ -46,20 +46,21 @@ const HamburgerMenu = () => {
         {dropdownOptions.length === 0 ? (
           <p>No side content</p>
         ) : (
-          <>
+          <div className="flex flex-col">
             <HeaderLink url="/" text="Home" />
             <HeaderLink url={`/profile/${username}`} text="Profile" />
             <HeaderLink url="/learn" text="Learn" />
             <HeaderLink url="/workshop" text="Workshop" />
             {dropdownOptions.map(
               (dropdownOption: NavEntry[], index: number) => (
-                <HeaderDropDown
-                  dropdownText={dropdownTexts[index]}
-                  options={dropdownOption}
+                <HamburgerDropdown
+                  links={dropdownOption}
+                  title={dropdownTexts[index]}
+                  useHamburgerMenuStore={useHamburgerMenuStore}
                 />
               )
             )}
-          </>
+          </div>
         )}
       </div>
     </>
