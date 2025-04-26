@@ -41,7 +41,7 @@ const HamburgerMenu = () => {
       <div
         className={`md:hidden ${
           isOpen ? "block" : "hidden"
-        } bg-[var(--color-header)] px-6 pb-3 list-none min-h-[20vh] text-right side-menu bg-[var(--color-cluster)] hamburger-expansion`}
+        } bg-[var(--color-header)] px-6 pb-3 list-none min-h-[20vh] text-right side-menu hamburger-expansion`}
       >
         {dropdownOptions.length === 0 ? (
           <p>No side content</p>
