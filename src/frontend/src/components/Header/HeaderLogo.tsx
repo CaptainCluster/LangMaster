@@ -6,7 +6,7 @@ const HeaderLogo = () => {
   return (
     <>
       <img
-        className="object-contain z-10 left-0 top-0 w-[9%] h-[9%] h-auto font-semibold hover:cursor-pointer"
+        className="object-contain z-10 left-0 top-0 w-[9%] h-auto font-semibold hover:cursor-pointer"
         src={logo}
         alt="Logo"
         onClick={() => {

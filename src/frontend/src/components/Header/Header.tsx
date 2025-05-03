@@ -4,8 +4,12 @@ import HeaderDropDown from "./HeaderDropdown";
 import NavEntry from "../../types/NavEntry";
 import dropdownOptions from "../../data/dropdownOptions";
 import dropdownTexts from "../../data/dropdownTexts";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
+  useEffect(() => {}, [location])
   /**
    * Checks whether user is authenticated and selects what
    * content will be in the header for navigation.

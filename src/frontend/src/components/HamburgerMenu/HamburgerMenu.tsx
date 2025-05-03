@@ -1,16 +1,21 @@
 import useHamburgerMenuStore from "../../stores/useHamburgerMenuStore";
-
+import { useLocation } from "react-router-dom";
 import dropdownTexts from "../../data/dropdownTexts";
 import dropdownOptions from "../../data/dropdownOptions";
 import NavEntry from "../../types/NavEntry";
 import HeaderLink from "../HeaderLink";
 import HamburgerDropdown from "./HamburgerDropdown";
+import { useEffect } from "react";
 
 const username = localStorage.getItem("auth_username")
   ? localStorage.getItem("auth_username")
   : "";
 
 const HamburgerMenu = () => {
+
+  const location = useLocation();
+  useEffect(() => {}, [location])
+
   const { isOpen, updateIsOpen } = useHamburgerMenuStore();
   return (
     <>
@@ -47,20 +52,30 @@ const HamburgerMenu = () => {
           <p>No side content</p>
         ) : (
           <div className="flex flex-col">
-            <HeaderLink url="/" text="Home" />
-            <HeaderLink url={`/profile/${username}`} text="Profile" />
-            <HeaderLink url="/learn" text="Learn" />
-            <HeaderLink url="/workshop" text="Workshop" />
-            {dropdownOptions.map(
-              (dropdownOption: NavEntry[], index: number) => (
-                <HamburgerDropdown
-                  links={dropdownOption}
-                  title={dropdownTexts[index]}
-                  useHamburgerMenuStore={useHamburgerMenuStore}
-                />
-              )
-            )}
+            {
+              localStorage.getItem("auth_token")
+              ?  <>
+                  <HeaderLink url="/" text="Home" />
+                  <HeaderLink url={`/profile/${username}`} text="Profile" />
+                  <HeaderLink url="/learn" text="Learn" />
+                  <HeaderLink url="/workshop" text="Workshop" />
+                  {dropdownOptions.map(
+                    (dropdownOption: NavEntry[], index: number) => (
+                      <HamburgerDropdown
+                        links={dropdownOption}
+                        title={dropdownTexts[index]}
+                        useHamburgerMenuStore={useHamburgerMenuStore}
+                      />
+                    )
+                  )}
+                  </>
+              : <>
+                  <HeaderLink url="/register" text="Register" />
+                  <HeaderLink url="/login" text="Login" />
+                </>
+            }
           </div>
+         
         )}
       </div>
     </>
