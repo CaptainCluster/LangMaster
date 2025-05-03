@@ -1,16 +1,21 @@
 import useHamburgerMenuStore from "../../stores/useHamburgerMenuStore";
-
+import { useLocation } from "react-router-dom";
 import dropdownTexts from "../../data/dropdownTexts";
 import dropdownOptions from "../../data/dropdownOptions";
 import NavEntry from "../../types/NavEntry";
 import HeaderLink from "../HeaderLink";
 import HamburgerDropdown from "./HamburgerDropdown";
+import { useEffect } from "react";
 
 const username = localStorage.getItem("auth_username")
   ? localStorage.getItem("auth_username")
   : "";
 
 const HamburgerMenu = () => {
+
+  const location = useLocation();
+  useEffect(() => {}, [location])
+
   const { isOpen, updateIsOpen } = useHamburgerMenuStore();
   return (
     <>
