@@ -47,20 +47,30 @@ const HamburgerMenu = () => {
           <p>No side content</p>
         ) : (
           <div className="flex flex-col">
-            <HeaderLink url="/" text="Home" />
-            <HeaderLink url={`/profile/${username}`} text="Profile" />
-            <HeaderLink url="/learn" text="Learn" />
-            <HeaderLink url="/workshop" text="Workshop" />
-            {dropdownOptions.map(
-              (dropdownOption: NavEntry[], index: number) => (
-                <HamburgerDropdown
-                  links={dropdownOption}
-                  title={dropdownTexts[index]}
-                  useHamburgerMenuStore={useHamburgerMenuStore}
-                />
-              )
-            )}
+            {
+              localStorage.getItem("auth_token")
+              ?  <>
+                  <HeaderLink url="/" text="Home" />
+                  <HeaderLink url={`/profile/${username}`} text="Profile" />
+                  <HeaderLink url="/learn" text="Learn" />
+                  <HeaderLink url="/workshop" text="Workshop" />
+                  {dropdownOptions.map(
+                    (dropdownOption: NavEntry[], index: number) => (
+                      <HamburgerDropdown
+                        links={dropdownOption}
+                        title={dropdownTexts[index]}
+                        useHamburgerMenuStore={useHamburgerMenuStore}
+                      />
+                    )
+                  )}
+                  </>
+              : <>
+                  <HeaderLink url="/register" text="Register" />
+                  <HeaderLink url="/login" text="Login" />
+                </>
+            }
           </div>
+         
         )}
       </div>
     </>
