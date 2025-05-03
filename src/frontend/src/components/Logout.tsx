@@ -13,7 +13,7 @@ const Logout = () => {
 
   return (
     <a
-      className="mx-1 p-2 text-[24px] text-black cursor-pointer"
+      className="m-1 p-2 px-7 text-[14px] md:mx-1 md:p-2 md:text-[24px] text-white md:text-black cursor-pointer"
       style={{ textDecoration: "none" }}
       onClick={() => logUserOut()}
     >
