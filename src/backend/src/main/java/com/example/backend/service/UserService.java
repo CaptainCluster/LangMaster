@@ -77,16 +77,15 @@ public class UserService
       }
 
         // Figuring out whether the user exists
-        Optional<User> potentialUser = userRepository.findByUsername(loggingUser.getUsername());
-        User foundUser = potentialUser.orElse(null);
-
-        if (foundUser == null)
+        Optional<User> optionalUser = userRepository.findByUsername(loggingUser.getUsername());
+        if (optionalUser.isEmpty())
         {
             return false;
         }
+        User user = optionalUser.get();
 
-        // Figuring out whether the passwords match. Returning the boolean.
-        return BCrypt.checkpw(loggingUser.getPassword(), foundUser.getPassword());
+        // Figuring out whether the passwords match.
+        return BCrypt.checkpw(loggingUser.getPassword(), user.getPassword());
     }
 
     public User findMatchingUser(String username)

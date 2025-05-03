@@ -2,10 +2,12 @@ package com.example.backend.controller;
 
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
+import com.example.backend.result.LoginResult;
 import com.example.backend.service.UserService;
 import com.example.backend.utilities.JwtUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,24 +40,29 @@ public class UserController
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user)
+    public ResponseEntity<LoginResult> loginUser(@RequestBody User user)
     {
-        JSONObject response = new JSONObject();
-
-        boolean validCredentials = userService.checkCredentials(user);
-
-        // If credentials are not valid, user is notified.
-        if (validCredentials)
+        LoginResult loginResult = new LoginResult();
+        try
         {
-            String jwtToken = jwtUtil.createJwt(user.getUsername());
-            response.put("success", true);
-            response.put("token", jwtToken);
+            boolean validCredentials = userService.checkCredentials(user);
+            // If credentials are not valid, user is notified.
+            if (validCredentials)
+            {
+                String jwtToken = jwtUtil.createJwt(user.getUsername());
+                loginResult.setSuccess(true);
+                loginResult.setToken(jwtToken);
+                return ResponseEntity.ok(loginResult);
+            }
+            loginResult.setSuccess(false);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginResult);
         }
-        else
+        catch (Exception exception)
         {
-            response.put("success", false);
+            loginResult.setSuccess(false);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(loginResult);
         }
-        return ResponseEntity.ok(response.toString());
+
     }
 
     //TODO: Implement requirement for JWT token

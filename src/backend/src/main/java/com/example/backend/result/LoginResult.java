@@ -6,6 +6,7 @@ public class LoginResult
     private String token;
 
     public LoginResult() {}
+
     public LoginResult(boolean success)
     {
         this.success = success;
@@ -19,5 +20,15 @@ public class LoginResult
     public void setToken(String token)
     {
         this.token = token;
+    }
+
+    public boolean isSuccess()
+    {
+        return success;
+    }
+
+    public String getToken()
+    {
+        return token;
     }
 }
